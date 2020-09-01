@@ -16,7 +16,7 @@
 title: whiteglass theme
 author: Junhwan 
 description: 인생은... 크레이지아케이드....
-baseurl: "" # the subpath of your site, e.g. /blog
+baseurl: "/" # the subpath of your site, e.g. /blog
 url: "https://ujunhwan.github.io" # the base hostname & protocol for your site, e.g. http://example.com
 lang: en
 timezone: UTC
