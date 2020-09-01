@@ -3,9 +3,7 @@
 main:
   - title: "blog"
     url: /
-  - title: "About"
-    url: /about/
-  - title : "tag"
+  - title: "tag"
     url: /tag/
-  - title: "GitHub"
+  - title: "gitHub"
     url: https://github.com/ujunhwan
