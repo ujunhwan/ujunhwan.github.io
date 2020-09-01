@@ -1,7 +1,7 @@
 ---
 layout: page
-title: "About"
-permalink: /about/
+title: "tag"
+permalink: /tag/
 ---
 
 # 유준환
