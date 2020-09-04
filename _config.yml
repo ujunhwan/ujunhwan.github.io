@@ -13,7 +13,7 @@
 # you will see them accessed via {{ site.title }}, {{ site.author }}, and so on.
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
-title: junhwan development blog
+title: ujunhwan
 author: Junhwan
 description: 인생은... 크레이지아케이드....
 baseurl: "/" # the subpath of your site, e.g. /blog
@@ -72,3 +72,9 @@ jekyll-archives:
   permalinks:
     category: /categories/:name/
     tag: /tags/:name/
+
+# Outputting
+permalink: /:categories/:title/
+paginate: 3 # 첫 페이지에보여줄 최근 게시물 수를 지정
+paginate_path: /page:num/
+timezone: Asia/Seoul # https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
