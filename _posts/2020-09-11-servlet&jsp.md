@@ -82,4 +82,8 @@ ${v1 } + ${v2 } = ${result } <br>
 
 </div>
 </details>
+
+<details>
+<summary>결과</summary>
 <img src='http://drive.google.com/uc?export=view&id=1oiLw8m79r-pbi-M5VrWa6Xbgz2-pZnx-' /><br>
+</details>
