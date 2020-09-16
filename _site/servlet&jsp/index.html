@@ -1,0 +1,88 @@
+<h1>Servlet과 jsp 연동</h1>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">servlet</code> 은 프로그램 로직이 수행되기에 유리하다.</li>
+  <li>jsp는 결과를 출력하기에 유리하다. html 문을 그냥 입력하면 되기 때문</li>
+  <li>따라서 프로그램 로직 수행은 servlet, 결과 출력은 jsp 에서 하는 것이 유리하다.</li>
+</ul>
+
+<p>결국 <code class="language-plaintext highlighter-rouge">servlet</code>과 <code class="language-plaintext highlighter-rouge">jsp</code>의 장단점을 해결하기 위해서 <code class="language-plaintext highlighter-rouge">servlet</code> 에서 프로그램 로직이 수행되고, 그 결과를 jsp 에게 포워딩 하는 방법이 사용되게 되었다.<br />
+이를 <code class="language-plaintext highlighter-rouge">servlet</code>과 <code class="language-plaintext highlighter-rouge">jsp</code>의 연동이라고 한다.<br />
+<br /></p>
+
+<h1>예제</h1>
+<p><em>LogicServlet.java</em> 파일에서 랜덤한 숫자를 발생 시킨다음, <code class="language-plaintext highlighter-rouge">request</code> 객체를 통해 <em>result.jsp</em> 로 보낸 뒤, <em>result.jsp</em> 에서 출력을 담당한다.
+ 이 때, <code class="language-plaintext highlighter-rouge">jsp</code> 에서의 출력 방식을 두가지로 사용할 수 있는데, <code class="language-plaintext highlighter-rouge">스크립틀릿</code>과 <code class="language-plaintext highlighter-rouge">표현식</code>을 사용하는 방법과 <code class="language-plaintext highlighter-rouge">EL표기법</code>을 사용하는 방법 이다.</p>
+<details>
+<summary>Source Code</summary>
+<div>
+
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// LogicServlet.java</span>
+<span class="kn">package</span> <span class="nn">examples</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">java.io.IOException</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">javax.servlet.RequestDispatcher</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.servlet.ServletException</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.servlet.annotation.WebServlet</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.servlet.http.HttpServlet</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.servlet.http.HttpServletRequest</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.servlet.http.HttpServletResponse</span><span class="o">;</span>
+
+<span class="nd">@WebServlet</span><span class="o">(</span><span class="s">"/logic"</span><span class="o">)</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">LogicServlet</span> <span class="kd">extends</span> <span class="nc">HttpServlet</span> <span class="o">{</span>
+	<span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">long</span> <span class="n">serialVersionUID</span> <span class="o">=</span> <span class="mi">1L</span><span class="o">;</span>
+       
+    <span class="kd">public</span> <span class="nf">LogicServlet</span><span class="o">()</span> <span class="o">{</span>
+        <span class="kd">super</span><span class="o">();</span>
+    <span class="o">}</span>
+	<span class="kd">protected</span> <span class="kt">void</span> <span class="nf">service</span><span class="o">(</span><span class="nc">HttpServletRequest</span> <span class="n">request</span><span class="o">,</span> <span class="nc">HttpServletResponse</span> <span class="n">response</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">ServletException</span><span class="o">,</span> <span class="nc">IOException</span> <span class="o">{</span>
+		<span class="kt">int</span> <span class="n">v1</span> <span class="o">=</span> <span class="o">(</span><span class="kt">int</span><span class="o">)(</span><span class="nc">Math</span><span class="o">.</span><span class="na">random</span><span class="o">()</span> <span class="o">*</span> <span class="mi">100</span><span class="o">)</span> <span class="o">+</span> <span class="mi">1</span><span class="o">;</span>
+		<span class="kt">int</span> <span class="n">v2</span> <span class="o">=</span> <span class="o">(</span><span class="kt">int</span><span class="o">)(</span><span class="nc">Math</span><span class="o">.</span><span class="na">random</span><span class="o">()</span> <span class="o">*</span> <span class="mi">100</span><span class="o">)</span> <span class="o">+</span> <span class="mi">1</span><span class="o">;</span>
+		<span class="kt">int</span> <span class="n">result</span> <span class="o">=</span> <span class="n">v1</span> <span class="o">+</span> <span class="n">v2</span><span class="o">;</span>
+		
+		<span class="c1">// jsp forwarding</span>
+		<span class="n">request</span><span class="o">.</span><span class="na">setAttribute</span><span class="o">(</span><span class="s">"v1"</span><span class="o">,</span> <span class="n">v1</span><span class="o">);</span>
+		<span class="n">request</span><span class="o">.</span><span class="na">setAttribute</span><span class="o">(</span><span class="s">"v2"</span><span class="o">,</span> <span class="n">v2</span><span class="o">);</span>
+		<span class="n">request</span><span class="o">.</span><span class="na">setAttribute</span><span class="o">(</span><span class="s">"result"</span><span class="o">,</span> <span class="n">result</span><span class="o">);</span>
+
+		<span class="nc">RequestDispatcher</span> <span class="n">rd</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="na">getRequestDispatcher</span><span class="o">(</span><span class="s">"/result.jsp"</span><span class="o">);</span>
+		<span class="n">rd</span><span class="o">.</span><span class="na">forward</span><span class="o">(</span><span class="n">request</span><span class="o">,</span> <span class="n">response</span><span class="o">);</span>
+	<span class="o">}</span>
+
+<span class="o">}</span>
+</code></pre></div>    </div>
+
+    <div class="language-jsp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">&lt;!-- result.jsp --&gt;</span>
+<span class="nt">&lt;%@ page </span><span class="na">language=</span><span class="s">"java"</span><span class="na"> contentType=</span><span class="s">"text/html; charset=UTF-8"</span><span class="na">
+    pageEncoding=</span><span class="s">"UTF-8"</span><span class="nt">%&gt;</span>
+<span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+<span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;title&gt;</span>Insert title here<span class="nt">&lt;/title&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+스크립틀릿 + 표현식 <span class="nt">&lt;br&gt;</span>
+<span class="nt">&lt;%</span>
+	<span class="kt">int</span> <span class="n">v1</span> <span class="o">=</span> <span class="o">(</span><span class="kt">int</span><span class="o">)</span><span class="n">request</span><span class="o">.</span><span class="na">getAttribute</span><span class="o">(</span><span class="s">"v1"</span><span class="o">);</span>
+	<span class="kt">int</span> <span class="n">v2</span> <span class="o">=</span> <span class="o">(</span><span class="kt">int</span><span class="o">)</span><span class="n">request</span><span class="o">.</span><span class="na">getAttribute</span><span class="o">(</span><span class="s">"v2"</span><span class="o">);</span>
+	<span class="kt">int</span> <span class="n">result</span> <span class="o">=</span> <span class="o">(</span><span class="kt">int</span><span class="o">)</span><span class="n">request</span><span class="o">.</span><span class="na">getAttribute</span><span class="o">(</span><span class="s">"result"</span><span class="o">);</span>
+<span class="nt">%&gt;</span>
+<span class="nt">&lt;%=</span><span class="n">v1</span> <span class="nt">%&gt;</span> + <span class="nt">&lt;%=</span><span class="n">v2</span> <span class="nt">%&gt;</span> = <span class="nt">&lt;%=</span><span class="n">result</span> <span class="nt">%&gt;&lt;br&gt;</span>
+<span class="nt">&lt;br&gt;</span>
+
+EL표기 <span class="nt">&lt;br&gt;</span>
+${v1 } + ${v2 } = ${result } <span class="nt">&lt;br&gt;</span>
+
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre></div>    </div>
+
+  </div>
+</details>
+
+<details>
+<summary>결과</summary>
+<img src="http://drive.google.com/uc?export=view&amp;id=1oiLw8m79r-pbi-M5VrWa6Xbgz2-pZnx-" /><br />
+</details>

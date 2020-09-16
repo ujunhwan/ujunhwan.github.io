@@ -1,0 +1,227 @@
+I"k8<h1>JSTL</h1>
+<blockquote>
+  <p>JSTL(JSP Standard Tag Library)는 JSP 페이지에서 조건문, 반복문 등을 html tag 형태로 작성할 수 있게 도와준다.</p>
+</blockquote>
+
+<div class="language-jsp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;%</span>
+    <span class="k">if</span><span class="o">(</span><span class="n">list</span><span class="o">.</span><span class="na">size</span><span class="o">()</span> <span class="err">&gt;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">list</span><span class="o">.</span><span class="na">size</span><span class="o">();</span><span class="err">&gt;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+            <span class="nc">Data</span> <span class="n">data</span> <span class="o">=</span> <span class="o">(</span><span class="nc">Data</span><span class="o">)</span><span class="n">list</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">i</span><span class="o">);</span>
+<span class="nt">%&gt;</span>
+<span class="nt">&lt;%=</span><span class="n">data</span><span class="o">.</span><span class="na">getTitle</span><span class="o">()</span> <span class="nt">%&gt;</span>
+
+<span class="nt">&lt;%</span>
+        <span class="o">}</span>
+    <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+<span class="nt">%&gt;</span>
+    데이터가 없습니다.
+<span class="nt">&lt;%</span>
+    <span class="o">}</span>
+<span class="nt">%&gt;</span>
+</code></pre></div></div>
+
+<div class="language-jsp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;c:if </span><span class="na">test=</span><span class="s">"!empty ${list}"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;c:foreach </span><span class="na">varName=</span><span class="s">"data"</span><span class="na"> list=</span><span class="s">"</span><span class="si">${</span><span class="n">list</span><span class="si">}</span><span class="s">&gt;
+        ${data.title}
+    &lt;/c:foreach&gt;
+&lt;/c:if&gt;
+&lt;c:if test="</span>empty ${list}"<span class="nt">&gt;</span>
+    데이터가 없습니다.
+<span class="nt">&lt;/c&gt;</span>
+</code></pre></div></div>
+
+<p>위의 두 코드는 <strong>논리적으로 동일한 코드</strong> 이다.<br />
+<br /></p>
+
+<h1>Core 태그</h1>
+<p>|태그|설명|
+|:—:|:—:|
+|set|JSP에서 사용할 변수를 설정한다.
+|remove|설정한 변수를 제거한다.
+|if|조건에 따라 내부 코드를 수행한다.
+|choose|다중 조건을 처리할 때 사용된다.
+|forEach|콜렉션이나 Map의 각 항목을 처리할 때 사용된다.
+|forTokens|구분자로 분리된 각 항목을 처리할 때 사용된다.
+|import|URL을 사용하여 다른 자원의 결과를 삽입할 때 사용된다.
+|redirect|지정한 경로로 리다이렉트 한다.
+|url|URL을 재작성한다.
+|catch|예외 처리에 사용된다.
+|out|JSPWriter에 내용을 알맞게 처리한 후 출력한다.</p>
+
+<p><br /></p>
+
+<h2>set, remove 태그</h2>
+
+<p><code class="language-plaintext highlighter-rouge">set</code> 태그와 <code class="language-plaintext highlighter-rouge">scope</code> 에 값을 저장하고, EL을 이용하여 출력한 뒤, <code class="language-plaintext highlighter-rouge">remove</code> 태그를 이용하여 값을 제거할 수 있다.</p>
+<details>
+<summary>Source Code</summary>
+<div>
+
+    <div class="language-jsp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;%@ page </span><span class="na">language=</span><span class="s">"java"</span><span class="na"> contentType=</span><span class="s">"text/html; charset=UTF-8"</span><span class="na">
+    pageEncoding=</span><span class="s">"UTF-8"</span><span class="nt">%&gt;</span>
+<span class="nt">&lt;%@ taglib </span><span class="na">prefix=</span><span class="s">"c"</span><span class="na"> uri=</span><span class="s">"http://java.sun.com/jsp/jstl/core"</span><span class="nt">%&gt;</span>
+<span class="nt">&lt;c:set </span><span class="na">var=</span><span class="s">"value1"</span><span class="na"> scope=</span><span class="s">"request"</span><span class="na"> value=</span><span class="s">"junhwan"</span> <span class="nt">/&gt;</span>
+<span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+<span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;title&gt;</span>Insert title here<span class="nt">&lt;/title&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+이름 : ${value1 }<span class="nt">&lt;br&gt;</span>
+<span class="nt">&lt;c:remove </span><span class="na">var=</span><span class="s">"value1"</span><span class="na"> scope=</span><span class="s">"request"</span><span class="nt">/&gt;</span>
+이름 : ${value1 }
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre></div>    </div>
+  </div>
+</details>
+
+<details>
+<summary>결과</summary>
+<div>
+
+    <p><img src="http://drive.google.com/uc?export=view&amp;id=1onDTd5JtI6TMKnBQ_n7qtQssQRbWxIwg" /><br /></p>
+
+    <p>처음에는 value1에 들어있는 내 이름이 출력이 되었고, <code class="language-plaintext highlighter-rouge">remove</code> 된 이후에는 출력이 되지 않는 것을 확인할 수 있다.</p>
+  </div>
+</details>
+
+<p><br /></p>
+
+<h2>choose 태그</h2>
+
+<p>if-else 구문하고 동일하다.</p>
+<details>
+<summary>Source Code</summary>
+<div>
+
+    <div class="language-jsp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;%@ page </span><span class="na">language=</span><span class="s">"java"</span><span class="na"> contentType=</span><span class="s">"text/html; charset=UTF-8"</span><span class="na">
+    pageEncoding=</span><span class="s">"UTF-8"</span><span class="nt">%&gt;</span>
+<span class="nt">&lt;%@ taglib </span><span class="na">prefix=</span><span class="s">"c"</span><span class="na"> uri=</span><span class="s">"http://java.sun.com/jsp/jstl/core"</span><span class="nt">%&gt;</span>
+<span class="nt">&lt;c:set </span><span class="na">var=</span><span class="s">"score"</span><span class="na"> scope=</span><span class="s">"request"</span><span class="na"> value=</span><span class="s">"83"</span> <span class="nt">/&gt;</span>
+<span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+<span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;title&gt;</span>Insert title here<span class="nt">&lt;/title&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+점수 : ${score }<span class="nt">&lt;br&gt;</span>
+	<span class="nt">&lt;c:choose&gt;</span>
+		<span class="nt">&lt;c:when </span><span class="na">test=</span><span class="s">"</span><span class="si">${</span><span class="n">score</span> <span class="o">&gt;=</span> <span class="mi">90</span><span class="si">}</span><span class="s">"</span><span class="nt">&gt;</span>
+			A학점 입니다.
+		<span class="nt">&lt;/c:when&gt;</span>
+		<span class="nt">&lt;c:when </span><span class="na">test=</span><span class="s">"</span><span class="si">${</span><span class="n">score</span> <span class="o">&gt;=</span> <span class="mi">80</span><span class="si">}</span><span class="s">"</span><span class="nt">&gt;</span>
+			B학점 입니다.
+		<span class="nt">&lt;/c:when&gt;</span>
+		<span class="nt">&lt;c:when </span><span class="na">test=</span><span class="s">"</span><span class="si">${</span><span class="n">score</span> <span class="o">&gt;=</span> <span class="mi">70</span><span class="si">}</span><span class="s">"</span><span class="nt">&gt;</span>
+			C학점 입니다.
+		<span class="nt">&lt;/c:when&gt;</span>
+		<span class="nt">&lt;c:when </span><span class="na">test=</span><span class="s">"</span><span class="si">${</span><span class="n">score</span> <span class="o">&gt;=</span> <span class="mi">60</span><span class="si">}</span><span class="s">"</span><span class="nt">&gt;</span>
+			D학점 입니다.
+		<span class="nt">&lt;/c:when&gt;</span>
+		<span class="nt">&lt;c:otherwise&gt;</span>
+			F학점 입니다.
+		<span class="nt">&lt;/c:otherwise&gt;</span>
+	<span class="nt">&lt;/c:choose&gt;</span>
+
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre></div>    </div>
+  </div>
+</details>
+
+<details>
+<summary>결과</summary>
+<div>
+
+    <p><img src="http://drive.google.com/uc?export=view&amp;id=1or8W7YjFsLD9wSmn8KjQS0NE6yQGf2Io" /><br /></p>
+
+  </div>
+</details>
+
+<p><br /></p>
+
+<h2>forEach 태그</h2>
+
+<p><code class="language-plaintext highlighter-rouge">forEach</code> 태그를 통해, <code class="language-plaintext highlighter-rouge">list</code>에 담겨있는 값들을 간단하게 사용할 수 있다.</p>
+
+<details>
+<summary>Source Code</summary>
+<div>
+
+    <div class="language-jsp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;%@ page </span><span class="na">language=</span><span class="s">"java"</span><span class="na"> contentType=</span><span class="s">"text/html; charset=UTF-8"</span><span class="na">
+    pageEncoding=</span><span class="s">"UTF-8"</span><span class="nt">%&gt;</span>
+<span class="nt">&lt;%@ taglib </span><span class="na">prefix=</span><span class="s">"c"</span><span class="na"> uri=</span><span class="s">"http://java.sun.com/jsp/jstl/core"</span><span class="nt">%&gt;</span>
+<span class="nt">&lt;%@ page </span><span class="na">import=</span><span class="s">"java.util.List"</span> <span class="nt">%&gt;</span>
+<span class="nt">&lt;%@ page </span><span class="na">import=</span><span class="s">"java.util.ArrayList"</span> <span class="nt">%&gt;</span>
+<span class="nt">&lt;%</span>
+	<span class="nc">List</span><span class="o">&lt;</span><span class="nc">String</span><span class="err">&gt;</span> <span class="n">list</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;</span><span class="err">&gt;</span><span class="o">();</span>
+	<span class="n">list</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">"Hello"</span><span class="o">);</span>
+	<span class="n">list</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">"World"</span><span class="o">);</span>
+	<span class="n">list</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">"!!!!!"</span><span class="o">);</span>
+	
+	<span class="n">request</span><span class="o">.</span><span class="na">setAttribute</span><span class="o">(</span><span class="s">"list"</span><span class="o">,</span> <span class="n">list</span><span class="o">);</span>
+<span class="nt">%&gt;</span>
+
+<span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+<span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;title&gt;</span>Insert title here<span class="nt">&lt;/title&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+<span class="nt">&lt;c:forEach </span><span class="na">var=</span><span class="s">"item"</span><span class="na"> items=</span><span class="s">"</span><span class="si">${</span><span class="n">list</span> <span class="si">}</span><span class="s">"</span><span class="na"> begin=</span><span class="s">"1"</span><span class="nt">&gt;</span>
+	${item }<span class="nt">&lt;br&gt;</span>
+<span class="nt">&lt;/c:forEach&gt;</span>
+
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre></div>    </div>
+  </div>
+</details>
+
+<details>
+<summary>결과</summary>
+
+<img src="http://drive.google.com/uc?export=view&amp;id=1ouTHODIqnH1iiXi31SEvFfjOu9fOjwgU" /><br />
+</details>
+<p><br /></p>
+
+<h2>import 태그</h2>
+<p><code class="language-plaintext highlighter-rouge">import</code> 태그를 통해 지정한 URL에 연결하여 결과를 지정한 변수에 저장할 수 있다.</p>
+
+<details>
+<summary>Source Code</summary>
+<div>
+
+    <div class="language-jsp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;%@ page </span><span class="na">language=</span><span class="s">"java"</span><span class="na"> contentType=</span><span class="s">"text/html; charset=UTF-8"</span><span class="na">
+    pageEncoding=</span><span class="s">"UTF-8"</span><span class="nt">%&gt;</span>
+<span class="nt">&lt;%@ taglib </span><span class="na">prefix=</span><span class="s">"c"</span><span class="na"> uri=</span><span class="s">"http://java.sun.com/jsp/jstl/core"</span> <span class="nt">%&gt;</span>
+<span class="nt">&lt;%@ page </span><span class="na">import=</span><span class="s">"java.util.*"</span> <span class="nt">%&gt;</span>
+<span class="nt">&lt;c:import </span><span class="na">url=</span><span class="s">"https://www.kakaocorp.com/"</span><span class="na"> var=</span><span class="s">"urlValue"</span><span class="na"> scope=</span><span class="s">"request"</span> <span class="nt">/&gt;</span>
+<span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+<span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;title&gt;</span>Insert title here<span class="nt">&lt;/title&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+${urlValue }
+
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre></div>    </div>
+
+  </div>
+</details>
+
+<details>
+<summary>결과</summary>
+
+<img src="http://drive.google.com/uc?export=view&amp;id=1p32IjyNJnud8tACCC9UvOAvyr-I9mWps" /><br />
+
+</details>
+
+:ET

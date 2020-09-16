@@ -1,0 +1,39 @@
+<h2>Ajax (XMLHttpRequest 통신)</h2>
+<blockquote>
+  <p><strong>Ajax(Asynchronous JavaScript and XML)</strong>
+는 비동기 방식으로 서버로부터 데이터를 가져오는 것이다.</p>
+</blockquote>
+
+<p>위쪽에 탭들을 누르면 아래 컨텐츠들이 매번 바뀐다. 
+그때마다 서버에서 새로운 데이터를 만들어서 보여줘야하니까
+원래는 서버에서 매번 새로운 페이지를 내려줘서 그걸 렌더링 하는 방법을 사용했었다.<br />
+지금은 <strong>필요한 부분</strong> 만 데이터를 가져오게 할 수 있다.
+새로고침 없이 전체 웹페이지에서 일부분만 받아온 데이터로 갱신할 수 있다.</p>
+
+<p>비동기적으로 즉 다른화면에 영향을 주지 않고 데이터를 서버에서 가져오는 방법을 <code class="language-plaintext highlighter-rouge">Ajax</code> 라고 한다.</p>
+
+<h2>JSON</h2>
+
+<p>표준적인 데이터 포맷을 결정하기 위해서 주로 <strong><em>JSON(JavaScript Object Notation)</em></strong> 포맷을 사용한다.<br />
+<br /></p>
+
+<h2>Ajax 실행코드</h2>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">oReq</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">XMLHttpRequest</span><span class="p">();</span>
+<span class="nx">oReq</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">"</span><span class="s2">load</span><span class="dl">"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">responseText</span><span class="p">);</span>
+<span class="p">});</span>
+
+<span class="nx">oReq</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="dl">"</span><span class="s2">GET</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">https://www.w3.org/TR/PNG/iso_8859-1.txt</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">oReq</span><span class="p">.</span><span class="nx">send</span><span class="p">();</span>
+</code></pre></div></div>
+<p>실행 순서</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">XMLHttpRequest</code> 객체 생성</li>
+  <li>open() 메서드로 요청 준비</li>
+  <li>send() 메서드로 서버에 전송</li>
+  <li>서버에서 응답시 load 이벤트 발생</li>
+  <li>function() 실행 (이 때, open, send는 전부 반환되고 callstack에 존재하지 않은 상태)</li>
+</ul>
+
+<h2>결과</h2>
+<p><img src="http://drive.google.com/uc?export=view&amp;id=1oOREqp_K-ST3ZFlhNvbzV3_LgyfMackV" /><br /></p>

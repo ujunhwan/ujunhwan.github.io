@@ -1,0 +1,26 @@
+I"�<h1>redirect</h1>
+
+<blockquote>
+  <p>redirect는 http protocol로 정해진 규칙이다.</p>
+</blockquote>
+
+<p>서버는 클라이언트로부터 요청을 받은 후, 클라이언트에게 특정 url로 이동하라고 요청할 수 있다. 이것을 <strong><em>redirect</em></strong> 라고 한다.</p>
+
+<p>서버에서는 클라이언트에게 응답으로 상태코드를 302와 함께 이동할 url정보를 Location 헤더에 담아 전송한다.
+클라이언트는 서버로부터 받은 상태값이 302이면 Location 헤더값으로 재요청을 보내게 된다.</p>
+
+<p>이때 브라우저의 주소창은 전송받은 url로 바뀌게 된다.
+<code class="language-plaintext highlighter-rouge">servlet</code> 이나 <code class="language-plaintext highlighter-rouge">jsp</code> 는 redirect 를 하기 위해 <code class="language-plaintext highlighter-rouge">HttpServletResponse</code> 가 갖고있는 <code class="language-plaintext highlighter-rouge">sendRedirect()</code> 메소드를 사용한다.</p>
+
+<div class="language-jsp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;%@ page </span><span class="na">language=</span><span class="s">"java"</span><span class="na"> contentType=</span><span class="s">"text/html; charset=UTF-8"</span><span class="na">
+    pageEncoding=</span><span class="s">"UTF-8"</span><span class="nt">%&gt;</span>
+<span class="nt">&lt;%</span>
+	<span class="n">response</span><span class="o">.</span><span class="na">sendRedirect</span><span class="o">(</span><span class="s">"https://www.naver.com"</span><span class="o">);</span>
+<span class="nt">%&gt;</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>redirect01.jsp 를 만든 뒤, 위의 코드를 입력하고 tomcat에 올려서 접속하면, 네이버가 실행된다.  
+</code></pre></div></div>
+
+<p>브라우저의 url 주소도 www.naver.com 으로 바뀜</p>
+:ET

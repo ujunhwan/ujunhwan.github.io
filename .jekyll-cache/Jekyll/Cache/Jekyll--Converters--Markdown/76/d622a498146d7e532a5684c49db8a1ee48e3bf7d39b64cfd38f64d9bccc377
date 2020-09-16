@@ -1,0 +1,18 @@
+I"�<h1>Expression Language</h1>
+
+<blockquote>
+  <p>표현 언어(Expression Language)는 값을 표현하는 데 사용되는 스크립트 언어로서 JSP의 기본 문법을 보완하는 역할을 한다.</p>
+</blockquote>
+
+<h3>문법</h3>
+<div class="language-jsp highlighter-rouge"><div class="highlight"><pre class="highlight"><code>${expr }
+</code></pre></div></div>
+
+<h3>예제</h3>
+<div class="language-jsp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;b&gt;</span>${sessionScope.member.id}<span class="nt">&lt;/b&gt;</span>님 환영합니다!
+</code></pre></div></div>
+
+<h2>EL 문법을 사용하지 않고, 문자열을 그대로 표시할 때</h2>
+<div class="language-jsp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;%@ page </span><span class="na">isELIgnored = </span><span class="s">"true"</span> <span class="nt">%&gt;</span> 
+</code></pre></div></div>
+:ET

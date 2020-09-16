@@ -1,0 +1,33 @@
+<h2>Event</h2>
+<p>브라우저를 마우스로 스크롤 하거나, 클릭 또는 이동 등등을 할때 이벤트가 발생한다.
+<code class="language-plaintext highlighter-rouge">HTML element</code> 별로 어떤 이벤트가 발생했을 때, 특정 행위를 하고 싶다면,
+대상 엘리먼트를 찾고, 어떤 일을 하도록 등록하면 된다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">el</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">"</span><span class="s2">outside</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">el</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">"</span><span class="s2">clock</span><span class="dl">"</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){</span>
+    <span class="c1">// ...</span>
+<span class="p">},</span> <span class="kc">false</span><span class="p">);</span>
+</code></pre></div></div>
+<p><code class="language-plaintext highlighter-rouge">addEventListener</code> 의 두번째 인자는 이벤트 리스너이다. 이벤트가 발생할 때 실행이 된다.</p>
+
+<h2>이벤트 객체</h2>
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+    <span class="nt">&lt;head&gt;</span>
+        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"outside"</span><span class="nt">&gt;</span>outside element<span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;/head&gt;</span>
+    <span class="nt">&lt;body&gt;</span>
+        <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"test1.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+    <span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre></div></div>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">el</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="dl">"</span><span class="s2">.outside</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="nx">el</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">"</span><span class="s2">click</span><span class="dl">"</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">evt</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">target</span> <span class="o">=</span> <span class="nx">evt</span><span class="p">.</span><span class="nx">target</span><span class="p">;</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">target</span><span class="p">.</span><span class="nx">className</span><span class="p">,</span> <span class="nx">target</span><span class="p">.</span><span class="nx">nodeName</span><span class="p">);</span>
+<span class="p">})</span>
+</code></pre></div></div>
+<p><img src="http://drive.google.com/uc?export=view&amp;id=1oNaj7SVU_p-MPHx5WexAYMGE096ZJH0L" /><br />
+click시 다음과 같이 console에 target이 가리키는 <code class="language-plaintext highlighter-rouge">className</code>과 <code class="language-plaintext highlighter-rouge">nodeName</code>이 출력된다.</p>

@@ -1,0 +1,11 @@
+I"�<h1>Mac OS 에서 MySQL 접속 포트 확인</h1>
+<div class="language-zsh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>mysql <span class="nt">-uroot</span>
+</code></pre></div></div>
+<p>터미널에서 입력해서 <code class="language-plaintext highlighter-rouge">mysql</code> 에 접속 후,</p>
+<div class="language-zsh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mysql&gt; SHOW GLOBAL VARIABLES LIKE <span class="s1">'PORT'</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>결과</p>
+
+<p><img src="http://drive.google.com/uc?export=view&amp;id=1pA7Ad7k_cPPRezxHxnwW6BamGhiP7xdq" /><br /></p>
+:ET

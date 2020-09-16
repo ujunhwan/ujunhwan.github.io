@@ -1,0 +1,127 @@
+<h1>Forward</h1>
+
+<blockquote>
+  <p>servlet1이 받은 요청을 다 처리하지 않고, servlet2에게 넘겨주는 작업을 <strong>forward</strong> 라고 한다.</p>
+</blockquote>
+
+<ul>
+  <li>웹 브라우저에서 servlet1에게 요청을 보냄</li>
+  <li>servlet1 은 요청을 처리한 후, 그 결과를 <code class="language-plaintext highlighter-rouge">HttpServletRequest</code>에 저장</li>
+  <li>servlet1 은 결과가 저장된 <code class="language-plaintext highlighter-rouge">HttpServletRequest</code> 와 응답을 위한 <code class="language-plaintext highlighter-rouge">HttpServletResponse</code>를 같은 웹 어플리케이션 안에 있는 servlet2 에게 전송 (forward)</li>
+  <li>servlet2 는 servlet1 로 부터 받은 <code class="language-plaintext highlighter-rouge">HttpServletRequest</code> 와 <code class="language-plaintext highlighter-rouge">HttpServletResponse</code> 를 이용하여 요청을 처리한 후 웹 브라우저에게 결과를 전송</li>
+</ul>
+
+<p><em>servlet1</em> 의 결과를 <code class="language-plaintext highlighter-rouge">forward</code> 되는 <em>servlet2</em> 에서 사용하기 위해선, 지역변수가 아닌 <strong><em>매개변수</em></strong> 가 필요하다.</p>
+
+<p><code class="language-plaintext highlighter-rouge">request</code> 객체는 response 가 되기 전까지 없어지지 않는다. 따라서 <code class="language-plaintext highlighter-rouge">request</code> 객체를 매개변수로 사용할 수 있다. 그러므로 <em>servlet1</em> 의 결과를 <code class="language-plaintext highlighter-rouge">request</code> 객체에 저장한다.</p>
+
+<p><br /></p>
+
+<details>
+<summary>forward와 redirect의 차이</summary>
+
+<div>
+
+    <p><br /></p>
+
+    <p>클라이언트가 서버에 요청을 보냈고 서버는 다시 클라이언트한테 새로운 요청할 곳을 알려주면서 여기로 다시 요청하라고 하는것이 <code class="language-plaintext highlighter-rouge">redirect</code> 이다.</p>
+
+    <p>클라이언트에 요청을 보냈고 서버가 그 요청에 대해서 혼자 처리하는 것이 아니라, 다른 누군가에게 처리를 맡기는 것을 <code class="language-plaintext highlighter-rouge">forward</code> 라고 한다.</p>
+
+    <p><code class="language-plaintext highlighter-rouge">forward</code> 는 새로운 요청이 들어온 것이 아니다.
+서버가 내부적으로 옮겨줬을 뿐이다. 
+따라서 클라이언트가 요청했을때 만들어졌던 <em>request</em>, <em>response</em> 객체는 그대로 유지된다.</p>
+
+    <p>또한 <code class="language-plaintext highlighter-rouge">redirect</code> 의 경우, url이 바뀌는데, <code class="language-plaintext highlighter-rouge">forward</code> 는 url의 변화가 없다.</p>
+  </div>
+</details>
+
+<p><br /></p>
+
+<h1>예제</h1>
+<p><em>FrontServlet</em> 에서 랜덤한 숫자를 발생시킨 뒤, <code class="language-plaintext highlighter-rouge">request</code> 객체에 저장한다.
+그 다음 <em>NextServlet</em> 으로 <code class="language-plaintext highlighter-rouge">forward</code> 를 보낸다.<br />
+<code class="language-plaintext highlighter-rouge">request</code> 객체에 담긴 값을 변수에 저장한 뒤, 그 수만큼 <strong>“Hello World!”</strong> 를 출력한다.<br />
+<br /></p>
+
+<details>
+<summary>Source Code</summary>
+<div>
+
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// FrontServlet</span>
+<span class="kn">package</span> <span class="nn">examples</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">java.io.IOException</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">javax.servlet.RequestDispatcher</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.servlet.ServletException</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.servlet.annotation.WebServlet</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.servlet.http.HttpServlet</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.servlet.http.HttpServletRequest</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.servlet.http.HttpServletResponse</span><span class="o">;</span>
+
+<span class="nd">@WebServlet</span><span class="o">(</span><span class="s">"/front"</span><span class="o">)</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">FrontServlet</span> <span class="kd">extends</span> <span class="nc">HttpServlet</span> <span class="o">{</span>
+	<span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">long</span> <span class="n">serialVersionUID</span> <span class="o">=</span> <span class="mi">1L</span><span class="o">;</span>
+       
+    <span class="kd">public</span> <span class="nf">FrontServlet</span><span class="o">()</span> <span class="o">{</span>
+        <span class="kd">super</span><span class="o">();</span>
+    <span class="o">}</span>
+
+	<span class="kd">protected</span> <span class="kt">void</span> <span class="nf">service</span><span class="o">(</span><span class="nc">HttpServletRequest</span> <span class="n">request</span><span class="o">,</span> <span class="nc">HttpServletResponse</span> <span class="n">response</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">ServletException</span><span class="o">,</span> <span class="nc">IOException</span> <span class="o">{</span>
+		<span class="kt">int</span> <span class="n">diceValue</span> <span class="o">=</span> <span class="o">(</span><span class="kt">int</span><span class="o">)(</span><span class="nc">Math</span><span class="o">.</span><span class="na">random</span><span class="o">()</span> <span class="o">*</span> <span class="mi">6</span><span class="o">)</span> <span class="o">+</span> <span class="mi">1</span><span class="o">;</span>
+		<span class="n">request</span><span class="o">.</span><span class="na">setAttribute</span><span class="o">(</span><span class="s">"dice"</span><span class="o">,</span> <span class="n">diceValue</span><span class="o">);</span>
+		
+		<span class="nc">RequestDispatcher</span> <span class="n">requestDispatcher</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="na">getRequestDispatcher</span><span class="o">(</span><span class="s">"/next"</span><span class="o">);</span>
+		<span class="n">requestDispatcher</span><span class="o">.</span><span class="na">forward</span><span class="o">(</span><span class="n">request</span><span class="o">,</span>  <span class="n">response</span><span class="o">);</span>
+	<span class="o">}</span>
+
+<span class="o">}</span>
+
+</code></pre></div>    </div>
+
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// NextServlet</span>
+<span class="kn">package</span> <span class="nn">examples</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">java.io.PrintWriter</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.io.IOException</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.servlet.ServletException</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.servlet.annotation.WebServlet</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.servlet.http.HttpServlet</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.servlet.http.HttpServletRequest</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.servlet.http.HttpServletResponse</span><span class="o">;</span>
+
+<span class="nd">@WebServlet</span><span class="o">(</span><span class="s">"/next"</span><span class="o">)</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">NextServlet</span> <span class="kd">extends</span> <span class="nc">HttpServlet</span> <span class="o">{</span>
+	<span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">long</span> <span class="n">serialVersionUID</span> <span class="o">=</span> <span class="mi">1L</span><span class="o">;</span>
+    <span class="kd">public</span> <span class="nf">NextServlet</span><span class="o">()</span> <span class="o">{</span>
+        <span class="kd">super</span><span class="o">();</span>
+    <span class="o">}</span>
+
+	<span class="kd">protected</span> <span class="kt">void</span> <span class="nf">service</span><span class="o">(</span><span class="nc">HttpServletRequest</span> <span class="n">request</span><span class="o">,</span> <span class="nc">HttpServletResponse</span> <span class="n">response</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">ServletException</span><span class="o">,</span> <span class="nc">IOException</span> <span class="o">{</span>
+
+		<span class="n">response</span><span class="o">.</span><span class="na">setContentType</span><span class="o">(</span><span class="s">"text/html"</span><span class="o">);</span>
+
+		<span class="nc">PrintWriter</span> <span class="n">out</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="na">getWriter</span><span class="o">();</span>
+
+		<span class="n">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"&lt;html&gt;"</span><span class="o">);</span>
+		<span class="n">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"&lt;head&gt;&lt;title&gt;form&lt;/title&gt;&lt;/head&gt;"</span><span class="o">);</span>
+		<span class="n">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"&lt;body&gt;"</span><span class="o">);</span>
+		
+		<span class="c1">// object가 반환되기 때문에 Integer로 형변환</span>
+		<span class="kt">int</span> <span class="n">dice</span> <span class="o">=</span> <span class="o">(</span><span class="nc">Integer</span><span class="o">)</span><span class="n">request</span><span class="o">.</span><span class="na">getAttribute</span><span class="o">(</span><span class="s">"dice"</span><span class="o">);</span>
+		<span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">dice</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+			<span class="n">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Hello World!&lt;br&gt;"</span><span class="o">);</span>
+		<span class="o">}</span>
+
+		<span class="n">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"dice : "</span> <span class="o">+</span> <span class="n">dice</span><span class="o">);</span>
+		<span class="n">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"&lt;/body&gt;&lt;/html&gt;"</span><span class="o">);</span>
+		
+	<span class="o">}</span>
+
+<span class="o">}</span>
+
+</code></pre></div>    </div>
+  </div>
+</details>
+

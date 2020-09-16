@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  
+  
+  <title>ujunhwan</title>
+  <meta name="description" content="인생은... 크레이지아케이드....">
+  
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="canonical" href="http://localhost:4000/page3/">
+  
+  
+  <link rel="alternate" type="application/rss+xml" title="ujunhwan" href="http://localhost:4000/feed.xml">
+
+  
+
+  
+  <meta property="og:title" content="ujunhwan">
+  <meta property="og:site_name" content="ujunhwan">
+  <meta property="og:url" content="http://localhost:4000/page3/">
+  <meta property="og:description" content="인생은... 크레이지아케이드....">
+  
+  
+  <meta name="twitter:card" content="summary">
+  
+  <meta name="twitter:title" content="ujunhwan">
+  <meta name="twitter:description" content="인생은... 크레이지아케이드....">
+  
+  
+
+  <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css?family=Bitter:400,400i,700&amp;display=swap" rel="stylesheet">
+
+  
+
+</head>
+
+
+  <body>
+
+    <header class="site-header">
+
+  <div class="wrapper">
+
+    <a class="site-title" href="/">ujunhwan</a>
+
+    <nav class="site-nav">
+      
+        
+        <a class="page-link" href="/">blog</a>
+      
+        
+        <a class="page-link" href="/archives/">archives</a>
+      
+        
+        <a class="page-link" href="https://github.com/ujunhwan">github</a>
+      
+    </nav>
+
+  </div>
+
+</header>
+
+
+    <main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <div class="home">
+
+  
+
+  
+
+  <ul class="post-list">
+    
+      
+      
+
+      <li>
+        <header class="post-header">
+          <h1 class="post-title">
+            
+              <a class="post-link" href="/redirect/">Redirect</a>
+            
+          </h1>
+
+          <p class="post-meta">
+            Sep 10, 2020
+            
+            
+          </p>
+        </header>
+
+        <div class="post-content">
+          <h1>redirect</h1>
+
+<blockquote>
+  <p>redirect는 http protocol로 정해진 규칙이다.</p>
+</blockquote>
+
+<p>서버는 클라이언트로부터 요청을 받은 후, 클라이언트에게 특정 url로 이동하라고 요청할 수 있다. 이것을 <strong><em>redirect</em></strong> 라고 한다.</p>
+
+<p>서버에서는 클라이언트에게 응답으로 상태코드를 302와 함께 이동할 url정보를 Location 헤더에 담아 전송한다.
+클라이언트는 서버로부터 받은 상태값이 302이면 Location 헤더값으로 재요청을 보내게 된다.</p>
+
+<p>이때 브라우저의 주소창은 전송받은 url로 바뀌게 된다.
+<code class="language-plaintext highlighter-rouge">servlet</code> 이나 <code class="language-plaintext highlighter-rouge">jsp</code> 는 redirect 를 하기 위해 <code class="language-plaintext highlighter-rouge">HttpServletResponse</code> 가 갖고있는 <code class="language-plaintext highlighter-rouge">sendRedirect()</code> 메소드를 사용한다.</p>
+
+<div class="language-jsp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;%@ page </span><span class="na">language=</span><span class="s">"java"</span><span class="na"> contentType=</span><span class="s">"text/html; charset=UTF-8"</span><span class="na">
+    pageEncoding=</span><span class="s">"UTF-8"</span><span class="nt">%&gt;</span>
+<span class="nt">&lt;%</span>
+	<span class="n">response</span><span class="o">.</span><span class="na">sendRedirect</span><span class="o">(</span><span class="s">"https://www.naver.com"</span><span class="o">);</span>
+<span class="nt">%&gt;</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>redirect01.jsp 를 만든 뒤, 위의 코드를 입력하고 tomcat에 올려서 접속하면, 네이버가 실행된다.  
+</code></pre></div></div>
+
+<p>브라우저의 url 주소도 www.naver.com 으로 바뀜</p>
+
+        </div>
+        
+      </li>
+    
+      
+      
+
+      <li>
+        <header class="post-header">
+          <h1 class="post-title">
+            
+              <a class="post-link" href="/jsp/">Jsp</a>
+            
+          </h1>
+
+          <p class="post-meta">
+            Sep 10, 2020
+            
+            
+          </p>
+        </header>
+
+        <div class="post-content">
+          <h1>jsp</h1>
+
+<p>모든 <code class="language-plaintext highlighter-rouge">jsp</code> 는 <code class="language-plaintext highlighter-rouge">servlet</code> 으로 바뀌어서 실행된다.
+바뀐 <code class="language-plaintext highlighter-rouge">servlet</code> 이 실행되는 것이다.
+따라서 <code class="language-plaintext highlighter-rouge">servlet</code>으로 바뀐 뒤에는, <code class="language-plaintext highlighter-rouge">servlet</code>의 라이프 사이클과 동일하게 실행이 된다.</p>
+<div class="language-jsp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;%</span>
+    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Hello World!"</span><span class="o">);</span>
+<span class="nt">%&gt;</span>
+</code></pre></div></div>
+<p>코드는 다음과 같이 &lt;% 태그를 이용해서 작성한다.
+이렇게 작성된 코드들은 전부 새로 생성된 <code class="language-plaintext highlighter-rouge">java</code> 파일의 <code class="language-plaintext highlighter-rouge">_jspService()</code> 내에 전달된다.<br />
+&lt;%! 태그의 경우, 함수나 필드를 생성할때 사용하는데, 
+그 이유는 <code class="language-plaintext highlighter-rouge">_jspService()</code> 내에 생성이 되는 것이 아니고 <code class="language-plaintext highlighter-rouge">_jspInit()</code> 에서 생성되기 때문이다.</p>
+
+<h2>jsp의 실행순서</h2>
+<ul>
+  <li>브라우저가 웹서버에 <code class="language-plaintext highlighter-rouge">jsp</code> 에 대한 요청 정보를 전달한다.</li>
+  <li>브라우저가 요청한 <code class="language-plaintext highlighter-rouge">jsp</code> 가 최초로 요청했을 경우만
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">jsp</code> 로 작성된 코드가 <code class="language-plaintext highlighter-rouge">servlet</code> 으로 변환된다. (<code class="language-plaintext highlighter-rouge">java</code> 파일 생성)</li>
+      <li><code class="language-plaintext highlighter-rouge">servlet</code> 코드를 컴파일해서 실행가능한 bytecode로 변환한다. (<code class="language-plaintext highlighter-rouge">class</code> 파일 생성)</li>
+      <li><code class="language-plaintext highlighter-rouge">servlet</code> 클래스를 로딩하고 인스턴스를 생성한다.</li>
+    </ul>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">servlet</code>이 실행되어 요청을 처리하고 응답 정보를 생성한다.</li>
+</ul>
+
+<h1>jsp lifecycle</h1>
+<blockquote>
+  <p><code class="language-plaintext highlighter-rouge">tomcat</code>이 <code class="language-plaintext highlighter-rouge">jsp</code>를 <code class="language-plaintext highlighter-rouge">servlet</code>으로 바꾸게 된다.</p>
+  <ul>
+    <li><em>.metadata</em> 폴더에 <code class="language-plaintext highlighter-rouge">java</code> 파일이 생성된다.</li>
+    <li>생성된 <code class="language-plaintext highlighter-rouge">java</code> 파일의 <code class="language-plaintext highlighter-rouge">_jspService()</code> 메소드를 확인해보면, <code class="language-plaintext highlighter-rouge">jsp</code> 파일의 내용이 변환되어 삽입돼있다.</li>
+  </ul>
+</blockquote>
+
+<div class="language-jsp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;%@ page </span><span class="na">language=</span><span class="s">"java"</span><span class="na"> contentType=</span><span class="s">"text/html; charset=UTF-8"</span><span class="na">
+    pageEncoding=</span><span class="s">"UTF-8"</span><span class="nt">%&gt;</span>
+<span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+<span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;title&gt;</span>Insert title here<span class="nt">&lt;/title&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+Hello world!
+<span class="nt">&lt;%</span>
+	<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="s">"jspService()"</span><span class="o">);</span>
+<span class="nt">%&gt;</span>
+
+<span class="nt">&lt;%!</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">jspInit</span><span class="o">(){</span>
+		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="s">"INIT!!!"</span><span class="o">);</span>
+	<span class="o">}</span>
+<span class="nt">%&gt;</span>
+
+<span class="nt">&lt;%!</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">jspDestroy</span><span class="o">()</span> <span class="o">{</span>
+	<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="s">"destroy"</span><span class="o">);</span>
+	<span class="o">}</span>
+<span class="nt">%&gt;</span>
+
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre></div></div>
+<h2>결과</h2>
+<p><br />
+<img src="http://drive.google.com/uc?export=view&amp;id=1oUeYtkc3Y6JDlvad-FQdpgr44oSIdzkk" /><br /></p>
+
+<p>console에 <code class="language-plaintext highlighter-rouge">jspInit()</code>이 처음에 출력되고, <code class="language-plaintext highlighter-rouge">jspService()</code>이 출력 된다음, <code class="language-plaintext highlighter-rouge">jspDestroy()</code> 가 출력된다. 
+이 때, <code class="language-plaintext highlighter-rouge">jsp</code> 에서 작성된 <code class="language-plaintext highlighter-rouge">jspInit()</code>, <code class="language-plaintext highlighter-rouge">jspDestroy()</code> 는 <code class="language-plaintext highlighter-rouge">override</code> 되어서 각각 <strong>실행</strong> 될때와 <strong>종료</strong> 될때 함수가 호출된다.<br />
+<br /></p>
+
+<h1>jsp 문법</h1>
+<ul>
+  <li>선언문 - &lt;%! %&gt;
+    <ul>
+      <li>전역변수 선언 및 메소드 선언에 사용</li>
+    </ul>
+  </li>
+  <li>스크립트릿 - &lt;% %&gt;
+    <ul>
+      <li>프로그래밍 코드 기술에 사용</li>
+    </ul>
+  </li>
+  <li>표현식 - &lt;%=%&gt;
+    <ul>
+      <li>화면에 출력할 내용 기술에 사용</li>
+    </ul>
+  </li>
+</ul>
+
+<h2>선언문</h2>
+<p><code class="language-plaintext highlighter-rouge">jsp</code> 페이지 내에서 필요한 <em>멤버변수</em> 나 <em>메소드</em> 가 필요할 때 선언해 사용하는 요소이다.</p>
+<div class="language-jsp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;%@ page </span><span class="na">language=</span><span class="s">"java"</span><span class="na"> contentType=</span><span class="s">"text/html; charset=UTF-8"</span><span class="na">
+    pageEncoding=</span><span class="s">"UTF-8"</span><span class="nt">%&gt;</span>
+<span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+<span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;title&gt;</span>Insert title here<span class="nt">&lt;/title&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+id : <span class="nt">&lt;%=</span><span class="n">getId</span><span class="o">()</span> <span class="cm">/* 표현식 사용해서 출력 */</span> <span class="nt">%&gt;</span>
+<span class="nt">&lt;%!</span> <span class="c1">// 선언문 시작</span>
+	<span class="nc">String</span> <span class="n">id</span> <span class="o">=</span> <span class="s">"u001"</span><span class="o">;</span>
+	<span class="kd">public</span> <span class="nc">String</span> <span class="nf">getId</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">id</span><span class="o">;</span>
+	<span class="o">}</span>
+<span class="nt">%&gt;</span> // 선언문 끝
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre></div></div>
+<h2>선언문 결과</h2>
+<p><img src="http://drive.google.com/uc?export=view&amp;id=1obuBTWdDx71QvL9J1OCn56Tt_GLDUYpP" /><br /><br />
+<br /></p>
+
+<h2>스크립트릿</h2>
+<div class="language-jsp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;%@ page </span><span class="na">language=</span><span class="s">"java"</span><span class="na"> contentType=</span><span class="s">"text/html; charset=UTF-8"</span><span class="na">
+pageEncoding=</span><span class="s">"UTF-8"</span><span class="nt">%&gt;</span>
+<span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+<span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;title&gt;</span>Insert title here<span class="nt">&lt;/title&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+<span class="nt">&lt;%</span>  <span class="c1">// 스크립트릿 시작</span>
+<span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="mi">5</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+<span class="nt">%&gt;</span>
+<span class="nt">&lt;H&lt;%=</span><span class="n">i</span> <span class="cm">/* 표현식 사용해서 출력 */</span> <span class="nt">%&gt;&gt;</span>아름다운 한글<span class="nt">&lt;/H&lt;%=</span><span class="n">i</span> <span class="nt">%&gt;&gt;</span>
+<span class="nt">&lt;%</span>
+<span class="o">}</span>
+<span class="nt">%&gt;</span>  // 스크립트릿 끝
+
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre></div></div>
+<h2>스크립트릿 결과</h2>
+<p><img src="http://drive.google.com/uc?export=view&amp;id=1ohKGalX7q1qQHMUk7QB1E55X00q3nesM" /><br />
+for문 안에 &lt;h1&gt; 태그가 들어가게 만들었다.<br />
+<br /></p>
+
+<h2>표현식</h2>
+<p><code class="language-plaintext highlighter-rouge">jsp</code> 페이지에서 웹 브라우저에 출력할 부분을 표현한다.<br />
+<strong>스크립트릿</strong> 내 에서 출력할 부분은 내장객체인 <code class="language-plaintext highlighter-rouge">out</code> 객체의 <code class="language-plaintext highlighter-rouge">print()</code> 또는 <code class="language-plaintext highlighter-rouge">println()</code> 메소드를 사용해서 출력한다.</p>
+
+<h2>주석</h2>
+
+<h3>html 주석</h3>
+<p>&lt;!– 주석 주석 주석 주석 –&gt;</p>
+
+<h3>java 주석</h3>
+<p>\// 주석 주석 주석 주석<br />
+\/* 주석 주석 주석 주석 */</p>
+
+<h3>jsp 주석</h3>
+<p>&lt;%– 주석 주석 주석 주석 –&gt;<br />
+<br /></p>
+<h2>주석 예시</h2>
+<h3>jsp code</h3>
+<div class="language-jsp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;%@ page </span><span class="na">language=</span><span class="s">"java"</span><span class="na"> contentType=</span><span class="s">"text/html; charset=UTF-8"</span><span class="na">
+pageEncoding=</span><span class="s">"UTF-8"</span><span class="nt">%&gt;</span>
+<span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+<span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+<span class="c">&lt;%-- jsp 주석 --%&gt;</span>
+<span class="c">&lt;!-- html 주석  --&gt;</span>
+<span class="nt">&lt;%</span> 
+<span class="c1">//java 주석 </span>
+<span class="nt">%&gt;</span>
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre></div></div>
+<h3>브라우저에 출력되는 html 소스</h3>
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+<span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;title&gt;</span>Insert title here<span class="nt">&lt;/title&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+
+<span class="c">&lt;!-- html 주석  --&gt;</span>
+
+
+
+<span class="nt">&lt;H1&gt;</span>아름다운 한글<span class="nt">&lt;/H1&gt;</span>
+
+<span class="nt">&lt;H2&gt;</span>아름다운 한글<span class="nt">&lt;/H2&gt;</span>
+
+<span class="nt">&lt;H3&gt;</span>아름다운 한글<span class="nt">&lt;/H3&gt;</span>
+
+<span class="nt">&lt;H4&gt;</span>아름다운 한글<span class="nt">&lt;/H4&gt;</span>
+
+<span class="nt">&lt;H5&gt;</span>아름다운 한글<span class="nt">&lt;/H5&gt;</span>
+
+
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre></div></div>
+<p>html의 경우는 그냥 출력된다.</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">out</span><span class="o">.</span><span class="na">write</span><span class="o">(</span><span class="s">" &lt;!-- html 주석 --&gt;\r\n"</span><span class="o">);</span>
+<span class="c1">//java 주석</span>
+</code></pre></div></div>
+<p>자바 주석과 html 주석은 <code class="language-plaintext highlighter-rouge">jsp</code>가 <code class="language-plaintext highlighter-rouge">servlet</code> 으로 바뀌었을 때 표현되지만, jsp 주석은 표현되지 않는다.<br />
+<br /></p>
+
+<h1>jsp 내장객체 (implicit objects)</h1>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">response</span><span class="o">.</span><span class="na">setContentType</span><span class="o">(</span><span class="s">"text/html; charset=UTF-8"</span><span class="o">);</span>
+      <span class="n">pageContext</span> <span class="o">=</span> <span class="n">_jspxFactory</span><span class="o">.</span><span class="na">getPageContext</span><span class="o">(</span><span class="k">this</span><span class="o">,</span> <span class="n">request</span><span class="o">,</span> <span class="n">response</span><span class="o">,</span>
+      			<span class="kc">null</span><span class="o">,</span> <span class="kc">true</span><span class="o">,</span> <span class="mi">8192</span><span class="o">,</span> <span class="kc">true</span><span class="o">);</span>
+      <span class="n">_jspx_page_context</span> <span class="o">=</span> <span class="n">pageContext</span><span class="o">;</span>
+      <span class="n">application</span> <span class="o">=</span> <span class="n">pageContext</span><span class="o">.</span><span class="na">getServletContext</span><span class="o">();</span>
+      <span class="n">config</span> <span class="o">=</span> <span class="n">pageContext</span><span class="o">.</span><span class="na">getServletConfig</span><span class="o">();</span>
+      <span class="n">session</span> <span class="o">=</span> <span class="n">pageContext</span><span class="o">.</span><span class="na">getSession</span><span class="o">();</span>
+      <span class="n">out</span> <span class="o">=</span> <span class="n">pageContext</span><span class="o">.</span><span class="na">getOut</span><span class="o">();</span>
+      <span class="n">_jspx_out</span> <span class="o">=</span> <span class="n">out</span><span class="o">;</span>
+</code></pre></div></div>
+<blockquote>
+  <p><code class="language-plaintext highlighter-rouge">jsp</code> 에 입력한 대부분의 코드들은 생성되는 <code class="language-plaintext highlighter-rouge">servlet</code> 소스의 <code class="language-plaintext highlighter-rouge">_jspService()</code> 메소드의 안에 삽입이 된다.</p>
+
+  <p><code class="language-plaintext highlighter-rouge">_jspService()</code> 에 삽입된 코드들의 윗부분에는 미리 선언된 객체들이 있는데, 해당 객체들은 <code class="language-plaintext highlighter-rouge">jsp</code> 에서도 사용이 가능하다.<br />
+<br /></p>
+</blockquote>
+<details>
+<summary>jsp 내장객체 종류</summary>
+<div>
+
+    <ul>
+      <li>request
+        <ul>
+          <li>HTML Form 요소 선택 갑소가 같은 사용자 입력 정보를 읽어올 때 사용</li>
+        </ul>
+      </li>
+      <li>response
+        <ul>
+          <li>사용자 요청에 대한 응답을 처리할 때 사용</li>
+        </ul>
+      </li>
+      <li>pageContext
+        <ul>
+          <li>현재 jsp 실행에 대한 context 정보를 참조하기 위해 사용</li>
+        </ul>
+      </li>
+      <li>session
+        <ul>
+          <li>클라이언트 세션 정보를 처리하기 위해 사용</li>
+        </ul>
+      </li>
+      <li>application
+        <ul>
+          <li>웹 서버의 애플리케이션 처리와 관련된 정보를 참조하기 위해 사용</li>
+        </ul>
+      </li>
+      <li>out
+        <ul>
+          <li>사용자에게 전달하기 위한 output 스트림을 처리하기 위해 사용</li>
+        </ul>
+      </li>
+      <li>config
+        <ul>
+          <li>현재 jsp에 대한 초기화 환경을 처리하기 위해 사용</li>
+        </ul>
+      </li>
+      <li>page
+        <ul>
+          <li>현재 jsp 페이지에 대한 클래스 정보</li>
+        </ul>
+      </li>
+      <li>exception
+        <ul>
+          <li>예외 처리를 위해 사용</li>
+        </ul>
+      </li>
+    </ul>
+
+  </div>
+</details>
+
+
+        </div>
+        
+      </li>
+    
+      
+      
+
+      <li>
+        <header class="post-header">
+          <h1 class="post-title">
+            
+              <a class="post-link" href="/foward/">Foward</a>
+            
+          </h1>
+
+          <p class="post-meta">
+            Sep 10, 2020
+            
+            
+          </p>
+        </header>
+
+        <div class="post-content">
+          <h1>Forward</h1>
+
+<blockquote>
+  <p>servlet1이 받은 요청을 다 처리하지 않고, servlet2에게 넘겨주는 작업을 <strong>forward</strong> 라고 한다.</p>
+</blockquote>
+
+<ul>
+  <li>웹 브라우저에서 servlet1에게 요청을 보냄</li>
+  <li>servlet1 은 요청을 처리한 후, 그 결과를 <code class="language-plaintext highlighter-rouge">HttpServletRequest</code>에 저장</li>
+  <li>servlet1 은 결과가 저장된 <code class="language-plaintext highlighter-rouge">HttpServletRequest</code> 와 응답을 위한 <code class="language-plaintext highlighter-rouge">HttpServletResponse</code>를 같은 웹 어플리케이션 안에 있는 servlet2 에게 전송 (forward)</li>
+  <li>servlet2 는 servlet1 로 부터 받은 <code class="language-plaintext highlighter-rouge">HttpServletRequest</code> 와 <code class="language-plaintext highlighter-rouge">HttpServletResponse</code> 를 이용하여 요청을 처리한 후 웹 브라우저에게 결과를 전송</li>
+</ul>
+
+<p><em>servlet1</em> 의 결과를 <code class="language-plaintext highlighter-rouge">forward</code> 되는 <em>servlet2</em> 에서 사용하기 위해선, 지역변수가 아닌 <strong><em>매개변수</em></strong> 가 필요하다.</p>
+
+<p><code class="language-plaintext highlighter-rouge">request</code> 객체는 response 가 되기 전까지 없어지지 않는다. 따라서 <code class="language-plaintext highlighter-rouge">request</code> 객체를 매개변수로 사용할 수 있다. 그러므로 <em>servlet1</em> 의 결과를 <code class="language-plaintext highlighter-rouge">request</code> 객체에 저장한다.</p>
+
+<p><br /></p>
+
+<details>
+<summary>forward와 redirect의 차이</summary>
+
+<div>
+
+    <p><br /></p>
+
+    <p>클라이언트가 서버에 요청을 보냈고 서버는 다시 클라이언트한테 새로운 요청할 곳을 알려주면서 여기로 다시 요청하라고 하는것이 <code class="language-plaintext highlighter-rouge">redirect</code> 이다.</p>
+
+    <p>클라이언트에 요청을 보냈고 서버가 그 요청에 대해서 혼자 처리하는 것이 아니라, 다른 누군가에게 처리를 맡기는 것을 <code class="language-plaintext highlighter-rouge">forward</code> 라고 한다.</p>
+
+    <p><code class="language-plaintext highlighter-rouge">forward</code> 는 새로운 요청이 들어온 것이 아니다.
+서버가 내부적으로 옮겨줬을 뿐이다. 
+따라서 클라이언트가 요청했을때 만들어졌던 <em>request</em>, <em>response</em> 객체는 그대로 유지된다.</p>
+
+    <p>또한 <code class="language-plaintext highlighter-rouge">redirect</code> 의 경우, url이 바뀌는데, <code class="language-plaintext highlighter-rouge">forward</code> 는 url의 변화가 없다.</p>
+  </div>
+</details>
+
+<p><br /></p>
+
+<h1>예제</h1>
+<p><em>FrontServlet</em> 에서 랜덤한 숫자를 발생시킨 뒤, <code class="language-plaintext highlighter-rouge">request</code> 객체에 저장한다.
+그 다음 <em>NextServlet</em> 으로 <code class="language-plaintext highlighter-rouge">forward</code> 를 보낸다.<br />
+<code class="language-plaintext highlighter-rouge">request</code> 객체에 담긴 값을 변수에 저장한 뒤, 그 수만큼 <strong>“Hello World!”</strong> 를 출력한다.<br />
+<br /></p>
+
+<details>
+<summary>Source Code</summary>
+<div>
+
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// FrontServlet</span>
+<span class="kn">package</span> <span class="nn">examples</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">java.io.IOException</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">javax.servlet.RequestDispatcher</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.servlet.ServletException</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.servlet.annotation.WebServlet</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.servlet.http.HttpServlet</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.servlet.http.HttpServletRequest</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.servlet.http.HttpServletResponse</span><span class="o">;</span>
+
+<span class="nd">@WebServlet</span><span class="o">(</span><span class="s">"/front"</span><span class="o">)</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">FrontServlet</span> <span class="kd">extends</span> <span class="nc">HttpServlet</span> <span class="o">{</span>
+	<span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">long</span> <span class="n">serialVersionUID</span> <span class="o">=</span> <span class="mi">1L</span><span class="o">;</span>
+       
+    <span class="kd">public</span> <span class="nf">FrontServlet</span><span class="o">()</span> <span class="o">{</span>
+        <span class="kd">super</span><span class="o">();</span>
+    <span class="o">}</span>
+
+	<span class="kd">protected</span> <span class="kt">void</span> <span class="nf">service</span><span class="o">(</span><span class="nc">HttpServletRequest</span> <span class="n">request</span><span class="o">,</span> <span class="nc">HttpServletResponse</span> <span class="n">response</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">ServletException</span><span class="o">,</span> <span class="nc">IOException</span> <span class="o">{</span>
+		<span class="kt">int</span> <span class="n">diceValue</span> <span class="o">=</span> <span class="o">(</span><span class="kt">int</span><span class="o">)(</span><span class="nc">Math</span><span class="o">.</span><span class="na">random</span><span class="o">()</span> <span class="o">*</span> <span class="mi">6</span><span class="o">)</span> <span class="o">+</span> <span class="mi">1</span><span class="o">;</span>
+		<span class="n">request</span><span class="o">.</span><span class="na">setAttribute</span><span class="o">(</span><span class="s">"dice"</span><span class="o">,</span> <span class="n">diceValue</span><span class="o">);</span>
+		
+		<span class="nc">RequestDispatcher</span> <span class="n">requestDispatcher</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="na">getRequestDispatcher</span><span class="o">(</span><span class="s">"/next"</span><span class="o">);</span>
+		<span class="n">requestDispatcher</span><span class="o">.</span><span class="na">forward</span><span class="o">(</span><span class="n">request</span><span class="o">,</span>  <span class="n">response</span><span class="o">);</span>
+	<span class="o">}</span>
+
+<span class="o">}</span>
+
+</code></pre></div>    </div>
+
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// NextServlet</span>
+<span class="kn">package</span> <span class="nn">examples</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">java.io.PrintWriter</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.io.IOException</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.servlet.ServletException</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.servlet.annotation.WebServlet</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.servlet.http.HttpServlet</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.servlet.http.HttpServletRequest</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.servlet.http.HttpServletResponse</span><span class="o">;</span>
+
+<span class="nd">@WebServlet</span><span class="o">(</span><span class="s">"/next"</span><span class="o">)</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">NextServlet</span> <span class="kd">extends</span> <span class="nc">HttpServlet</span> <span class="o">{</span>
+	<span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">long</span> <span class="n">serialVersionUID</span> <span class="o">=</span> <span class="mi">1L</span><span class="o">;</span>
+    <span class="kd">public</span> <span class="nf">NextServlet</span><span class="o">()</span> <span class="o">{</span>
+        <span class="kd">super</span><span class="o">();</span>
+    <span class="o">}</span>
+
+	<span class="kd">protected</span> <span class="kt">void</span> <span class="nf">service</span><span class="o">(</span><span class="nc">HttpServletRequest</span> <span class="n">request</span><span class="o">,</span> <span class="nc">HttpServletResponse</span> <span class="n">response</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">ServletException</span><span class="o">,</span> <span class="nc">IOException</span> <span class="o">{</span>
+
+		<span class="n">response</span><span class="o">.</span><span class="na">setContentType</span><span class="o">(</span><span class="s">"text/html"</span><span class="o">);</span>
+
+		<span class="nc">PrintWriter</span> <span class="n">out</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="na">getWriter</span><span class="o">();</span>
+
+		<span class="n">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"&lt;html&gt;"</span><span class="o">);</span>
+		<span class="n">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"&lt;head&gt;&lt;title&gt;form&lt;/title&gt;&lt;/head&gt;"</span><span class="o">);</span>
+		<span class="n">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"&lt;body&gt;"</span><span class="o">);</span>
+		
+		<span class="c1">// object가 반환되기 때문에 Integer로 형변환</span>
+		<span class="kt">int</span> <span class="n">dice</span> <span class="o">=</span> <span class="o">(</span><span class="nc">Integer</span><span class="o">)</span><span class="n">request</span><span class="o">.</span><span class="na">getAttribute</span><span class="o">(</span><span class="s">"dice"</span><span class="o">);</span>
+		<span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">dice</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+			<span class="n">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Hello World!&lt;br&gt;"</span><span class="o">);</span>
+		<span class="o">}</span>
+
+		<span class="n">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"dice : "</span> <span class="o">+</span> <span class="n">dice</span><span class="o">);</span>
+		<span class="n">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"&lt;/body&gt;&lt;/html&gt;"</span><span class="o">);</span>
+		
+	<span class="o">}</span>
+
+<span class="o">}</span>
+
+</code></pre></div>    </div>
+  </div>
+</details>
+
+
+        </div>
+        
+      </li>
+    
+  </ul>
+
+  
+  <div class="pagination">
+    
+      <a class="previous" href="/page4/">&laquo; Older</a>
+    
+
+    
+      <a class="next" href="/page2/">Newer &raquo;</a>
+    
+  </div>
+
+
+
+</div>
+
+      </div>
+    </main>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <p>
+      
+
+&copy; Junhwan - Powered by <a href="https://jekyllrb.com">Jekyll</a> &amp; <a href="https://github.com/yous/whiteglass">whiteglass</a> - Subscribe via <a href="http://localhost:4000/feed.xml">RSS</a>
+
+    </p>
+
+  </div>
+
+</footer>
+
+
+  </body>
+
+</html>
