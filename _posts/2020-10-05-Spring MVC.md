@@ -64,11 +64,15 @@ Spring MVC 는 지역화를 제공한다.
 
 브라우저가 보내는 헤더 정보로부터 각 사용자의 브라우저의 언어셋팅 정보등을 받아올 수 있다.
 
+<br>
+
 ___RequestContextHolder에 요청 저장___
 
 이 부분은 스레드 로컬 객체이다. 
 
 요청을 받아서 응답할 때 까지, HttpServletRequest, HttpServletResponse 등을 스프링이 관리하는 객체안에서 사용할 수 있도록 해준다.
+
+<Br>
 
 ___FlashMap 복원___
 

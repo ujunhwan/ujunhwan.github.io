@@ -87,6 +87,175 @@
         <header class="post-header">
           <h1 class="post-title">
             
+              <a class="post-link" href="/Javascript-%EA%B8%B0%EB%B3%B8%EC%A0%95%EB%A6%AC/">Javascript 기본정리</a>
+            
+          </h1>
+
+          <p class="post-meta">
+            Sep 8, 2020
+            
+            
+          </p>
+        </header>
+
+        <div class="post-content">
+          <h1>Javascript</h1>
+<h2>변수</h2>
+<p>모든 언어는 어떤 값 또는 어떤 객체를 표현하는 <strong>변수</strong> 가 있다.
+자바스크립트에서도 어떤 변수를 사용하는가에 따라서,    <code class="language-plaintext highlighter-rouge">Scope</code> 라는 변수의 유효범위가 달라진다.<br />
+<br /></p>
+
+<h2>연산자</h2>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">name</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">crong</span><span class="dl">"</span><span class="p">;</span>
+<span class="kd">const</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">name</span> <span class="o">||</span> <span class="dl">"</span><span class="s2">codesquad</span><span class="dl">"</span><span class="p">;</span>
+</code></pre></div></div>
+<p>OR연산을 사용해서 name이 존재하면 name이 쓰이고, 없으면 <strong><em>codesquad</em></strong> 가 쓰인다. 왼쪽 만족시, 오른쪽 확인 X<br />
+여기선 <strong><em>crong</em></strong> 출력
+<br /></p>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">name</span><span class="p">;</span>
+<span class="kd">const</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">name</span> <span class="o">||</span> <span class="dl">"</span><span class="s2">codesquad</span><span class="dl">"</span><span class="p">;</span>
+</code></pre></div></div>
+<p>name이 존재하지 않으므로, <strong><em>codesquad</em></strong> 출력<br />
+<br /></p>
+
+<h2>비교연산자</h2>
+<p>js에서는 ==보다는 <code class="language-plaintext highlighter-rouge">===</code> 를 많이 사용한다. why?</p>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="mi">0</span> <span class="o">==</span> <span class="dl">"</span><span class="s2">0</span><span class="dl">"</span><span class="p">;</span>
+<span class="kc">true</span>
+
+<span class="mi">0</span> <span class="o">==</span> <span class="mi">0</span><span class="p">;</span>
+<span class="kc">true</span>
+
+<span class="mi">0</span> <span class="o">===</span> <span class="dl">"</span><span class="s2">0</span><span class="dl">"</span><span class="p">;</span>
+<span class="kc">false</span>
+
+<span class="mi">0</span> <span class="o">===</span> <span class="mi">0</span><span class="p">;</span>
+<span class="kc">true</span>
+
+<span class="kc">null</span> <span class="o">==</span> <span class="kc">undefined</span><span class="p">;</span>
+<span class="kc">true</span>
+</code></pre></div></div>
+<blockquote>
+  <p>==은 타입을 비교하지 않는다.</p>
+</blockquote>
+
+<p>타입까지 비교하기 위해선 <code class="language-plaintext highlighter-rouge">===</code> 을 사용해야 한다!<br />
+<br /></p>
+
+<h2>js의 type</h2>
+<blockquote>
+  <p>타입은 선언할때가 아니고, 실행타임에 결정된다. 함수안에서의 파라미터나 변수는 실행될 때 그 타입이 결정된다.</p>
+
+  <p>간단한 기본타입은 ` typeof `를 이용해 판단할 수 있다.<br />
+<br /></p>
+</blockquote>
+
+<h2>문자열 처리</h2>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">typeof</span> <span class="dl">"</span><span class="s2">abc</span><span class="dl">"</span><span class="p">;</span> <span class="c1">// string</span>
+<span class="k">typeof</span> <span class="dl">"</span><span class="s2">A</span><span class="dl">"</span><span class="p">;</span> <span class="c1">// string</span>
+<span class="k">typeof</span> <span class="dl">'</span><span class="s1">a</span><span class="dl">'</span><span class="p">;</span> <span class="c1">// string. single quote도 사용가능.</span>
+</code></pre></div></div>
+
+<p>문자열에 다양한 메서드가 존재.</p>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="dl">"</span><span class="s2">ab:cd</span><span class="dl">"</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="dl">"</span><span class="s2">.</span><span class="dl">"</span><span class="p">);</span> <span class="c1">// ["ab", "cd"];</span>
+<span class="dl">"</span><span class="s2">ab:cd</span><span class="dl">"</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="dl">"</span><span class="s2">:</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">$</span><span class="dl">"</span><span class="p">);</span> <span class="c1">// "ab$cd"</span>
+<span class="dl">"</span><span class="s2">  abcde  </span><span class="dl">"</span><span class="p">.</span><span class="nx">trim</span><span class="p">();</span> <span class="c1">// "abcde"</span>
+</code></pre></div></div>
+<p><br /></p>
+
+<h2>js의 함수</h2>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">printName</span><span class="p">(</span><span class="nx">firstname</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="dl">"</span><span class="s2">name is </span><span class="dl">"</span> <span class="o">+</span> <span class="nx">firstname</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">printName</span><span class="p">());</span>
+</code></pre></div></div>
+<p>만약 파라미터인 <code class="language-plaintext highlighter-rouge">firstname</code> 을 입력하지 않는다면?<br />
+<strong>‘name is undefined’</strong> 출력<br />
+아무것도 입력하지 않으면, undefined 가 입력된다.<br />
+<br /></p>
+
+<h2>hoisting</h2>
+<p>함수 안에 있는 변수들을 모두 끌어올려서 선언한다고 하여 <code class="language-plaintext highlighter-rouge">hoisting</code> 이라고 한다.</p>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">printName</span><span class="p">(</span><span class="nx">firstname</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">inner</span><span class="p">);</span>
+
+    <span class="kd">var</span> <span class="nx">inner</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="dl">"</span><span class="s2">inner value</span><span class="dl">"</span><span class="p">;</span>
+    <span class="p">}</span>
+
+<span class="p">}</span>
+
+<span class="nx">printName</span><span class="p">();</span>    
+</code></pre></div></div>
+<p><strong>undefined</strong> 출력.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">printName</span><span class="p">(</span><span class="nx">firstname</span><span class="p">)</span> <span class="p">{</span>
+
+    <span class="kd">var</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">inner</span><span class="p">();</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">name is </span><span class="dl">"</span> <span class="o">+</span> <span class="nx">result</span><span class="p">);</span>
+
+    <span class="kd">function</span> <span class="nx">inner</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="dl">"</span><span class="s2">inner value</span><span class="dl">"</span><span class="p">;</span>
+    <span class="p">}</span>
+
+<span class="p">}</span>
+
+<span class="nx">printName</span><span class="p">();</span>
+</code></pre></div></div>
+<p><strong>name is inner value</strong> 출력. <code class="language-plaintext highlighter-rouge">javascript</code> 의 <code class="language-plaintext highlighter-rouge">parser</code>가 함수와 변수들을 먼저 선언한다. 이 때, 위에 작성된 코드의 경우</p>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">inner</span> <span class="o">=</span> <span class="nx">functino</span><span class="p">()</span> <span class="p">{</span>
+    <span class="p">...</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<p>으로 작성되어 있으므로, <code class="language-plaintext highlighter-rouge">parser</code>에 의해 <strong><em>inner</em></strong> 라는 변수만 먼저 선언 되었고, 아래에 작성된 코드의 경우</p>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">inner</span><span class="p">()</span> <span class="p">{</span>
+    <span class="p">...</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<p>으로 작성되어 있으므로, <strong><em>inner</em></strong> 함수가 먼저 선언이 되었으므로, 결과에서 차이가 난다.<br />
+<br /></p>
+
+<h2>arguments</h2>
+<p>함수가 실행되면 그 안에서 <code class="language-plaintext highlighter-rouge">arguments</code> 라는 특별한 지역변수가 존재한다. js 함수는 선언한 파라미터보다 더 많은 인자를 보낼 수도 있다. 이 때 넘어온 인자를 <code class="language-plaintext highlighter-rouge">arguments</code> 로 배열의 형태로 하나씩 접근할 수가 있다. <code class="language-plaintext highlighter-rouge">arguments</code> 는 배열타입은 아니다. 따라서 배열의 메서드를 사용할 수 없다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">a</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">arguments</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="nx">a</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">);</span>
+</code></pre></div></div>
+<p><strong>{ ‘0’: 1, ‘1’: 2, ‘2’: 3 }</strong> 출력.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">a</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="nx">i</span><span class="o">&lt;</span><span class="nx">arguments</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">arguments</span><span class="p">[</span><span class="nx">i</span><span class="p">]);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="nx">a</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">);</span>
+</code></pre></div></div>
+<p><strong>4 2 3</strong> 출력.<br />
+함수의 선언에서 매개변수를 굳이 지정하지 않아도, <code class="language-plaintext highlighter-rouge">arguments</code> 를 이용하여 사용할 수 있다. 그러나, <code class="language-plaintext highlighter-rouge">arguments</code> 는 의도를 알기 힘드므로, 조심히 사용해야 한다.<br />
+<br /></p>
+
+<h2>arrow function</h2>
+<p><code class="language-plaintext highlighter-rouge">ES2015</code> 에는 <code class="language-plaintext highlighter-rouge">arrow function</code> 이 추가됐다. 간단하게 함수를 선언할 수 있는 문법이다.</p>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">getName</span><span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="dl">"</span><span class="s2">Yu </span><span class="dl">"</span> <span class="o">+</span> <span class="nx">name</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="c1">// getName 함수와 아래의 arrow 함수는 동일하다.</span>
+<span class="kd">var</span> <span class="nx">getName</span> <span class="o">=</span> <span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="dl">"</span><span class="s2">Yu </span><span class="dl">"</span> <span class="o">+</span> <span class="nx">name</span><span class="p">;</span>
+</code></pre></div></div>
+
+        </div>
+        
+      </li>
+    
+      
+      
+
+      <li>
+        <header class="post-header">
+          <h1 class="post-title">
+            
               <a class="post-link" href="/Java-%EC%8B%9C%EA%B0%84-%EB%B6%88%EB%9F%AC%EC%98%A4%EA%B8%B0-%EB%B0%8F-%EC%84%A0%ED%96%89-0-%EC%A0%9C%EA%B1%B0/">Java 시간 불러오기 및 선행 0 제거</a>
             
           </h1>
@@ -230,283 +399,12 @@
         
       </li>
     
-      
-      
-
-      <li>
-        <header class="post-header">
-          <h1 class="post-title">
-            
-              <a class="post-link" href="/servlet/">Servlet</a>
-            
-          </h1>
-
-          <p class="post-meta">
-            Sep 1, 2020
-            
-            
-          </p>
-        </header>
-
-        <div class="post-content">
-          <h2>Servlet</h2>
-<hr />
-<p><code class="language-plaintext highlighter-rouge">servlet</code> 은 <code class="language-plaintext highlighter-rouge">annotation</code>을 이용하여 <code class="language-plaintext highlighter-rouge">web.xml</code> 을 대체한다.<br />
-<br /></p>
-
-<!--
-## 1부터 10까지 출력하기
-___
-```java
-package exam;
-
-import java.io.IOException;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.PrintWriter;
-
-@WebServlet("/ttt") //anotation을 이용
-// ttt이라는 요청이 들어왔을 때 이 프로그램이 실행되면서 응답할 코드가 만들어지고 그 코드로 응답을 한다.
-public class TenServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-       
-    public TenServlet() {
-        super();
-    }
-
-    // 요청을 하기위한 객체, 요청을 받기위한 객체
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.setContentType("text/html;charset=utf-8");
-		PrintWriter out = response.getWriter();
-		out.println("<h1>1-1까지 출력!</h1>");
-		for(int i = 1; i <= 10; i++) {
-			out.println(i+"<br>");
-		}
-		out.close();
-	}
-}
-```  
-localhost:8080/firstWeb/ttt 에 생성된다.
-<br>
-<br>
-
--->
-<h2>Servlet Lifecycle</h2>
-<hr />
-<p><code class="language-plaintext highlighter-rouge">LifecycleServelet()</code> , <code class="language-plaintext highlighter-rouge">init()</code> 이 차례대로 실행 후, <code class="language-plaintext highlighter-rouge">service()</code>함수가 페이지가 로딩될 때 마다 실행된다.</p>
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">examples</span><span class="o">;</span>
-
-<span class="kn">import</span> <span class="nn">java.io.IOException</span><span class="o">;</span>
-<span class="kn">import</span> <span class="nn">javax.servlet.ServletConfig</span><span class="o">;</span>
-<span class="kn">import</span> <span class="nn">javax.servlet.ServletException</span><span class="o">;</span>
-<span class="kn">import</span> <span class="nn">javax.servlet.annotation.WebServlet</span><span class="o">;</span>
-<span class="kn">import</span> <span class="nn">javax.servlet.http.HttpServlet</span><span class="o">;</span>
-<span class="kn">import</span> <span class="nn">javax.servlet.http.HttpServletRequest</span><span class="o">;</span>
-<span class="kn">import</span> <span class="nn">javax.servlet.http.HttpServletResponse</span><span class="o">;</span>
-
-<span class="nd">@WebServlet</span><span class="o">(</span><span class="s">"/LifecycleServlet"</span><span class="o">)</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">LifecycleServlet</span> <span class="kd">extends</span> <span class="nc">HttpServlet</span> <span class="o">{</span>
-	<span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">long</span> <span class="n">serialVersionUID</span> <span class="o">=</span> <span class="mi">1L</span><span class="o">;</span>
-       
-    <span class="kd">public</span> <span class="nf">LifecycleServlet</span><span class="o">()</span> <span class="o">{</span>
-    	<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"LifecycleServlet 생성!"</span><span class="o">);</span>	<span class="c1">// print in console</span>
-    <span class="o">}</span>
-
-	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">init</span><span class="o">(</span><span class="nc">ServletConfig</span> <span class="n">config</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">ServletException</span> <span class="o">{</span>
-		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"init test 호출!"</span><span class="o">);</span>
-	<span class="o">}</span>
-
-	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">destroy</span><span class="o">()</span> <span class="o">{</span>
-		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"destroy 호출!"</span><span class="o">);</span>
-	<span class="o">}</span>
-	<span class="c1">//수정되면 더이상 쓸수없으므로 destroy</span>
-
-	<span class="kd">protected</span> <span class="kt">void</span> <span class="nf">service</span><span class="o">(</span><span class="nc">HttpServletRequest</span> <span class="n">request</span><span class="o">,</span> <span class="nc">HttpServletResponse</span> <span class="n">response</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">ServletException</span><span class="o">,</span> <span class="nc">IOException</span> <span class="o">{</span>
-		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"service 호출!"</span><span class="o">);</span>
-	<span class="o">}</span>
-<span class="o">}</span>
-</code></pre></div></div>
-<ul>
-  <li>
-    <p>webapplication이 <strong>갱신</strong>되거나, <code class="language-plaintext highlighter-rouge">WAS</code>가 <strong>종료</strong>될 때 <code class="language-plaintext highlighter-rouge">destory()</code> 호출된다.</p>
-  </li>
-  <li>
-    <p><code class="language-plaintext highlighter-rouge">service()</code>라는 메서드는 실제 HttpServlet에 <code class="language-plaintext highlighter-rouge">service()</code> 메서드가 구현되어있다.</p>
-  </li>
-  <li>
-    <p>내가 만든 클래스가 <code class="language-plaintext highlighter-rouge">service()</code>라는 메서드를 갖고있지 않다면 부모클래스의 <code class="language-plaintext highlighter-rouge">service()</code> 메서드가 실행된다.</p>
-  </li>
-  <li>
-    <p>내가 <code class="language-plaintext highlighter-rouge">service()</code>를 override하지 않았다면, httpservlet(부모)의 <code class="language-plaintext highlighter-rouge">service()</code> 메서드가 호출된다.</p>
-  </li>
-  <li>
-    <p>클라이언트의 요청이 GET이면 <code class="language-plaintext highlighter-rouge">doGet()</code> 호출 POST면 <code class="language-plaintext highlighter-rouge">doPost()</code> 호출<br />
-<br /></p>
-  </li>
-</ul>
-
-<h2>LifecycleServlet 수정</h2>
-<hr />
-<p>기존에는 <code class="language-plaintext highlighter-rouge">service()</code>를 override했다. 이번에는 <code class="language-plaintext highlighter-rouge">service()</code>를 주석, <code class="language-plaintext highlighter-rouge">doGet()</code>, <code class="language-plaintext highlighter-rouge">doPost()</code>를 override한다.</p>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"&lt;form method='post' action='/firstweb/LifecycleServlet'&gt;"</span><span class="o">);</span>
-</code></pre></div></div>
-<ul>
-  <li><code class="language-plaintext highlighter-rouge">action</code> : submit 버튼이 눌렸을 때, 이 주소로 요청한다.</li>
-  <li><code class="language-plaintext highlighter-rouge">method</code> = <code class="language-plaintext highlighter-rouge">'post'</code> : 이 때 요청은 Post로 한다.</li>
-</ul>
-
-<p>URL에서 직접 넘어갔을 때는 GET이라는 요청이 들어왔을 것이므로 HttpServlet이 가진 service() 메서드는 doGet()이라는 메서드를 호출했을 것이다. 따라서 doGet()이 실행되므로 html태그가 보인다.</p>
-
-<p>submit 버튼이 눌릴때 앞서 요청을 Post로 하였으므로, HttpServlet이 가진 service() 메서드가 doPost() 라는 메서드를 호출 할 것이다.<br />
-<br /></p>
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"name : &lt;input type='text' name='name'&gt;&lt;br&gt;"</span><span class="o">);</span>
-</code></pre></div></div>
-<ul>
-  <li>input의 name이 name인 애를 받아서 name 객체에 넣는다.<br />
-<br /></li>
-</ul>
-
-<h2>Request, Response</h2>
-<hr />
-<p>WAS는 웹 브라우저로부터 Servlet요청을 받으면,</p>
-<ul>
-  <li>요청할 때 갖고 있는 정보를 <code class="language-plaintext highlighter-rouge">HttpServletRequest</code> 객체를 생성해 저장한다.</li>
-  <li>웹 브라우저(user)에게 응답을 보낼 때 사용하기 위해 <code class="language-plaintext highlighter-rouge">HttpServletResponse</code>객체를 생성한다.</li>
-  <li>생성된 객체들을 Servlet에게 전달한다.</li>
-</ul>
-
-<h3>HttpServletRequest</h3>
-<ul>
-  <li>http프로토콜의 request정보를 servlet에게 전달하기 위한 목적으로 사용한다.</li>
-  <li>헤더정보, 파라미터, 쿠키, URI, URL 등의 정보를 읽어 들이는 메서드를 갖고있다. (user의 정보)</li>
-</ul>
-
-<h3>HttpServletResponse</h3>
-<ul>
-  <li>Request를 보낸 client에게 응답을 보내기 위해 <code class="language-plaintext highlighter-rouge">HttpServletResponse</code> 객체를 생성하여 servlet에게 전달한다.</li>
-  <li>servlet은 이 객체를 이용해, 응답코드, 응답메시지, content type 등을 전송한다.<br />
-<br /></li>
-</ul>
-
-<h2>Header 추출</h2>
-<hr />
-<p><em>요청이 들어올 때 들고 들어온 헤더 정보 출력</em><br />
-정보를 <code class="language-plaintext highlighter-rouge">HttpServletRequest</code> 객체에 담으므로 <code class="language-plaintext highlighter-rouge">request</code>에 정보가 담겨있다.</p>
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">Enumeration</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">headerNames</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="na">getHeaderNames</span><span class="o">();</span>
-</code></pre></div></div>
-<p><code class="language-plaintext highlighter-rouge">request</code>의 <code class="language-plaintext highlighter-rouge">getHeaderNames()</code> 메서드를 사용하여 <code class="language-plaintext highlighter-rouge">headerNames</code>에 전부 담았고, while문을 이용하여 요소들을 하나씩 넘기며 출력하였다.</p>
-
-<!--
-```java
-package examples;
-
-import java.util.Enumeration;
-import java.io.PrintWriter;
-import java.io.IOException;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-@WebServlet("/header")
-public class HeaderServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-    public HeaderServlet() {
-        super();
-    }
-
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.setContentType("text/html");
-		PrintWriter out = response.getWriter();
-		out.println("<html>");
-		out.println("<head><title>form</title></head>");
-		out.println("<body>");
-
-		Enumeration<String> headerNames = request.getHeaderNames();
-		while(headerNames.hasMoreElements()) {
-			String headerName = headerNames.nextElement();
-			String headerValue = request.getHeader(headerName);
-			out.println(headerName + " : " + headerValue + " <br> ");
-		}		
-		
-		out.println("</body>");
-		out.println("</html>");
-	}
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
-	}
-}
-```  
--->
-<p><br /></p>
-
-<h2>Parameter</h2>
-<hr />
-<p><code class="language-plaintext highlighter-rouge">http://localhost:8080/firstWeb/param?name=kim&amp;age=5</code><br />
-물음표를 기준으로 뒤에있는 것들을 <code class="language-plaintext highlighter-rouge">parameter</code>라고 한다. <strong>&amp;</strong> 이 기준점이고 더 많은 <code class="language-plaintext highlighter-rouge">parameter</code>를 사용할 수 있다.</p>
-<ul>
-  <li>uri = <code class="language-plaintext highlighter-rouge">getRequestURI()</code>가 return 해준 값. url에서 port 이하 부분이 나온다.</li>
-  <li>url = 요청 주소 전체</li>
-</ul>
-
-<!--
-```java
-package examples;
-
-import java.io.PrintWriter;
-import java.io.IOException;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-@WebServlet("/info")
-public class InfoServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-	public InfoServlet() {
-        super();
-    }
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.setContentType("text/html");
-		PrintWriter out = response.getWriter();
-		out.println("<html>");
-		out.println("<head><title>info</title></head>");
-		out.println("<body>");
-
-		String uri = request.getRequestURI();
-		StringBuffer url = request.getRequestURL();
-		String contentPath = request.getContextPath();
-		String remoteAddr = request.getRemoteAddr();
-		
-		out.println("uri : " + uri + "<br>");
-		out.println("url : " + url + "<br>");
-		out.println("contentPath : " + contentPath + "<br>");
-		out.println("remoteAddr : " + remoteAddr + "<br>");
-		
-		out.println("</body>");
-		out.println("</html>");
-	}
-
-}
-
-```
--->
-
-        </div>
-        
-      </li>
-    
   </ul>
 
   
   <div class="pagination">
+    
+      <a class="previous" href="/page7/">&laquo; Older</a>
     
 
     
