@@ -1,0 +1,23 @@
+<h2>cannot change version of project facet dynamic web module to 2.3 error</h2>
+
+<p><br /></p>
+
+<p><strong>pom.xml</strong> 에서 <code class="language-plaintext highlighter-rouge">servlet</code> 버전을 바꿔도, <strong>org.eclipse.wst.common.project.facet.core.xml</strong> 에서 jst.web의 버전을 변경하여도 에러가 뜬다면 <strong>web.xml</strong> 에서 문제가 발생한 것이다.</p>
+
+<p><strong>web.xml</strong> 이 다음과 같이 적혀져 있을 것이다.</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;!DOCTYPE web-app PUBLIC
+"-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+"http://java.sun.com/dtd/web-app_2_3.dtd" &gt;</span>
+</code></pre></div></div>
+
+<p>이것을</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
+<span class="nt">&lt;web-app</span> <span class="na">xmlns=</span><span class="s">"http://xmlns.jcp.org/xml/ns/javaee"</span> <span class="na">xmlns:xsi=</span><span class="s">"http://www.w3.org/2001/XMLSchema-instance"</span>
+<span class="na">xsi:schemaLocation=</span><span class="s">"http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"</span> <span class="na">version=</span><span class="s">"3.1"</span> <span class="nt">/&gt;</span>
+</code></pre></div></div>
+
+<p>다음과 같이 바꿔준다.</p>
+
+<p><em>해결!</em></p>
