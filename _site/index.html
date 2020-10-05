@@ -254,6 +254,147 @@ RedirectAttributes의 addFlashAttribute메소드를 이용해서 저장한다.
         <header class="post-header">
           <h1 class="post-title">
             
+              <a class="post-link" href="/Spring-JDBC/">Spring jdbc</a>
+            
+          </h1>
+
+          <p class="post-meta">
+            Sep 29, 2020
+            
+            
+          </p>
+        </header>
+
+        <div class="post-content">
+          <h1>Spring JDBC</h1>
+
+<h2>Spring JDBC 패키지</h2>
+
+<p><strong><em>org.springframework.jdbc.core</em></strong><br />
+JdbcTemplate 및 관련 Helper 객체 제공</p>
+
+<p><br /></p>
+
+<p><strong><em>org.springframework.jdbc.datasource</em></strong><br />
+DataSource를 쉽게 접근하기 위한 유틸 클래스, 트랜젝션매니져 및 다양한 DataSource 구현을 제공</p>
+
+<p><br /></p>
+
+<p><strong><em>org.springframework.jdbc.object</em></strong><br />
+RDBMS 조회, 갱신, 저장등을 안전하고 재사용 가능한 객제 제공</p>
+
+<p><br /></p>
+
+<p><strong><em>org.springframework.jdbc.support</em></strong><br />
+jdbc.core 및 jdbc.object를 사용하는 JDBC 프레임워크를 지원</p>
+
+<p><br /></p>
+
+<h2>JDBC Template select Example</h2>
+
+<ul>
+  <li>열의 수 구하기</li>
+</ul>
+
+<details>
+<summary>JDBC</summary>
+<div>
+
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kt">int</span> <span class="nf">row</span><span class="o">(</span><span class="nc">Role</span> <span class="n">role</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kt">int</span> <span class="n">ret</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+    
+    <span class="k">try</span> <span class="o">{</span>
+        <span class="nc">Class</span><span class="o">.</span><span class="na">forName</span><span class="o">(</span><span class="s">"com.mysql.cj.jdbc.Driver"</span><span class="o">);</span>
+    <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">ClassNotFoundException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+    <span class="o">}</span>
+    
+    <span class="nc">String</span> <span class="n">sql</span> <span class="o">=</span> <span class="s">"SELECT count(*) FROM t_actor"</span><span class="o">;</span>
+    <span class="k">try</span> <span class="o">(</span><span class="nc">Connection</span> <span class="n">conn</span> <span class="o">=</span> <span class="nc">DriverManager</span><span class="o">.</span><span class="na">getConnection</span><span class="o">(</span><span class="n">dburl</span><span class="o">,</span> <span class="n">dbUser</span><span class="o">,</span> <span class="n">dbpasswd</span><span class="o">);</span>
+            <span class="nc">PreparedStatement</span> <span class="n">ps</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="na">prepareStatement</span><span class="o">(</span><span class="n">sql</span><span class="o">))</span> <span class="o">{</span>
+        
+        <span class="n">ret</span> <span class="o">=</span> <span class="n">ps</span><span class="o">.</span><span class="na">executeUpdate</span><span class="o">();</span>
+
+    <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+    <span class="o">}</span>
+    <span class="k">return</span> <span class="n">ret</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div>    </div>
+
+  </div>
+</details>
+
+<details>
+<summary>Spring JDBC</summary>
+<div>
+
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="n">rowCount</span> <span class="o">=</span> <span class="k">this</span><span class="o">.</span><span class="na">jdbcTemplate</span><span class="o">.</span><span class="na">queryForInt</span><span class="o">(</span><span class="s">"select count(*) from t_actor"</span><span class="o">);</span>
+</code></pre></div>    </div>
+  </div>
+</details>
+
+<p><code class="language-plaintext highlighter-rouge">Spring JDBC</code> 를 이용하면 간단하게 한줄로 실행가능하다.</p>
+
+<ul>
+  <li>변수 바인딩 하기</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="n">countOfActorsNamedJoe</span> <span class="o">=</span> <span class="k">this</span><span class="o">.</span><span class="na">jdbcTemplate</span><span class="o">.</span><span class="na">queryForInt</span><span class="o">(</span><span class="s">"select count(*) from t_actor where first_name = ?"</span><span class="o">,</span> <span class="s">"Joe"</span><span class="o">);</span> 
+</code></pre></div></div>
+
+<ul>
+  <li>String으로 결과 받기</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">String</span> <span class="n">lastName</span> <span class="o">=</span> <span class="k">this</span><span class="o">.</span><span class="na">jdbcTemplate</span><span class="o">.</span><span class="na">queryForObject</span><span class="o">(</span><span class="s">"select last_name from t_actor where id = ?"</span><span class="o">,</span> <span class="k">new</span> <span class="nc">Object</span><span class="o">[]{</span><span class="mi">1212L</span><span class="o">},</span> <span class="nc">String</span><span class="o">.</span><span class="na">class</span><span class="o">);</span> 
+</code></pre></div></div>
+
+<ul>
+  <li>한 행 조회하기</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">Actor</span> <span class="n">actor</span> <span class="o">=</span> <span class="k">this</span><span class="o">.</span><span class="na">jdbcTemplate</span><span class="o">.</span><span class="na">queryForObject</span><span class="o">(</span>
+  <span class="s">"select first_name, last_name from t_actor where id = ?"</span><span class="o">,</span>
+  <span class="k">new</span> <span class="nc">Object</span><span class="o">[]{</span><span class="mi">1212L</span><span class="o">},</span>
+  <span class="k">new</span> <span class="nc">RowMapper</span><span class="o">&lt;</span><span class="nc">Actor</span><span class="o">&gt;()</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="nc">Actor</span> <span class="nf">mapRow</span><span class="o">(</span><span class="nc">ResultSet</span> <span class="n">rs</span><span class="o">,</span> <span class="kt">int</span> <span class="n">rowNum</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">SQLException</span> <span class="o">{</span>
+      <span class="nc">Actor</span> <span class="n">actor</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Actor</span><span class="o">();</span>
+      <span class="n">actor</span><span class="o">.</span><span class="na">setFirstName</span><span class="o">(</span><span class="n">rs</span><span class="o">.</span><span class="na">getString</span><span class="o">(</span><span class="s">"first_name"</span><span class="o">));</span>
+      <span class="n">actor</span><span class="o">.</span><span class="na">setLastName</span><span class="o">(</span><span class="n">rs</span><span class="o">.</span><span class="na">getString</span><span class="o">(</span><span class="s">"last_name"</span><span class="o">));</span>
+      <span class="k">return</span> <span class="n">actor</span><span class="o">;</span>
+    <span class="o">}</span>
+  <span class="o">});</span>
+</code></pre></div></div>
+
+<ul>
+  <li>여러 건 조회하기</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">List</span><span class="o">&lt;</span><span class="nc">Actor</span><span class="o">&gt;</span> <span class="n">actors</span> <span class="o">=</span> <span class="k">this</span><span class="o">.</span><span class="na">jdbcTemplate</span><span class="o">.</span><span class="na">query</span><span class="o">(</span>
+  <span class="s">"select first_name, last_name from t_actor"</span><span class="o">,</span>
+  <span class="k">new</span> <span class="nc">RowMapper</span><span class="o">&lt;</span><span class="nc">Actor</span><span class="o">&gt;()</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="nc">Actor</span> <span class="nf">mapRow</span><span class="o">(</span><span class="nc">ResultSet</span> <span class="n">rs</span><span class="o">,</span> <span class="kt">int</span> <span class="n">rowNum</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">SQLException</span> <span class="o">{</span>
+      <span class="nc">Actor</span> <span class="n">actor</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Actor</span><span class="o">();</span>
+      <span class="n">actor</span><span class="o">.</span><span class="na">setFirstName</span><span class="o">(</span><span class="n">rs</span><span class="o">.</span><span class="na">getString</span><span class="o">(</span><span class="s">"first_name"</span><span class="o">));</span>
+      <span class="n">actor</span><span class="o">.</span><span class="na">setLastName</span><span class="o">(</span><span class="n">rs</span><span class="o">.</span><span class="na">getString</span><span class="o">(</span><span class="s">"last_name"</span><span class="o">));</span>
+      <span class="k">return</span> <span class="n">actor</span><span class="o">;</span>
+    <span class="o">}</span>
+  <span class="o">});</span>
+</code></pre></div></div>
+
+
+        </div>
+        
+      </li>
+    
+      
+      
+
+      <li>
+        <header class="post-header">
+          <h1 class="post-title">
+            
               <a class="post-link" href="/mysql-%EB%B9%84%EB%B0%80%EB%B2%88%ED%98%B8-%EB%B3%80%EA%B2%BD/">Mysql 비밀번호 변경</a>
             
           </h1>
@@ -279,40 +420,6 @@ FLUSH PRIVILEGES;
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;</span> mysqladmin <span class="nt">-u</span>아이디 <span class="nt">-p</span>기존패스워드 password 신규패스워드
 </code></pre></div></div>
 
-
-        </div>
-        
-      </li>
-    
-      
-      
-
-      <li>
-        <header class="post-header">
-          <h1 class="post-title">
-            
-              <a class="post-link" href="/Mac-OS-%EC%97%90%EC%84%9C-MySQL-%EC%A0%91%EC%86%8D-%ED%8F%AC%ED%8A%B8-%ED%99%95%EC%9D%B8/">Mac os 에서 mysql 접속 포트 확인</a>
-            
-          </h1>
-
-          <p class="post-meta">
-            Sep 16, 2020
-            
-            
-          </p>
-        </header>
-
-        <div class="post-content">
-          <h1>Mac OS 에서 MySQL 접속 포트 확인</h1>
-<div class="language-zsh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>mysql <span class="nt">-uroot</span>
-</code></pre></div></div>
-<p>터미널에서 입력해서 <code class="language-plaintext highlighter-rouge">mysql</code> 에 접속 후,</p>
-<div class="language-zsh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mysql&gt; SHOW GLOBAL VARIABLES LIKE <span class="s1">'PORT'</span><span class="p">;</span>
-</code></pre></div></div>
-
-<p>결과</p>
-
-<p><img src="http://drive.google.com/uc?export=view&amp;id=1pA7Ad7k_cPPRezxHxnwW6BamGhiP7xdq" /><br /></p>
 
         </div>
         
