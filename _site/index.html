@@ -296,45 +296,10 @@ jdbc.core 및 jdbc.object를 사용하는 JDBC 프레임워크를 지원</p>
   <li>열의 수 구하기</li>
 </ul>
 
-<details>
-<summary>JDBC</summary>
-<div>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="n">rowCount</span> <span class="o">=</span> <span class="k">this</span><span class="o">.</span><span class="na">jdbcTemplate</span><span class="o">.</span><span class="na">queryForInt</span><span class="o">(</span><span class="s">"select count(*) from t_actor"</span><span class="o">);</span>
+</code></pre></div></div>
 
-    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kt">int</span> <span class="nf">row</span><span class="o">(</span><span class="nc">Role</span> <span class="n">role</span><span class="o">)</span> <span class="o">{</span>
-    <span class="kt">int</span> <span class="n">ret</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
-    
-    <span class="k">try</span> <span class="o">{</span>
-        <span class="nc">Class</span><span class="o">.</span><span class="na">forName</span><span class="o">(</span><span class="s">"com.mysql.cj.jdbc.Driver"</span><span class="o">);</span>
-    <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">ClassNotFoundException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
-    <span class="o">}</span>
-    
-    <span class="nc">String</span> <span class="n">sql</span> <span class="o">=</span> <span class="s">"SELECT count(*) FROM t_actor"</span><span class="o">;</span>
-    <span class="k">try</span> <span class="o">(</span><span class="nc">Connection</span> <span class="n">conn</span> <span class="o">=</span> <span class="nc">DriverManager</span><span class="o">.</span><span class="na">getConnection</span><span class="o">(</span><span class="n">dburl</span><span class="o">,</span> <span class="n">dbUser</span><span class="o">,</span> <span class="n">dbpasswd</span><span class="o">);</span>
-            <span class="nc">PreparedStatement</span> <span class="n">ps</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="na">prepareStatement</span><span class="o">(</span><span class="n">sql</span><span class="o">))</span> <span class="o">{</span>
-        
-        <span class="n">ret</span> <span class="o">=</span> <span class="n">ps</span><span class="o">.</span><span class="na">executeUpdate</span><span class="o">();</span>
-
-    <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
-    <span class="o">}</span>
-    <span class="k">return</span> <span class="n">ret</span><span class="o">;</span>
-<span class="o">}</span>
-</code></pre></div>    </div>
-
-  </div>
-</details>
-
-<details>
-<summary>Spring JDBC</summary>
-<div>
-
-    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="n">rowCount</span> <span class="o">=</span> <span class="k">this</span><span class="o">.</span><span class="na">jdbcTemplate</span><span class="o">.</span><span class="na">queryForInt</span><span class="o">(</span><span class="s">"select count(*) from t_actor"</span><span class="o">);</span>
-</code></pre></div>    </div>
-  </div>
-</details>
-
-<p><code class="language-plaintext highlighter-rouge">Spring JDBC</code> 를 이용하면 간단하게 한줄로 실행가능하다.</p>
+<p><br /></p>
 
 <ul>
   <li>변수 바인딩 하기</li>
@@ -343,12 +308,16 @@ jdbc.core 및 jdbc.object를 사용하는 JDBC 프레임워크를 지원</p>
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="n">countOfActorsNamedJoe</span> <span class="o">=</span> <span class="k">this</span><span class="o">.</span><span class="na">jdbcTemplate</span><span class="o">.</span><span class="na">queryForInt</span><span class="o">(</span><span class="s">"select count(*) from t_actor where first_name = ?"</span><span class="o">,</span> <span class="s">"Joe"</span><span class="o">);</span> 
 </code></pre></div></div>
 
+<p><br /></p>
+
 <ul>
   <li>String으로 결과 받기</li>
 </ul>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">String</span> <span class="n">lastName</span> <span class="o">=</span> <span class="k">this</span><span class="o">.</span><span class="na">jdbcTemplate</span><span class="o">.</span><span class="na">queryForObject</span><span class="o">(</span><span class="s">"select last_name from t_actor where id = ?"</span><span class="o">,</span> <span class="k">new</span> <span class="nc">Object</span><span class="o">[]{</span><span class="mi">1212L</span><span class="o">},</span> <span class="nc">String</span><span class="o">.</span><span class="na">class</span><span class="o">);</span> 
 </code></pre></div></div>
+
+<p><br /></p>
 
 <ul>
   <li>한 행 조회하기</li>
@@ -367,6 +336,8 @@ jdbc.core 및 jdbc.object를 사용하는 JDBC 프레임워크를 지원</p>
   <span class="o">});</span>
 </code></pre></div></div>
 
+<p><br /></p>
+
 <ul>
   <li>여러 건 조회하기</li>
 </ul>
@@ -383,6 +354,7 @@ jdbc.core 및 jdbc.object를 사용하는 JDBC 프레임워크를 지원</p>
   <span class="o">});</span>
 </code></pre></div></div>
 
+<p><br /></p>
 
         </div>
         

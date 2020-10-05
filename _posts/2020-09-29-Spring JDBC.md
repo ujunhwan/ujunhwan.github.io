@@ -26,47 +26,11 @@ jdbc.core 및 jdbc.object를 사용하는 JDBC 프레임워크를 지원
 
 * 열의 수 구하기
 
-<details>
-<summary>JDBC</summary>
-<div markdown="1">
-
-```java
-public int row(Role role) {
-    int ret = 0;
-    
-    try {
-        Class.forName("com.mysql.cj.jdbc.Driver");
-    } catch (ClassNotFoundException e) {
-        e.printStackTrace();
-    }
-    
-    String sql = "SELECT count(*) FROM t_actor";
-    try (Connection conn = DriverManager.getConnection(dburl, dbUser, dbpasswd);
-            PreparedStatement ps = conn.prepareStatement(sql)) {
-        
-        ret = ps.executeUpdate();
-
-    } catch (Exception e) {
-        e.printStackTrace();
-    }
-    return ret;
-}
-```
-
-</div>
-</details>
-
-<details>
-<summary>Spring JDBC</summary>
-<div markdown="1">
-
 ```java
 int rowCount = this.jdbcTemplate.queryForInt("select count(*) from t_actor");
 ```
-</div>
-</details>
 
-`Spring JDBC` 를 이용하면 간단하게 한줄로 실행가능하다.
+<br>
 
 * 변수 바인딩 하기
 
@@ -74,11 +38,15 @@ int rowCount = this.jdbcTemplate.queryForInt("select count(*) from t_actor");
 int countOfActorsNamedJoe = this.jdbcTemplate.queryForInt("select count(*) from t_actor where first_name = ?", "Joe"); 
 ```
 
+<br>
+
 * String으로 결과 받기
 
 ```java
 String lastName = this.jdbcTemplate.queryForObject("select last_name from t_actor where id = ?", new Object[]{1212L}, String.class); 
 ```
+
+<br>
 
 * 한 행 조회하기
 
@@ -96,6 +64,8 @@ Actor actor = this.jdbcTemplate.queryForObject(
   });
 ```
 
+<br>
+
 * 여러 건 조회하기
 
 ```java
@@ -111,5 +81,4 @@ List<Actor> actors = this.jdbcTemplate.query(
   });
 ```
 
-
-
+<br>
