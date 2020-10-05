@@ -87,6 +87,64 @@
         <header class="post-header">
           <h1 class="post-title">
             
+              <a class="post-link" href="/Java-%EC%8B%9C%EA%B0%84-%EB%B6%88%EB%9F%AC%EC%98%A4%EA%B8%B0-%EB%B0%8F-%EC%84%A0%ED%96%89-0-%EC%A0%9C%EA%B1%B0/">Java 시간 불러오기 및 선행 0 제거</a>
+            
+          </h1>
+
+          <p class="post-meta">
+            Sep 5, 2020
+            
+            
+          </p>
+        </header>
+
+        <div class="post-content">
+          <h2>Source Code</h2>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">java.time.LocalDateTime</span><span class="o">;</span>
+<span class="kd">public</span> <span class="nc">String</span> <span class="nf">getDateTime</span><span class="o">()</span> <span class="o">{</span>
+    <span class="nc">LocalDateTime</span> <span class="n">localNow</span> <span class="o">=</span> <span class="nc">LocalDateTime</span><span class="o">.</span><span class="na">now</span><span class="o">();</span>
+    
+    <span class="nc">String</span> <span class="n">ret</span> <span class="o">=</span> <span class="s">""</span><span class="o">;</span>
+    <span class="nc">String</span> <span class="n">yyyy</span> <span class="o">=</span> <span class="n">localNow</span><span class="o">.</span><span class="na">format</span><span class="o">(</span><span class="nc">DateTimeFormatter</span><span class="o">.</span><span class="na">ofPattern</span><span class="o">(</span><span class="s">"yyyy"</span><span class="o">));</span>
+    <span class="nc">String</span> <span class="no">MM</span> <span class="o">=</span> <span class="n">localNow</span><span class="o">.</span><span class="na">format</span><span class="o">(</span><span class="nc">DateTimeFormatter</span><span class="o">.</span><span class="na">ofPattern</span><span class="o">(</span><span class="s">"MM"</span><span class="o">));</span>
+    <span class="nc">String</span> <span class="n">dd</span> <span class="o">=</span> <span class="n">localNow</span><span class="o">.</span><span class="na">format</span><span class="o">(</span><span class="nc">DateTimeFormatter</span><span class="o">.</span><span class="na">ofPattern</span><span class="o">(</span><span class="s">"dd"</span><span class="o">));</span>
+    <span class="nc">String</span> <span class="no">HH</span> <span class="o">=</span> <span class="n">localNow</span><span class="o">.</span><span class="na">format</span><span class="o">(</span><span class="nc">DateTimeFormatter</span><span class="o">.</span><span class="na">ofPattern</span><span class="o">(</span><span class="s">"HH"</span><span class="o">));</span>
+    <span class="nc">String</span> <span class="n">mm</span> <span class="o">=</span> <span class="n">localNow</span><span class="o">.</span><span class="na">format</span><span class="o">(</span><span class="nc">DateTimeFormatter</span><span class="o">.</span><span class="na">ofPattern</span><span class="o">(</span><span class="s">"mm"</span><span class="o">));</span>
+
+    <span class="no">MM</span> <span class="o">=</span> <span class="n">eraseZero</span><span class="o">(</span><span class="no">MM</span><span class="o">);</span>
+    <span class="n">dd</span> <span class="o">=</span> <span class="n">eraseZero</span><span class="o">(</span><span class="n">dd</span><span class="o">);</span>
+    <span class="no">HH</span> <span class="o">=</span> <span class="n">eraseZero</span><span class="o">(</span><span class="no">HH</span><span class="o">);</span>
+    
+    <span class="n">ret</span> <span class="o">=</span> <span class="n">yyyy</span> <span class="o">+</span> <span class="s">"/"</span> <span class="o">+</span> <span class="no">MM</span> <span class="o">+</span> <span class="s">"/"</span> <span class="o">+</span> <span class="n">dd</span> <span class="o">+</span> <span class="s">" "</span> <span class="o">+</span> <span class="no">HH</span> <span class="o">+</span> <span class="s">":"</span> <span class="o">+</span> <span class="n">mm</span><span class="o">;</span>
+
+    <span class="k">return</span> <span class="n">ret</span><span class="o">;</span>
+<span class="o">}</span>
+
+<span class="kd">public</span> <span class="nc">String</span> <span class="nf">eraseZero</span><span class="o">(</span><span class="nc">String</span> <span class="n">str</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">str</span> <span class="o">=</span> <span class="nc">Integer</span><span class="o">.</span><span class="na">toString</span><span class="o">(</span><span class="nc">Integer</span><span class="o">.</span><span class="na">parseInt</span><span class="o">(</span><span class="n">str</span><span class="o">));</span>
+    <span class="k">return</span> <span class="n">str</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p>현재 시간의 경우 <code class="language-plaintext highlighter-rouge">LocalDateTime</code>의 <code class="language-plaintext highlighter-rouge">now()</code> 메서드를 사용하여 <code class="language-plaintext highlighter-rouge">localNow</code> 변수로 불러왔다. 하지만 이때 localNow에 저장된 format은 <code class="language-plaintext highlighter-rouge">2020-09-05T18:15:45</code> 와 같은 형식이다.<br /><br />
+<strong><em>2020/9/5 18:15</em></strong> 로 나타내고 싶었으므로, parsing하여서 각각의 변수에 저장하였다.<br />
+<code class="language-plaintext highlighter-rouge">ofPattern()</code>의 안에 format을 넣어서 바로 표현할 수 있지만 <strong><em>2020/09/05</em></strong> 와 같은 형식으로 나오므로 그렇게 하지 않았다.<br /><br />
+선행되는 0을 제거해야 하므로 해당되는 <code class="language-plaintext highlighter-rouge">String</code> 변수 <code class="language-plaintext highlighter-rouge">MM</code>, <code class="language-plaintext highlighter-rouge">dd</code>, <code class="language-plaintext highlighter-rouge">HH</code>를 <code class="language-plaintext highlighter-rouge">Integer</code>로 변환했다가 다시 <code class="language-plaintext highlighter-rouge">String</code>으로 변환하면 선행되는 0이 제거될 것이라는 아이디어가 떠올랐고, 적용하였다.</p>
+
+<p><img src="http://drive.google.com/uc?export=view&amp;id=1nMZgOhkzYpGk2YX97nTIGE76XfrsbIlJ" /><br /></p>
+
+<center style="font-size:30px;">성공!</center>
+
+        </div>
+        
+      </li>
+    
+      
+      
+
+      <li>
+        <header class="post-header">
+          <h1 class="post-title">
+            
               <a class="post-link" href="/css-layout-%EB%B8%94%EB%9F%AD-%EC%A4%91%EC%95%99%EB%B0%B0%EC%B9%98/">Css layout 블럭 중앙배치</a>
             
           </h1>

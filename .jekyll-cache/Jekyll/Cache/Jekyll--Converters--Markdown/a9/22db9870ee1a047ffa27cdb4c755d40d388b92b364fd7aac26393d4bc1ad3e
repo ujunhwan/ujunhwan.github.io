@@ -1,0 +1,72 @@
+I"m<h1>[Spring] IoC/DI 컨테이너</h1>
+
+<h2>컨테이너란?</h2>
+<ul>
+  <li>컨테이너는 인스턴스의 생명주기를 관리한다.</li>
+  <li>생성된 인스턴스들에게 추가적인 기능을 제공한다.</li>
+</ul>
+
+<p>예를들어, <code class="language-plaintext highlighter-rouge">Servlet</code> 을 실행해주는 <code class="language-plaintext highlighter-rouge">WAS</code> 는 <code class="language-plaintext highlighter-rouge">Servlet Container</code>를 갖고있다고 말한다.
+개발자가 <code class="language-plaintext highlighter-rouge">Servlet</code> 클래스를 작성했지만, 실제로 메모리에 올리고 실행하는 것은 <code class="language-plaintext highlighter-rouge">WAS</code>의 <code class="language-plaintext highlighter-rouge">Servlet Container</code> 이다.
+<code class="language-plaintext highlighter-rouge">Servlet Container</code> 는 동일한 요청을 받으면, 다시 메모리에 올리지 않고 기존에 메모리에 올라간 서블릿을 실행하여, 웹 브라우저에 전송한다.</p>
+
+<p><br /></p>
+
+<h2>IOC란?</h2>
+<ul>
+  <li><strong><em>Inversion of Control</em></strong> 의 약어이다.</li>
+  <li>프로그램의 흐름의 제어를, 다른 프로그램이 제어하는 것을 <code class="language-plaintext highlighter-rouge">IoC</code> 라고 한다.</li>
+</ul>
+
+<p>인터페이스를 통일하면, 내부 메서드들은 같기 때문에 사용하는데 훨씬 쉬울 것이다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">Tv</span> <span class="n">tv</span> <span class="o">=</span> <span class="nc">TvFactory</span> <span class="nf">getTv</span><span class="o">(</span><span class="s">"S"</span><span class="o">);</span>
+<span class="c1">// s type의 tv를 갖다준다.</span>
+</code></pre></div></div>
+
+<h2>DI란?</h2>
+<ul>
+  <li><strong><em>Dependency Injection</em></strong> 의 약어이다.</li>
+  <li>클래스 사이의 의존관계를 <em>Bean</em> 설정 정보를 바탕으로 컨테이너가 자동으로 연결해주는 것을 뜻한다.</li>
+</ul>
+
+<p><br /></p>
+
+<h3>DI가 적용되지 않은 예시</h3>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">Engine</span> <span class="o">{</span>
+    <span class="o">...</span>
+<span class="o">}</span>
+
+<span class="kd">class</span> <span class="nc">Car</span> <span class="o">{</span>
+    <span class="nc">Engine</span> <span class="n">v5</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Engine</span><span class="o">();</span>
+<span class="o">}</span>
+
+</code></pre></div></div>
+
+<h3>DI가 적용된 예시</h3>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Component</span>
+<span class="kd">class</span> <span class="nc">Engine</span> <span class="o">{</span>
+    <span class="o">...</span>
+<span class="o">}</span>
+
+<span class="nd">@Component</span>
+<span class="kd">class</span> <span class="nc">Car</span> <span class="o">{</span>
+    <span class="nd">@Autowired</span>
+    <span class="nc">Engine</span> <span class="n">v5</span><span class="o">;</span>
+<span class="o">}</span>
+
+</code></pre></div></div>
+<p>컨테이너가 v5변수에 인스턴스를 할당해주게 된다.</p>
+
+<p><br /></p>
+
+<h2>Spring에서 제공하는 IoC/DI 컨테이너</h2>
+
+<ul>
+  <li>BeanFactory : IoC/DI에 대한 기본 기능을 가지고 있다.</li>
+  <li>ApplicationContext : <code class="language-plaintext highlighter-rouge">BeanFactory</code>의 모든 기능을 포함하며, 일반적으로 BeanFactory보다 추천된다. 트랜잭션 처리, AOP등에 대한 처리를 할 수 있다. <code class="language-plaintext highlighter-rouge">BeanPostProcessor</code>, <code class="language-plaintext highlighter-rouge">BeanFactoryPostProcessor</code> 등을 자동으로 등록하고, <code class="language-plaintext highlighter-rouge">국제화 처리</code>, <code class="language-plaintext highlighter-rouge">어플리케이션 이벤트</code> 등을 처리할 수 있다.</li>
+</ul>
+
+:ET
