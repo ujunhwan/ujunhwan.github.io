@@ -5,7 +5,7 @@
   
   <link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" />
   <link href="http://localhost:4000/" rel="alternate" type="text/html" hreflang="en" />
-  <updated>2020-09-16T15:06:39+09:00</updated>
+  <updated>2020-09-17T14:14:58+09:00</updated>
   <id>http://localhost:4000//</id>
 
   
@@ -24,6 +24,57 @@
     </author>
   
 
+  
+  
+    <entry>
+      
+      <title type="html">Mysql 비밀번호 변경</title>
+      
+      
+      <link href="http://localhost:4000/mysql-%EB%B9%84%EB%B0%80%EB%B2%88%ED%98%B8-%EB%B3%80%EA%B2%BD/" rel="alternate" type="text/html" title="Mysql 비밀번호 변경" />
+      
+      <published>2020-09-17T00:00:00+09:00</published>
+      <updated>2020-09-17T00:00:00+09:00</updated>
+      <id>http://localhost:4000/mysql%20%EB%B9%84%EB%B0%80%EB%B2%88%ED%98%B8%20%EB%B3%80%EA%B2%BD</id>
+      <content type="html" xml:base="http://localhost:4000/mysql-%EB%B9%84%EB%B0%80%EB%B2%88%ED%98%B8-%EB%B3%80%EA%B2%BD/">&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;MySQL&lt;/code&gt; 8.x 버전 기준이다.&lt;/p&gt;
+
+&lt;h1&gt;root 계정&lt;/h1&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-mysql&quot;&gt;UPDATE mysql.user SET authentication_string=PASSWORD('패스워드') WHERE user='root' AND Host='localhost';
+FLUSH PRIVILEGES;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h1&gt;db 계정&lt;/h1&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; mysqladmin &lt;span class=&quot;nt&quot;&gt;-u&lt;/span&gt;아이디 &lt;span class=&quot;nt&quot;&gt;-p&lt;/span&gt;기존패스워드 password 신규패스워드
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content>
+
+      
+      
+      
+      
+      
+
+      
+        <author>
+            <name>Junhwan</name>
+          
+          
+        </author>
+      
+
+      
+
+      
+
+      
+        <summary type="html">MySQL 8.x 버전 기준이다. root 계정 UPDATE mysql.user SET authentication_string=PASSWORD('패스워드') WHERE user='root' AND Host='localhost'; FLUSH PRIVILEGES; db 계정 &amp;gt; mysqladmin -u아이디 -p기존패스워드 password 신규패스워드</summary>
+      
+
+      
+      
+    </entry>
+  
   
   
     <entry>

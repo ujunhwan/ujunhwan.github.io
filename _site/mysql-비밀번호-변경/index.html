@@ -1,0 +1,13 @@
+<p><code class="language-plaintext highlighter-rouge">MySQL</code> 8.x 버전 기준이다.</p>
+
+<h1>root 계정</h1>
+
+<pre><code class="language-mysql">UPDATE mysql.user SET authentication_string=PASSWORD('패스워드') WHERE user='root' AND Host='localhost';
+FLUSH PRIVILEGES;
+</code></pre>
+
+<h1>db 계정</h1>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;</span> mysqladmin <span class="nt">-u</span>아이디 <span class="nt">-p</span>기존패스워드 password 신규패스워드
+</code></pre></div></div>
+
