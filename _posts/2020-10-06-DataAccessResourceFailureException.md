@@ -15,3 +15,19 @@ private String url = "jdbc:mysql://localhost:3306/dbname?useSSL=false&serverTime
 ```
 
 _해결!_
+
+<br>
+
++추가
+<br>
+
+이렇게 하니, 국제시로 적용돼서, 9시간 늦게 DB에 적용되었다.
+
+```java
+private String url = "jdbc:mysql://localhost:3306/dbname?useSSL=false&serverTimezone=Asia/Seoul";
+```
+
+UTC 부분을 _Asia/Seoul_ 로 변경하였다.
+
+_해결!_
+
