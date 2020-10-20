@@ -5,7 +5,7 @@
   
   <link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" />
   <link href="http://localhost:4000/" rel="alternate" type="text/html" hreflang="en" />
-  <updated>2020-10-05T17:45:16+09:00</updated>
+  <updated>2020-10-20T17:39:52+09:00</updated>
   <id>http://localhost:4000//</id>
 
   
@@ -24,6 +24,374 @@
     </author>
   
 
+  
+  
+    <entry>
+      
+      <title type="html">Beanpropertyrowmapper 관련 오류</title>
+      
+      
+      <link href="http://localhost:4000/BeanPropertyRowMapper-%EA%B4%80%EB%A0%A8-%EC%98%A4%EB%A5%98/" rel="alternate" type="text/html" title="Beanpropertyrowmapper 관련 오류" />
+      
+      <published>2020-10-20T00:00:00+09:00</published>
+      <updated>2020-10-20T00:00:00+09:00</updated>
+      <id>http://localhost:4000/BeanPropertyRowMapper%20%EA%B4%80%EB%A0%A8%20%EC%98%A4%EB%A5%98</id>
+      <content type="html" xml:base="http://localhost:4000/BeanPropertyRowMapper-%EA%B4%80%EB%A0%A8-%EC%98%A4%EB%A5%98/">&lt;p&gt;평소에는 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;RowMapper&lt;/code&gt; 를 아래와 같이 override 하여서 사용하였다.&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;RowMapper&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;Product&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+	&lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
+	&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Product&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;mapRow&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;ResultSet&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;rs&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;rowNum&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;throws&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;SQLException&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+		&lt;span class=&quot;nc&quot;&gt;Product&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;product&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Product&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;rs&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getInt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;displayInfoId&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;rs&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getString&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;placeName&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;),&lt;/span&gt;
+				&lt;span class=&quot;n&quot;&gt;rs&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getString&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;productContent&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;rs&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getString&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;productDescription&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;),&lt;/span&gt;
+				&lt;span class=&quot;n&quot;&gt;rs&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getInt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;productId&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;rs&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getString&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;productImageUrl&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;rs&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getInt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;categoryId&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;));&lt;/span&gt;
+
+		&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;product&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+	&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;그런데, column들이 많아졌을 때, 이걸 일일히 다 타이핑해야되나 싶어졌다..&lt;br /&gt;
+그래서 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;BeanPropertyRowMapper&lt;/code&gt; 를 이용하여 간단하게 해보려고 시도하였다.&lt;/p&gt;
+
+&lt;h3&gt;Error&lt;/h3&gt;
+&lt;p&gt;DB와의 연동 하는 과정에서, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;org.springframework.beans.BeanInstantiationException&lt;/code&gt; 오류가 발생하였다.&lt;/p&gt;
+
+&lt;h3&gt;원인&lt;/h3&gt;
+&lt;p&gt;원인은 쿼리문에 있었다.&lt;/p&gt;
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;SELECT_PRODUCT_BY_CATEGORY&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;SELECT d.id as displayInfoId, 
+p.id as productId, p.description as productDescription, 
+d.place_name as placeName, p.content as productContent\n&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; 
+    &lt;span class=&quot;o&quot;&gt;...&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;...&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;이런식으로, 내가 보기 편하게 as를 이용하여 카멜표기법으로 바꾸었는데, 
+&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;BeanPropertyRowMapper&lt;/code&gt; 는 스네이크 표기법으로 표현된 컬럼명들을 자동으로 카멜표기법으로 바꾸어, 클래스에 맞게 맵핑 해주는 것이었다.&lt;/p&gt;
+
+&lt;h3&gt;해결&lt;/h3&gt;
+&lt;p&gt;따라서, 쿼리문에 적혀있는 as들을 다 지웠더니 잘 실행이 됐다.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;해결!&lt;/em&gt;&lt;/p&gt;</content>
+
+      
+      
+      
+      
+      
+
+      
+        <author>
+            <name>Junhwan</name>
+          
+          
+        </author>
+      
+
+      
+
+      
+
+      
+        <summary type="html">평소에는 RowMapper 를 아래와 같이 override 하여서 사용하였다. new RowMapper&amp;lt;Product&amp;gt;() { @Override public Product mapRow(ResultSet rs, int rowNum) throws SQLException { Product product = new Product(rs.getInt(&quot;displayInfoId&quot;), rs.getString(&quot;placeName&quot;), rs.getString(&quot;productContent&quot;), rs.getString(&quot;productDescription&quot;), rs.getInt(&quot;productId&quot;), rs.getString(&quot;productImageUrl&quot;), rs.getInt(&quot;categoryId&quot;)); return product; } } 그런데, column들이 많아졌을 때, 이걸 일일히 다 타이핑해야되나 싶어졌다.. 그래서 BeanPropertyRowMapper 를 이용하여 간단하게 해보려고 시도하였다. Error DB와의 연동 하는 과정에서, org.springframework.beans.BeanInstantiationException 오류가 발생하였다. 원인 원인은 쿼리문에 있었다. public final static String SELECT_PRODUCT_BY_CATEGORY = &quot;SELECT d.id as displayInfoId, p.id as productId, p.description as productDescription, d.place_name as placeName, p.content as productContent\n&quot; + ... ... 이런식으로, 내가 보기 편하게 as를 이용하여 카멜표기법으로 바꾸었는데, BeanPropertyRowMapper 는 스네이크 표기법으로 표현된 컬럼명들을 자동으로 카멜표기법으로 바꾸어, 클래스에 맞게 맵핑 해주는 것이었다. 해결 따라서, 쿼리문에 적혀있는 as들을 다 지웠더니 잘 실행이 됐다. 해결!</summary>
+      
+
+      
+      
+    </entry>
+  
+  
+  
+    <entry>
+      
+      <title type="html">Dispatcherservlet 설정</title>
+      
+      
+      <link href="http://localhost:4000/DispatcherServlet-%EC%84%A4%EC%A0%95/" rel="alternate" type="text/html" title="Dispatcherservlet 설정" />
+      
+      <published>2020-10-06T00:00:00+09:00</published>
+      <updated>2020-10-06T00:00:00+09:00</updated>
+      <id>http://localhost:4000/DispatcherServlet%20%EC%84%A4%EC%A0%95</id>
+      <content type="html" xml:base="http://localhost:4000/DispatcherServlet-%EC%84%A4%EC%A0%95/">&lt;h1&gt;DispatcherServlet 설정&lt;/h1&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;DispatcherServlet&lt;/code&gt; 에 대한 설정은 web.xml에서 하고, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;DispatcherServlet&lt;/code&gt; 이 읽어들여야할 내용은 @Configuration에서 설정한다.&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nd&quot;&gt;@Configuration&lt;/span&gt;
+&lt;span class=&quot;nd&quot;&gt;@EnableWebMvc&lt;/span&gt;
+&lt;span class=&quot;nd&quot;&gt;@ComponentScan&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;basePackages&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;junhwan.webmvc.controller&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;})&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;WebMvcContextConfiguration&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;WebMvcConfigurerAdapter&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;...&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;DispatcherServlet&lt;/code&gt; 은 해당 파일 설정을 읽어들여서 내부적으로 스프링 컨테이너인 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ApplicationContext&lt;/code&gt; 를 생성하게 된다.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2&gt;@Configuration&lt;/h2&gt;
+
+&lt;p&gt;이 어노테이션으로 인해서, 자바 config 파일이다 라고 알려준다.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2&gt;@EnableWebMvc&lt;/h2&gt;
+
+&lt;p&gt;DispatcherServlet의 RequestMappingHandlerMapping, RequestMappingHandlerAdapter, ExceptionHandlerExceptionResolver, MessageConverter 등 Web에 필요한 Bean들을 대부분 자동으로 설정해준다.&lt;/p&gt;
+
+&lt;p&gt;java config가 아닌 xml으로 설정을 했다면, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;mvc:annotation-driven /&amp;gt;&lt;/code&gt; 이 해줄 것이다.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;기본 설정 이외의 설정&lt;/em&gt; 이 필요하다면 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;WebMvcConfigurerAdapter&lt;/code&gt; 를 상속받아 Java config class를 작성한 후, 필요한 메소드를 오버라이딩 하도록 한다.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2&gt;@ComponentScan&lt;/h2&gt;
+
+&lt;p&gt;Spring MVC에서는 컨트롤러를 찾아야 한다. 이것을 찾기 위해서는 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ComponentScan&lt;/code&gt; 이라고 하는 어노테이션이 사용이 된다.&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ComponentScan&lt;/code&gt; 어노테이션을 이용하면 &lt;em&gt;Controller, Service, Repository, Component&lt;/em&gt; 어노테이션이 붙은 클래스를 찾아 스프링 컨테이너가 관리하게 된다.&lt;/p&gt;
+
+&lt;p&gt;우리가 작성할 컨트롤러에는 URL Mapping 정보가 어노테이션으로 설정이 되어있을 것이다.
+이러한 URL Mapping 정보는 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;DispatcherServlet&lt;/code&gt;이 관리하는 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;RequestMapping&lt;/code&gt; 객체들로 설정이 될 것이다. 이것을 위해,&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;DefaultAnnotationHandlerMapping&lt;/code&gt; 과 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;RequestMappingHandlerMapping&lt;/code&gt; 구현체는 다른 핸드러 매핑보다 훨씬 더 정교한 작업을 수행한다.&lt;/p&gt;
+
+&lt;p&gt;이 두 개의 구현체는 애노테이션을 사용해 매핑 관계를 찾는 매우 강력한 기능을 가지고 있다. 이들 구현체는 스프링 컨테이너 즉 애플리케이션 컨텍스트에 있는 요청 처리 빈에서 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;RequestMapping&lt;/code&gt; 어노테이션을 클래스나 메소드에서 찾아 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;HandlerMapping&lt;/code&gt; 객체를 생성하게 된다.&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;HandlerMapping&lt;/code&gt; 은 서버로 들어온 요청을 어느 핸들러로 전달할지 결정하는 역할을 수행한다.&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;DefaultAnnotationHandlerMapping&lt;/code&gt; 은 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;DispatcherServlet&lt;/code&gt;이 기본으로 등록하는 기본 핸들러 맵핑 객체이고, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;RequestMappingHandlerMapping&lt;/code&gt;은 더 강력하고 유연하지만 사용하려면 &lt;em&gt;명시적으로&lt;/em&gt; 설정해야 한다.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2&gt;WebMvcConfigurerAdapter&lt;/h2&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;@EnableWebMvc&lt;/code&gt; 를 이용하면 기본적인 설정이 모두 자동으로 되지만, 기본 설정 이외의 설정이 필요할 경우 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;WebMvcConfigurerAdapter&lt;/code&gt; 클래스를 상속 받은 후, 메서드를 오버라이딩 하여 구현한다.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2&gt;Controller(Handler) 클래스 작성하기&lt;/h2&gt;
+
+&lt;p&gt;@Contoller 어노테이션을 클래스 위에 붙인다.&lt;/p&gt;
+
+&lt;p&gt;요청이 들어왔을 때 어떤 url로 들어온 요청인지 알아내서 실제로 처리해야 되는 컨트롤러가 뭔지, 그 컨트롤러에서 구현하고 있는 메서드가 뭔지 알아내야 한다. 
+따라서 맵핑을 위해 @RequestMapping 어노테이션을 클래스나 메서드에서 사용한다.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2&gt;@RequestMapping&lt;/h2&gt;
+
+&lt;p&gt;Http Method와 연결하는 방법&lt;/p&gt;
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nd&quot;&gt;@RequestMapping&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/users&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;method&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;RequestMethod&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;POST&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;/users라는 url로 요청이 post방식이면 이거 수행하세요~ 라는 뜻&lt;/p&gt;
+
+&lt;p&gt;4.3 이후로는 @GetMapping @PostMapping 등등도 사용 가능하다.&lt;/p&gt;
+
+&lt;details&gt;
+&lt;summary&gt;예시&lt;/summary&gt;
+&lt;div&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;Http 특정 헤더와 연결하는 방법
+        &lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nd&quot;&gt;@RequestMapping&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;method&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;RequestMethod&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;GET&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;headers&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;content-type=application.json&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;        &lt;/div&gt;
+      &lt;/li&gt;
+      &lt;li&gt;Http 특정 parameter와 연결하는 방법
+        &lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nd&quot;&gt;@RequestMapping&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;method&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;RequestMethod&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;GET&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;params&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;type=raw&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;        &lt;/div&gt;
+      &lt;/li&gt;
+      &lt;li&gt;Content-Type Header 와 연결하는 방법
+        &lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nd&quot;&gt;@RequestMapping&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;method&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;RequestMethod&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;GET&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;consumes&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;application/json&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;        &lt;/div&gt;
+      &lt;/li&gt;
+      &lt;li&gt;Accept Header 와 연결하는 방법
+        &lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nd&quot;&gt;@RequestMapping&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;method&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;RequestMethod&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;GET&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;produces&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;application/json&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;        &lt;/div&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+
+  &lt;/div&gt;
+&lt;/details&gt;
+
+&lt;details&gt;
+&lt;summary&gt;WebMvcContextConfiguration.java&lt;/summary&gt;
+&lt;div&gt;
+
+    &lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+&lt;span class=&quot;nd&quot;&gt;@Configuration&lt;/span&gt;
+&lt;span class=&quot;nd&quot;&gt;@EnableWebMvc&lt;/span&gt;
+&lt;span class=&quot;nd&quot;&gt;@ComponentScan&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;basePackages&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;kr.or.connect.mvcexam.controller&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;})&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;// 패키지에서 찾을 곳을 설정&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;WebMvcContextConfiguration&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;WebMvcConfigurerAdapter&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+	&lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;addResourceHandlers&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;ResourceHandlerRegistry&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;registry&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;registry&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;addResourceHandler&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/assets/**&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;addResourceLocations&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;classpath:/META-INF/resources/webjars/&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setCachePeriod&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;31556926&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;registry&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;addResourceHandler&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/css/**&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;addResourceLocations&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/css/&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setCachePeriod&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;31556926&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;registry&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;addResourceHandler&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/img/**&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;addResourceLocations&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/img/&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setCachePeriod&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;31556926&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;registry&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;addResourceHandler&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/js/**&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;addResourceLocations&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/js/&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setCachePeriod&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;31556926&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;// css 폴더 밑에 application 루트 디렉토리 아래에 있는 이러한 디렉토리를 만들어놓고&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;// /css/** 으로 들어오는 요청은, /css/에서 찾는다.&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;// 이 부분이 없다면, Controller가 가진 RequestMapping 에서 찾을 것이므로 필요하다&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+ 
+    &lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;configureDefaultServletHandling&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;DefaultServletHandlerConfigurer&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;configurer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;c1&quot;&gt;// default servlet handler를 사용하게 한다.&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;configurer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;enable&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+   
+    &lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;addViewControllers&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;ViewControllerRegistry&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;registry&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    		&lt;span class=&quot;nc&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;addViewControllers가 호출됩니다. &quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;registry&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;addViewController&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setViewName&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;main&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;registry&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;addViewController&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;asdf&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setViewName&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;userForm&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+    
+    &lt;span class=&quot;nd&quot;&gt;@Bean&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;InternalResourceViewResolver&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;getInternalResourceViewResolver&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;nc&quot;&gt;InternalResourceViewResolver&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;resolver&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;InternalResourceViewResolver&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;resolver&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setPrefix&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/WEB-INF/views/&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;resolver&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setSuffix&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;.jsp&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;// /WEB-INF/view/**.jsp 를 실행한다.&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;resolver&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+
+  &lt;/div&gt;
+&lt;/details&gt;
+
+&lt;details&gt;
+&lt;summary&gt;web.xml&lt;/summary&gt;
+&lt;div&gt;
+
+    &lt;div class=&quot;language-xml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;web-app&amp;gt;&lt;/span&gt;
+
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;display-name&amp;gt;&lt;/span&gt;Spring JavaConfig Sample&lt;span class=&quot;nt&quot;&gt;&amp;lt;/display-name&amp;gt;&lt;/span&gt;
+
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;servlet&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;servlet-name&amp;gt;&lt;/span&gt;mvc&lt;span class=&quot;nt&quot;&gt;&amp;lt;/servlet-name&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;servlet-class&amp;gt;&lt;/span&gt;org.springframework.web.servlet.DispatcherServlet&lt;span class=&quot;nt&quot;&gt;&amp;lt;/servlet-class&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;init-param&amp;gt;&lt;/span&gt;
+      &lt;span class=&quot;nt&quot;&gt;&amp;lt;param-name&amp;gt;&lt;/span&gt;contextClass&lt;span class=&quot;nt&quot;&gt;&amp;lt;/param-name&amp;gt;&lt;/span&gt;
+      &lt;span class=&quot;nt&quot;&gt;&amp;lt;param-value&amp;gt;&lt;/span&gt;org.springframework.web.context.support.AnnotationConfigWebApplicationContext&lt;span class=&quot;nt&quot;&gt;&amp;lt;/param-value&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/init-param&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;init-param&amp;gt;&lt;/span&gt;
+      &lt;span class=&quot;nt&quot;&gt;&amp;lt;param-name&amp;gt;&lt;/span&gt;contextConfigLocation&lt;span class=&quot;nt&quot;&gt;&amp;lt;/param-name&amp;gt;&lt;/span&gt;
+      &lt;span class=&quot;nt&quot;&gt;&amp;lt;param-value&amp;gt;&lt;/span&gt;kr.or.connect.mvcexam.config.WebMvcContextConfiguration&lt;span class=&quot;nt&quot;&gt;&amp;lt;/param-value&amp;gt;&lt;/span&gt;
+      &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- DispatcherServlet이 java config파일을 이용하는 부분 --&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/init-param&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;load-on-startup&amp;gt;&lt;/span&gt;1&lt;span class=&quot;nt&quot;&gt;&amp;lt;/load-on-startup&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;/servlet&amp;gt;&lt;/span&gt;
+
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;servlet-mapping&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;servlet-name&amp;gt;&lt;/span&gt;mvc&lt;span class=&quot;nt&quot;&gt;&amp;lt;/servlet-name&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;url-pattern&amp;gt;&lt;/span&gt;/&lt;span class=&quot;nt&quot;&gt;&amp;lt;/url-pattern&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- 모든 요청을 DispatcherServlet이 받도록 함 --&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- 위에 있는 org.springframework.web.servlet.DispatcherServlet이 실행됨 --&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;/servlet-mapping&amp;gt;&lt;/span&gt;
+
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/web-app&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+
+  &lt;/div&gt;
+&lt;/details&gt;
+
+&lt;p&gt;&lt;strong&gt;web.xml&lt;/strong&gt; 으로 인해, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;DispatcherServlet&lt;/code&gt; 이 &lt;em&gt;FrontController&lt;/em&gt; 로 사용된다.&lt;/p&gt;</content>
+
+      
+      
+      
+      
+      
+
+      
+        <author>
+            <name>Junhwan</name>
+          
+          
+        </author>
+      
+
+      
+
+      
+
+      
+        <summary type="html">DispatcherServlet 설정 DispatcherServlet 에 대한 설정은 web.xml에서 하고, DispatcherServlet 이 읽어들여야할 내용은 @Configuration에서 설정한다. @Configuration @EnableWebMvc @ComponentScan(basePackages = { &quot;junhwan.webmvc.controller&quot; }) public class WebMvcContextConfiguration extends WebMvcConfigurerAdapter { ... } DispatcherServlet 은 해당 파일 설정을 읽어들여서 내부적으로 스프링 컨테이너인 ApplicationContext 를 생성하게 된다. @Configuration 이 어노테이션으로 인해서, 자바 config 파일이다 라고 알려준다. @EnableWebMvc DispatcherServlet의 RequestMappingHandlerMapping, RequestMappingHandlerAdapter, ExceptionHandlerExceptionResolver, MessageConverter 등 Web에 필요한 Bean들을 대부분 자동으로 설정해준다. java config가 아닌 xml으로 설정을 했다면, &amp;lt;mvc:annotation-driven /&amp;gt; 이 해줄 것이다. 기본 설정 이외의 설정 이 필요하다면 WebMvcConfigurerAdapter 를 상속받아 Java config class를 작성한 후, 필요한 메소드를 오버라이딩 하도록 한다. @ComponentScan Spring MVC에서는 컨트롤러를 찾아야 한다. 이것을 찾기 위해서는 ComponentScan 이라고 하는 어노테이션이 사용이 된다. ComponentScan 어노테이션을 이용하면 Controller, Service, Repository, Component 어노테이션이 붙은 클래스를 찾아 스프링 컨테이너가 관리하게 된다. 우리가 작성할 컨트롤러에는 URL Mapping 정보가 어노테이션으로 설정이 되어있을 것이다. 이러한 URL Mapping 정보는 DispatcherServlet이 관리하는 RequestMapping 객체들로 설정이 될 것이다. 이것을 위해, DefaultAnnotationHandlerMapping 과 RequestMappingHandlerMapping 구현체는 다른 핸드러 매핑보다 훨씬 더 정교한 작업을 수행한다. 이 두 개의 구현체는 애노테이션을 사용해 매핑 관계를 찾는 매우 강력한 기능을 가지고 있다. 이들 구현체는 스프링 컨테이너 즉 애플리케이션 컨텍스트에 있는 요청 처리 빈에서 RequestMapping 어노테이션을 클래스나 메소드에서 찾아 HandlerMapping 객체를 생성하게 된다. HandlerMapping 은 서버로 들어온 요청을 어느 핸들러로 전달할지 결정하는 역할을 수행한다. DefaultAnnotationHandlerMapping 은 DispatcherServlet이 기본으로 등록하는 기본 핸들러 맵핑 객체이고, RequestMappingHandlerMapping은 더 강력하고 유연하지만 사용하려면 명시적으로 설정해야 한다. WebMvcConfigurerAdapter @EnableWebMvc 를 이용하면 기본적인 설정이 모두 자동으로 되지만, 기본 설정 이외의 설정이 필요할 경우 WebMvcConfigurerAdapter 클래스를 상속 받은 후, 메서드를 오버라이딩 하여 구현한다. Controller(Handler) 클래스 작성하기 @Contoller 어노테이션을 클래스 위에 붙인다. 요청이 들어왔을 때 어떤 url로 들어온 요청인지 알아내서 실제로 처리해야 되는 컨트롤러가 뭔지, 그 컨트롤러에서 구현하고 있는 메서드가 뭔지 알아내야 한다. 따라서 맵핑을 위해 @RequestMapping 어노테이션을 클래스나 메서드에서 사용한다. @RequestMapping Http Method와 연결하는 방법 @RequestMapping(&quot;/users&quot;, method=RequestMethod.POST) /users라는 url로 요청이 post방식이면 이거 수행하세요~ 라는 뜻 4.3 이후로는 @GetMapping @PostMapping 등등도 사용 가능하다. 예시 Http 특정 헤더와 연결하는 방법 @RequestMapping(method = RequestMethod.GET, headers=&quot;content-type=application.json&quot;) Http 특정 parameter와 연결하는 방법 @RequestMapping(method = RequestMethod.GET, params=&quot;type=raw&quot;) Content-Type Header 와 연결하는 방법 @RequestMapping(method = RequestMethod.GET, consumes = &quot;application/json&quot;) Accept Header 와 연결하는 방법 @RequestMapping(method = RequestMethod.GET, produces = &quot;application/json&quot;) WebMvcContextConfiguration.java @Configuration @EnableWebMvc @ComponentScan(basePackages = { &quot;kr.or.connect.mvcexam.controller&quot; }) // 패키지에서 찾을 곳을 설정 public class WebMvcContextConfiguration extends WebMvcConfigurerAdapter { @Override public void addResourceHandlers(ResourceHandlerRegistry registry) { registry.addResourceHandler(&quot;/assets/**&quot;).addResourceLocations(&quot;classpath:/META-INF/resources/webjars/&quot;).setCachePeriod(31556926); registry.addResourceHandler(&quot;/css/**&quot;).addResourceLocations(&quot;/css/&quot;).setCachePeriod(31556926); registry.addResourceHandler(&quot;/img/**&quot;).addResourceLocations(&quot;/img/&quot;).setCachePeriod(31556926); registry.addResourceHandler(&quot;/js/**&quot;).addResourceLocations(&quot;/js/&quot;).setCachePeriod(31556926); // css 폴더 밑에 application 루트 디렉토리 아래에 있는 이러한 디렉토리를 만들어놓고 // /css/** 으로 들어오는 요청은, /css/에서 찾는다. // 이 부분이 없다면, Controller가 가진 RequestMapping 에서 찾을 것이므로 필요하다 } @Override public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) { // default servlet handler를 사용하게 한다. configurer.enable(); } @Override public void addViewControllers(final ViewControllerRegistry registry) { System.out.println(&quot;addViewControllers가 호출됩니다. &quot;); registry.addViewController(&quot;/&quot;).setViewName(&quot;main&quot;); registry.addViewController(&quot;asdf&quot;).setViewName(&quot;userForm&quot;); } @Bean public InternalResourceViewResolver getInternalResourceViewResolver() { InternalResourceViewResolver resolver = new InternalResourceViewResolver(); resolver.setPrefix(&quot;/WEB-INF/views/&quot;); resolver.setSuffix(&quot;.jsp&quot;); // /WEB-INF/view/**.jsp 를 실행한다. return resolver; } web.xml &amp;lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&amp;gt; &amp;lt;web-app&amp;gt; &amp;lt;display-name&amp;gt;Spring JavaConfig Sample&amp;lt;/display-name&amp;gt; &amp;lt;servlet&amp;gt; &amp;lt;servlet-name&amp;gt;mvc&amp;lt;/servlet-name&amp;gt; &amp;lt;servlet-class&amp;gt;org.springframework.web.servlet.DispatcherServlet&amp;lt;/servlet-class&amp;gt; &amp;lt;init-param&amp;gt; &amp;lt;param-name&amp;gt;contextClass&amp;lt;/param-name&amp;gt; &amp;lt;param-value&amp;gt;org.springframework.web.context.support.AnnotationConfigWebApplicationContext&amp;lt;/param-value&amp;gt; &amp;lt;/init-param&amp;gt; &amp;lt;init-param&amp;gt; &amp;lt;param-name&amp;gt;contextConfigLocation&amp;lt;/param-name&amp;gt; &amp;lt;param-value&amp;gt;kr.or.connect.mvcexam.config.WebMvcContextConfiguration&amp;lt;/param-value&amp;gt; &amp;lt;!-- DispatcherServlet이 java config파일을 이용하는 부분 --&amp;gt; &amp;lt;/init-param&amp;gt; &amp;lt;load-on-startup&amp;gt;1&amp;lt;/load-on-startup&amp;gt; &amp;lt;/servlet&amp;gt; &amp;lt;servlet-mapping&amp;gt; &amp;lt;servlet-name&amp;gt;mvc&amp;lt;/servlet-name&amp;gt; &amp;lt;url-pattern&amp;gt;/&amp;lt;/url-pattern&amp;gt; &amp;lt;!-- 모든 요청을 DispatcherServlet이 받도록 함 --&amp;gt; &amp;lt;!-- 위에 있는 org.springframework.web.servlet.DispatcherServlet이 실행됨 --&amp;gt; &amp;lt;/servlet-mapping&amp;gt; &amp;lt;/web-app&amp;gt; web.xml 으로 인해, DispatcherServlet 이 FrontController 로 사용된다.</summary>
+      
+
+      
+      
+    </entry>
+  
+  
+  
+    <entry>
+      
+      <title type="html">Dataaccessresourcefailureexception</title>
+      
+      
+      <link href="http://localhost:4000/DataAccessResourceFailureException/" rel="alternate" type="text/html" title="Dataaccessresourcefailureexception" />
+      
+      <published>2020-10-06T00:00:00+09:00</published>
+      <updated>2020-10-06T00:00:00+09:00</updated>
+      <id>http://localhost:4000/DataAccessResourceFailureException</id>
+      <content type="html" xml:base="http://localhost:4000/DataAccessResourceFailureException/">&lt;h2&gt;Error Message&lt;/h2&gt;
+&lt;p&gt;Exception in thread “main” org.springframework.dao.DataAccessResourceFailureException: Error retrieving database metadata; nested exception is org.springframework.jdbc.support.MetaDataAccessException: Could not get Connection for extracting meta data; nested exception is org.springframework.jdbc.CannotGetJdbcConnectionException: Could not get JDBC Connection; nested exception is java.sql.SQLException: Cannot create PoolableConnectionFactory (No timezone mapping entry for ‘UTC8’)&lt;/p&gt;
+
+&lt;p&gt;문제의 url&lt;/p&gt;
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;url&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;jdbc:mysql://localhost:3306/dbname?useSSL=false&amp;amp;serverTimezone=UTC8&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;에러 메시지를 보니, UTC8에 맵핑된 타임존이 없어서 발생하는 오류라고 생각했다.&lt;/p&gt;
+
+&lt;p&gt;그래서 간단하게 UTC로 바꾸었다.&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;url&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;jdbc:mysql://localhost:3306/dbname?useSSL=false&amp;amp;serverTimezone=UTC&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;em&gt;해결!&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;+추가
+&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;이렇게 하니, 국제시로 적용돼서, 9시간 늦게 DB에 적용되었다.&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;url&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;jdbc:mysql://localhost:3306/dbname?useSSL=false&amp;amp;serverTimezone=Asia/Seoul&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;UTC 부분을 &lt;em&gt;Asia/Seoul&lt;/em&gt; 로 변경하였다.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;해결!&lt;/em&gt;&lt;/p&gt;</content>
+
+      
+      
+      
+      
+      
+
+      
+        <author>
+            <name>Junhwan</name>
+          
+          
+        </author>
+      
+
+      
+
+      
+
+      
+        <summary type="html">Error Message Exception in thread “main” org.springframework.dao.DataAccessResourceFailureException: Error retrieving database metadata; nested exception is org.springframework.jdbc.support.MetaDataAccessException: Could not get Connection for extracting meta data; nested exception is org.springframework.jdbc.CannotGetJdbcConnectionException: Could not get JDBC Connection; nested exception is java.sql.SQLException: Cannot create PoolableConnectionFactory (No timezone mapping entry for ‘UTC8’) 문제의 url private String url = &quot;jdbc:mysql://localhost:3306/dbname?useSSL=false&amp;amp;serverTimezone=UTC8&quot;; 에러 메시지를 보니, UTC8에 맵핑된 타임존이 없어서 발생하는 오류라고 생각했다. 그래서 간단하게 UTC로 바꾸었다. private String url = &quot;jdbc:mysql://localhost:3306/dbname?useSSL=false&amp;amp;serverTimezone=UTC&quot;; 해결! +추가 이렇게 하니, 국제시로 적용돼서, 9시간 늦게 DB에 적용되었다. private String url = &quot;jdbc:mysql://localhost:3306/dbname?useSSL=false&amp;amp;serverTimezone=Asia/Seoul&quot;; UTC 부분을 Asia/Seoul 로 변경하였다. 해결!</summary>
+      
+
+      
+      
+    </entry>
+  
   
   
     <entry>
@@ -2428,340 +2796,6 @@ click시 다음과 같이 console에 target이 가리키는 &lt;code class=&quot
 
       
         <summary type="html">Ajax (XMLHttpRequest 통신) Ajax(Asynchronous JavaScript and XML) 는 비동기 방식으로 서버로부터 데이터를 가져오는 것이다. 위쪽에 탭들을 누르면 아래 컨텐츠들이 매번 바뀐다. 그때마다 서버에서 새로운 데이터를 만들어서 보여줘야하니까 원래는 서버에서 매번 새로운 페이지를 내려줘서 그걸 렌더링 하는 방법을 사용했었다. 지금은 필요한 부분 만 데이터를 가져오게 할 수 있다. 새로고침 없이 전체 웹페이지에서 일부분만 받아온 데이터로 갱신할 수 있다. 비동기적으로 즉 다른화면에 영향을 주지 않고 데이터를 서버에서 가져오는 방법을 Ajax 라고 한다. JSON 표준적인 데이터 포맷을 결정하기 위해서 주로 JSON(JavaScript Object Notation) 포맷을 사용한다. Ajax 실행코드 var oReq = new XMLHttpRequest(); oReq.addEventListener(&quot;load&quot;, function() { console.log(this.responseText); }); oReq.open(&quot;GET&quot;, &quot;https://www.w3.org/TR/PNG/iso_8859-1.txt&quot;); oReq.send(); 실행 순서 XMLHttpRequest 객체 생성 open() 메서드로 요청 준비 send() 메서드로 서버에 전송 서버에서 응답시 load 이벤트 발생 function() 실행 (이 때, open, send는 전부 반환되고 callstack에 존재하지 않은 상태) 결과</summary>
-      
-
-      
-      
-    </entry>
-  
-  
-  
-    <entry>
-      
-      <title type="html">Dom</title>
-      
-      
-      <link href="http://localhost:4000/DOM/" rel="alternate" type="text/html" title="Dom" />
-      
-      <published>2020-09-09T00:00:00+09:00</published>
-      <updated>2020-09-09T00:00:00+09:00</updated>
-      <id>http://localhost:4000/DOM</id>
-      <content type="html" xml:base="http://localhost:4000/DOM/">&lt;h2&gt;DOM&lt;/h2&gt;
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;Document Object Model&lt;/em&gt;&lt;/strong&gt; 이라는 객체형태의 모델로 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;HTML&lt;/code&gt; 코드가 저장이 된다.
-그렇게 저장이 된 정보들을 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;DOM Tree&lt;/code&gt; 라고 한다.
-결국 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;HTML element&lt;/code&gt; 는 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Tree&lt;/code&gt; 형태로 저장을 하고 화면에 표현이 된다.
-&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;js&lt;/code&gt;를 이용해서 어떤 부분을 찾고 삭제하고 할 수 있다.
-이런 것들을 편하게 하기 위해서, 브라우저는 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;DOM API&lt;/code&gt; 를 제공한다.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;getElementById()
-    &lt;ul&gt;
-      &lt;li&gt;ID 정보를 통해서 찾을 수 있는 메서드이다.&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;querySelector()
-    &lt;ul&gt;
-      &lt;li&gt;DOM을 찾을때 사용하는 메서드이다.&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;http://drive.google.com/uc?export=view&amp;amp;id=1oFHQQbswtji1ULFetUbqcg5HdvjHTH0J&quot; /&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;아마존에서 다음과 같은 카트에 있는 text를 변경할 것이다. 크롬 개발자도구의 console 탭에서 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;getElementByID()&lt;/code&gt; 를 사용하여 특정 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;element&lt;/code&gt; 를 찾은 뒤, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;innerText&lt;/code&gt; 를 변경하였다.&lt;br /&gt;
-&lt;br /&gt;
-&lt;img src=&quot;http://drive.google.com/uc?export=view&amp;amp;id=1oKYM749NOJm7u_YvjGQMRMX4BRw8L2eQ&quot; /&gt;&lt;br /&gt;
-&lt;br /&gt;
-결과는 다음과 같다.
-&lt;br /&gt;
-&lt;img src=&quot;http://drive.google.com/uc?export=view&amp;amp;id=1oEi4AjDpMB6ET7wdQZUXfRU7EIi7lZMA&quot; /&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;이번에는 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;querySelector()&lt;/code&gt; 를 이용하여 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;element&lt;/code&gt; 를 찾은 뒤, 다시 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;innerText&lt;/code&gt; 를 변경하였다. 이 때, 찾으려는 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;element&lt;/code&gt; 가 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ID&lt;/code&gt; 이므로, #을 붙여서 사용하였다.
-&lt;br /&gt;
-&lt;img src=&quot;http://drive.google.com/uc?export=view&amp;amp;id=1oKZY27II2HqPrgU2tUO3hlo2Th2EDsxR&quot; /&gt;&lt;br /&gt;
-&lt;br /&gt;
-결과는 다음과 같다.
-&lt;img src=&quot;http://drive.google.com/uc?export=view&amp;amp;id=1oJU1KRQvDOa2DpSrB_szuTBAFiCuWuY_&quot; /&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;개인적으로, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;getElementID()&lt;/code&gt;로 할 수 있는 것들을 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;querySeletor()&lt;/code&gt; 가 포함하고 있으므로, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;querySelector()&lt;/code&gt; 를 자주 사용할 것 같다.&lt;/p&gt;</content>
-
-      
-      
-      
-      
-      
-
-      
-        <author>
-            <name>Junhwan</name>
-          
-          
-        </author>
-      
-
-      
-
-      
-
-      
-        <summary type="html">DOM Document Object Model 이라는 객체형태의 모델로 HTML 코드가 저장이 된다. 그렇게 저장이 된 정보들을 DOM Tree 라고 한다. 결국 HTML element 는 Tree 형태로 저장을 하고 화면에 표현이 된다. js를 이용해서 어떤 부분을 찾고 삭제하고 할 수 있다. 이런 것들을 편하게 하기 위해서, 브라우저는 DOM API 를 제공한다. getElementById() ID 정보를 통해서 찾을 수 있는 메서드이다. querySelector() DOM을 찾을때 사용하는 메서드이다. 아마존에서 다음과 같은 카트에 있는 text를 변경할 것이다. 크롬 개발자도구의 console 탭에서 getElementByID() 를 사용하여 특정 element 를 찾은 뒤, innerText 를 변경하였다. 결과는 다음과 같다. 이번에는 querySelector() 를 이용하여 element 를 찾은 뒤, 다시 innerText 를 변경하였다. 이 때, 찾으려는 element 가 ID 이므로, #을 붙여서 사용하였다. 결과는 다음과 같다. 개인적으로, getElementID()로 할 수 있는 것들을 querySeletor() 가 포함하고 있으므로, querySelector() 를 자주 사용할 것 같다.</summary>
-      
-
-      
-      
-    </entry>
-  
-  
-  
-    <entry>
-      
-      <title type="html">Javascript 기본정리</title>
-      
-      
-      <link href="http://localhost:4000/Javascript-%EA%B8%B0%EB%B3%B8%EC%A0%95%EB%A6%AC/" rel="alternate" type="text/html" title="Javascript 기본정리" />
-      
-      <published>2020-09-08T00:00:00+09:00</published>
-      <updated>2020-09-08T00:00:00+09:00</updated>
-      <id>http://localhost:4000/Javascript%20%EA%B8%B0%EB%B3%B8%EC%A0%95%EB%A6%AC</id>
-      <content type="html" xml:base="http://localhost:4000/Javascript-%EA%B8%B0%EB%B3%B8%EC%A0%95%EB%A6%AC/">&lt;h1&gt;Javascript&lt;/h1&gt;
-&lt;h2&gt;변수&lt;/h2&gt;
-&lt;p&gt;모든 언어는 어떤 값 또는 어떤 객체를 표현하는 &lt;strong&gt;변수&lt;/strong&gt; 가 있다.
-자바스크립트에서도 어떤 변수를 사용하는가에 따라서,    &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Scope&lt;/code&gt; 라는 변수의 유효범위가 달라진다.&lt;br /&gt;
-&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2&gt;연산자&lt;/h2&gt;
-&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;name&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;crong&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;name&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;||&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;codesquad&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;OR연산을 사용해서 name이 존재하면 name이 쓰이고, 없으면 &lt;strong&gt;&lt;em&gt;codesquad&lt;/em&gt;&lt;/strong&gt; 가 쓰인다. 왼쪽 만족시, 오른쪽 확인 X&lt;br /&gt;
-여기선 &lt;strong&gt;&lt;em&gt;crong&lt;/em&gt;&lt;/strong&gt; 출력
-&lt;br /&gt;&lt;/p&gt;
-&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;name&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;||&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;codesquad&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;name이 존재하지 않으므로, &lt;strong&gt;&lt;em&gt;codesquad&lt;/em&gt;&lt;/strong&gt; 출력&lt;br /&gt;
-&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2&gt;비교연산자&lt;/h2&gt;
-&lt;p&gt;js에서는 ==보다는 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;===&lt;/code&gt; 를 많이 사용한다. why?&lt;/p&gt;
-&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;
-
-&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;
-
-&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;===&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;
-
-&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;===&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;
-
-&lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;undefined&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;blockquote&gt;
-  &lt;p&gt;==은 타입을 비교하지 않는다.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;타입까지 비교하기 위해선 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;===&lt;/code&gt; 을 사용해야 한다!&lt;br /&gt;
-&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2&gt;js의 type&lt;/h2&gt;
-&lt;blockquote&gt;
-  &lt;p&gt;타입은 선언할때가 아니고, 실행타임에 결정된다. 함수안에서의 파라미터나 변수는 실행될 때 그 타입이 결정된다.&lt;/p&gt;
-
-  &lt;p&gt;간단한 기본타입은 ` typeof `를 이용해 판단할 수 있다.&lt;br /&gt;
-&lt;br /&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h2&gt;문자열 처리&lt;/h2&gt;
-&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;typeof&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;abc&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// string&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;typeof&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;A&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// string&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;typeof&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// string. single quote도 사용가능.&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;문자열에 다양한 메서드가 존재.&lt;/p&gt;
-&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;ab:cd&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;split&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// [&quot;ab&quot;, &quot;cd&quot;];&lt;/span&gt;
-&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;ab:cd&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;replace&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// &quot;ab$cd&quot;&lt;/span&gt;
-&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;  abcde  &lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;trim&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// &quot;abcde&quot;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2&gt;js의 함수&lt;/h2&gt;
-&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;printName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;firstname&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;name is &lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;firstname&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;printName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;());&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;만약 파라미터인 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;firstname&lt;/code&gt; 을 입력하지 않는다면?&lt;br /&gt;
-&lt;strong&gt;‘name is undefined’&lt;/strong&gt; 출력&lt;br /&gt;
-아무것도 입력하지 않으면, undefined 가 입력된다.&lt;br /&gt;
-&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2&gt;hoisting&lt;/h2&gt;
-&lt;p&gt;함수 안에 있는 변수들을 모두 끌어올려서 선언한다고 하여 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;hoisting&lt;/code&gt; 이라고 한다.&lt;/p&gt;
-&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;printName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;firstname&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;inner&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-
-    &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;inner&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;inner value&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;nx&quot;&gt;printName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;    
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;&lt;strong&gt;undefined&lt;/strong&gt; 출력.&lt;/p&gt;
-
-&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;printName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;firstname&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-
-    &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;inner&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;name is &lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-
-    &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;inner&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;inner value&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;nx&quot;&gt;printName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;&lt;strong&gt;name is inner value&lt;/strong&gt; 출력. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;javascript&lt;/code&gt; 의 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;parser&lt;/code&gt;가 함수와 변수들을 먼저 선언한다. 이 때, 위에 작성된 코드의 경우&lt;/p&gt;
-&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;inner&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;functino&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;...&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;으로 작성되어 있으므로, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;parser&lt;/code&gt;에 의해 &lt;strong&gt;&lt;em&gt;inner&lt;/em&gt;&lt;/strong&gt; 라는 변수만 먼저 선언 되었고, 아래에 작성된 코드의 경우&lt;/p&gt;
-&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;inner&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;...&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;으로 작성되어 있으므로, &lt;strong&gt;&lt;em&gt;inner&lt;/em&gt;&lt;/strong&gt; 함수가 먼저 선언이 되었으므로, 결과에서 차이가 난다.&lt;br /&gt;
-&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2&gt;arguments&lt;/h2&gt;
-&lt;p&gt;함수가 실행되면 그 안에서 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;arguments&lt;/code&gt; 라는 특별한 지역변수가 존재한다. js 함수는 선언한 파라미터보다 더 많은 인자를 보낼 수도 있다. 이 때 넘어온 인자를 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;arguments&lt;/code&gt; 로 배열의 형태로 하나씩 접근할 수가 있다. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;arguments&lt;/code&gt; 는 배열타입은 아니다. 따라서 배열의 메서드를 사용할 수 없다.&lt;/p&gt;
-
-&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;arguments&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;nx&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;&lt;strong&gt;{ ‘0’: 1, ‘1’: 2, ‘2’: 3 }&lt;/strong&gt; 출력.&lt;/p&gt;
-
-&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;arguments&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;length&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;arguments&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]);&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;nx&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;&lt;strong&gt;4 2 3&lt;/strong&gt; 출력.&lt;br /&gt;
-함수의 선언에서 매개변수를 굳이 지정하지 않아도, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;arguments&lt;/code&gt; 를 이용하여 사용할 수 있다. 그러나, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;arguments&lt;/code&gt; 는 의도를 알기 힘드므로, 조심히 사용해야 한다.&lt;br /&gt;
-&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2&gt;arrow function&lt;/h2&gt;
-&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ES2015&lt;/code&gt; 에는 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;arrow function&lt;/code&gt; 이 추가됐다. 간단하게 함수를 선언할 수 있는 문법이다.&lt;/p&gt;
-&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;getName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;Yu &lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;// getName 함수와 아래의 arrow 함수는 동일하다.&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;getName&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;Yu &lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content>
-
-      
-      
-      
-      
-      
-
-      
-        <author>
-            <name>Junhwan</name>
-          
-          
-        </author>
-      
-
-      
-
-      
-
-      
-        <summary type="html">Javascript 변수 모든 언어는 어떤 값 또는 어떤 객체를 표현하는 변수 가 있다. 자바스크립트에서도 어떤 변수를 사용하는가에 따라서, Scope 라는 변수의 유효범위가 달라진다. 연산자 const name = &quot;crong&quot;; const result = name || &quot;codesquad&quot;; OR연산을 사용해서 name이 존재하면 name이 쓰이고, 없으면 codesquad 가 쓰인다. 왼쪽 만족시, 오른쪽 확인 X 여기선 crong 출력 const name; const result = name || &quot;codesquad&quot;; name이 존재하지 않으므로, codesquad 출력 비교연산자 js에서는 ==보다는 === 를 많이 사용한다. why? 0 == &quot;0&quot;; true 0 == 0; true 0 === &quot;0&quot;; false 0 === 0; true null == undefined; true ==은 타입을 비교하지 않는다. 타입까지 비교하기 위해선 === 을 사용해야 한다! js의 type 타입은 선언할때가 아니고, 실행타임에 결정된다. 함수안에서의 파라미터나 변수는 실행될 때 그 타입이 결정된다. 간단한 기본타입은 ` typeof `를 이용해 판단할 수 있다. 문자열 처리 typeof &quot;abc&quot;; // string typeof &quot;A&quot;; // string typeof 'a'; // string. single quote도 사용가능. 문자열에 다양한 메서드가 존재. &quot;ab:cd&quot;.split(&quot;.&quot;); // [&quot;ab&quot;, &quot;cd&quot;]; &quot;ab:cd&quot;.replace(&quot;:&quot;, &quot;$&quot;); // &quot;ab$cd&quot; &quot; abcde &quot;.trim(); // &quot;abcde&quot; js의 함수 function printName(firstname) { return &quot;name is &quot; + firstname; } console.log(printName()); 만약 파라미터인 firstname 을 입력하지 않는다면? ‘name is undefined’ 출력 아무것도 입력하지 않으면, undefined 가 입력된다. hoisting 함수 안에 있는 변수들을 모두 끌어올려서 선언한다고 하여 hoisting 이라고 한다. function printName(firstname) { console.log(inner); var inner = function() { return &quot;inner value&quot;; } } printName(); undefined 출력. function printName(firstname) { var result = inner(); console.log(&quot;name is &quot; + result); function inner() { return &quot;inner value&quot;; } } printName(); name is inner value 출력. javascript 의 parser가 함수와 변수들을 먼저 선언한다. 이 때, 위에 작성된 코드의 경우 var inner = functino() { ... } 으로 작성되어 있으므로, parser에 의해 inner 라는 변수만 먼저 선언 되었고, 아래에 작성된 코드의 경우 function inner() { ... } 으로 작성되어 있으므로, inner 함수가 먼저 선언이 되었으므로, 결과에서 차이가 난다. arguments 함수가 실행되면 그 안에서 arguments 라는 특별한 지역변수가 존재한다. js 함수는 선언한 파라미터보다 더 많은 인자를 보낼 수도 있다. 이 때 넘어온 인자를 arguments 로 배열의 형태로 하나씩 접근할 수가 있다. arguments 는 배열타입은 아니다. 따라서 배열의 메서드를 사용할 수 없다. function a() { console.log(arguments); } a(1, 2, 3); { ‘0’: 1, ‘1’: 2, ‘2’: 3 } 출력. function a() { for(var i=0; i&amp;lt;arguments.length; i++) { console.log(arguments[i]); } } a(4, 2, 3); 4 2 3 출력. 함수의 선언에서 매개변수를 굳이 지정하지 않아도, arguments 를 이용하여 사용할 수 있다. 그러나, arguments 는 의도를 알기 힘드므로, 조심히 사용해야 한다. arrow function ES2015 에는 arrow function 이 추가됐다. 간단하게 함수를 선언할 수 있는 문법이다. function getName(name) { return &quot;Yu &quot; + name; } // getName 함수와 아래의 arrow 함수는 동일하다. var getName = (name) =&amp;gt; &quot;Yu &quot; + name;</summary>
-      
-
-      
-      
-    </entry>
-  
-  
-  
-    <entry>
-      
-      <title type="html">Java 시간 불러오기 및 선행 0 제거</title>
-      
-      
-      <link href="http://localhost:4000/Java-%EC%8B%9C%EA%B0%84-%EB%B6%88%EB%9F%AC%EC%98%A4%EA%B8%B0-%EB%B0%8F-%EC%84%A0%ED%96%89-0-%EC%A0%9C%EA%B1%B0/" rel="alternate" type="text/html" title="Java 시간 불러오기 및 선행 0 제거" />
-      
-      <published>2020-09-05T00:00:00+09:00</published>
-      <updated>2020-09-05T00:00:00+09:00</updated>
-      <id>http://localhost:4000/Java%20%EC%8B%9C%EA%B0%84%20%EB%B6%88%EB%9F%AC%EC%98%A4%EA%B8%B0%20%EB%B0%8F%20%EC%84%A0%ED%96%89%200%20%EC%A0%9C%EA%B1%B0</id>
-      <content type="html" xml:base="http://localhost:4000/Java-%EC%8B%9C%EA%B0%84-%EB%B6%88%EB%9F%AC%EC%98%A4%EA%B8%B0-%EB%B0%8F-%EC%84%A0%ED%96%89-0-%EC%A0%9C%EA%B1%B0/">&lt;h2&gt;Source Code&lt;/h2&gt;
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;java.time.LocalDateTime&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;getDateTime&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;nc&quot;&gt;LocalDateTime&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;localNow&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;LocalDateTime&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;now&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-    
-    &lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ret&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;yyyy&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;localNow&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;format&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;DateTimeFormatter&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;ofPattern&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;yyyy&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;));&lt;/span&gt;
-    &lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;MM&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;localNow&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;format&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;DateTimeFormatter&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;ofPattern&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;MM&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;));&lt;/span&gt;
-    &lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dd&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;localNow&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;format&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;DateTimeFormatter&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;ofPattern&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;dd&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;));&lt;/span&gt;
-    &lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;HH&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;localNow&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;format&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;DateTimeFormatter&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;ofPattern&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;HH&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;));&lt;/span&gt;
-    &lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;mm&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;localNow&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;format&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;DateTimeFormatter&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;ofPattern&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;mm&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;));&lt;/span&gt;
-
-    &lt;span class=&quot;no&quot;&gt;MM&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;eraseZero&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;MM&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;dd&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;eraseZero&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dd&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-    &lt;span class=&quot;no&quot;&gt;HH&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;eraseZero&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;HH&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-    
-    &lt;span class=&quot;n&quot;&gt;ret&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;yyyy&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;/&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;MM&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;/&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dd&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot; &quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;HH&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;:&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;mm&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-
-    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ret&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;eraseZero&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;str&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;str&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Integer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;toString&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;Integer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;parseInt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;str&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;));&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;str&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;현재 시간의 경우 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;LocalDateTime&lt;/code&gt;의 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;now()&lt;/code&gt; 메서드를 사용하여 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;localNow&lt;/code&gt; 변수로 불러왔다. 하지만 이때 localNow에 저장된 format은 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;2020-09-05T18:15:45&lt;/code&gt; 와 같은 형식이다.&lt;br /&gt;&lt;br /&gt;
-&lt;strong&gt;&lt;em&gt;2020/9/5 18:15&lt;/em&gt;&lt;/strong&gt; 로 나타내고 싶었으므로, parsing하여서 각각의 변수에 저장하였다.&lt;br /&gt;
-&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ofPattern()&lt;/code&gt;의 안에 format을 넣어서 바로 표현할 수 있지만 &lt;strong&gt;&lt;em&gt;2020/09/05&lt;/em&gt;&lt;/strong&gt; 와 같은 형식으로 나오므로 그렇게 하지 않았다.&lt;br /&gt;&lt;br /&gt;
-선행되는 0을 제거해야 하므로 해당되는 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;String&lt;/code&gt; 변수 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;MM&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;dd&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;HH&lt;/code&gt;를 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Integer&lt;/code&gt;로 변환했다가 다시 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;String&lt;/code&gt;으로 변환하면 선행되는 0이 제거될 것이라는 아이디어가 떠올랐고, 적용하였다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;http://drive.google.com/uc?export=view&amp;amp;id=1nMZgOhkzYpGk2YX97nTIGE76XfrsbIlJ&quot; /&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;center style=&quot;font-size:30px;&quot;&gt;성공!&lt;/center&gt;</content>
-
-      
-      
-      
-      
-      
-
-      
-        <author>
-            <name>Junhwan</name>
-          
-          
-        </author>
-      
-
-      
-
-      
-
-      
-        <summary type="html">Source Code import java.time.LocalDateTime; public String getDateTime() { LocalDateTime localNow = LocalDateTime.now(); String ret = &quot;&quot;; String yyyy = localNow.format(DateTimeFormatter.ofPattern(&quot;yyyy&quot;)); String MM = localNow.format(DateTimeFormatter.ofPattern(&quot;MM&quot;)); String dd = localNow.format(DateTimeFormatter.ofPattern(&quot;dd&quot;)); String HH = localNow.format(DateTimeFormatter.ofPattern(&quot;HH&quot;)); String mm = localNow.format(DateTimeFormatter.ofPattern(&quot;mm&quot;)); MM = eraseZero(MM); dd = eraseZero(dd); HH = eraseZero(HH); ret = yyyy + &quot;/&quot; + MM + &quot;/&quot; + dd + &quot; &quot; + HH + &quot;:&quot; + mm; return ret; } public String eraseZero(String str) { str = Integer.toString(Integer.parseInt(str)); return str; } 현재 시간의 경우 LocalDateTime의 now() 메서드를 사용하여 localNow 변수로 불러왔다. 하지만 이때 localNow에 저장된 format은 2020-09-05T18:15:45 와 같은 형식이다. 2020/9/5 18:15 로 나타내고 싶었으므로, parsing하여서 각각의 변수에 저장하였다. ofPattern()의 안에 format을 넣어서 바로 표현할 수 있지만 2020/09/05 와 같은 형식으로 나오므로 그렇게 하지 않았다. 선행되는 0을 제거해야 하므로 해당되는 String 변수 MM, dd, HH를 Integer로 변환했다가 다시 String으로 변환하면 선행되는 0이 제거될 것이라는 아이디어가 떠올랐고, 적용하였다. 성공!</summary>
       
 
       

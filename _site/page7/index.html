@@ -87,313 +87,176 @@
         <header class="post-header">
           <h1 class="post-title">
             
-              <a class="post-link" href="/Javascript-%EA%B8%B0%EB%B3%B8%EC%A0%95%EB%A6%AC/">Javascript 기본정리</a>
+              <a class="post-link" href="/event/">Event</a>
             
           </h1>
 
           <p class="post-meta">
-            Sep 8, 2020
+            Sep 9, 2020
             
             
           </p>
         </header>
 
         <div class="post-content">
-          <h1>Javascript</h1>
-<h2>변수</h2>
-<p>모든 언어는 어떤 값 또는 어떤 객체를 표현하는 <strong>변수</strong> 가 있다.
-자바스크립트에서도 어떤 변수를 사용하는가에 따라서,    <code class="language-plaintext highlighter-rouge">Scope</code> 라는 변수의 유효범위가 달라진다.<br />
-<br /></p>
+          <h2>Event</h2>
+<p>브라우저를 마우스로 스크롤 하거나, 클릭 또는 이동 등등을 할때 이벤트가 발생한다.
+<code class="language-plaintext highlighter-rouge">HTML element</code> 별로 어떤 이벤트가 발생했을 때, 특정 행위를 하고 싶다면,
+대상 엘리먼트를 찾고, 어떤 일을 하도록 등록하면 된다.</p>
 
-<h2>연산자</h2>
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">name</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">crong</span><span class="dl">"</span><span class="p">;</span>
-<span class="kd">const</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">name</span> <span class="o">||</span> <span class="dl">"</span><span class="s2">codesquad</span><span class="dl">"</span><span class="p">;</span>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">el</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">"</span><span class="s2">outside</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">el</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">"</span><span class="s2">clock</span><span class="dl">"</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){</span>
+    <span class="c1">// ...</span>
+<span class="p">},</span> <span class="kc">false</span><span class="p">);</span>
 </code></pre></div></div>
-<p>OR연산을 사용해서 name이 존재하면 name이 쓰이고, 없으면 <strong><em>codesquad</em></strong> 가 쓰인다. 왼쪽 만족시, 오른쪽 확인 X<br />
-여기선 <strong><em>crong</em></strong> 출력
-<br /></p>
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">name</span><span class="p">;</span>
-<span class="kd">const</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">name</span> <span class="o">||</span> <span class="dl">"</span><span class="s2">codesquad</span><span class="dl">"</span><span class="p">;</span>
-</code></pre></div></div>
-<p>name이 존재하지 않으므로, <strong><em>codesquad</em></strong> 출력<br />
-<br /></p>
+<p><code class="language-plaintext highlighter-rouge">addEventListener</code> 의 두번째 인자는 이벤트 리스너이다. 이벤트가 발생할 때 실행이 된다.</p>
 
-<h2>비교연산자</h2>
-<p>js에서는 ==보다는 <code class="language-plaintext highlighter-rouge">===</code> 를 많이 사용한다. why?</p>
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="mi">0</span> <span class="o">==</span> <span class="dl">"</span><span class="s2">0</span><span class="dl">"</span><span class="p">;</span>
-<span class="kc">true</span>
-
-<span class="mi">0</span> <span class="o">==</span> <span class="mi">0</span><span class="p">;</span>
-<span class="kc">true</span>
-
-<span class="mi">0</span> <span class="o">===</span> <span class="dl">"</span><span class="s2">0</span><span class="dl">"</span><span class="p">;</span>
-<span class="kc">false</span>
-
-<span class="mi">0</span> <span class="o">===</span> <span class="mi">0</span><span class="p">;</span>
-<span class="kc">true</span>
-
-<span class="kc">null</span> <span class="o">==</span> <span class="kc">undefined</span><span class="p">;</span>
-<span class="kc">true</span>
-</code></pre></div></div>
-<blockquote>
-  <p>==은 타입을 비교하지 않는다.</p>
-</blockquote>
-
-<p>타입까지 비교하기 위해선 <code class="language-plaintext highlighter-rouge">===</code> 을 사용해야 한다!<br />
-<br /></p>
-
-<h2>js의 type</h2>
-<blockquote>
-  <p>타입은 선언할때가 아니고, 실행타임에 결정된다. 함수안에서의 파라미터나 변수는 실행될 때 그 타입이 결정된다.</p>
-
-  <p>간단한 기본타입은 ` typeof `를 이용해 판단할 수 있다.<br />
-<br /></p>
-</blockquote>
-
-<h2>문자열 처리</h2>
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">typeof</span> <span class="dl">"</span><span class="s2">abc</span><span class="dl">"</span><span class="p">;</span> <span class="c1">// string</span>
-<span class="k">typeof</span> <span class="dl">"</span><span class="s2">A</span><span class="dl">"</span><span class="p">;</span> <span class="c1">// string</span>
-<span class="k">typeof</span> <span class="dl">'</span><span class="s1">a</span><span class="dl">'</span><span class="p">;</span> <span class="c1">// string. single quote도 사용가능.</span>
-</code></pre></div></div>
-
-<p>문자열에 다양한 메서드가 존재.</p>
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="dl">"</span><span class="s2">ab:cd</span><span class="dl">"</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="dl">"</span><span class="s2">.</span><span class="dl">"</span><span class="p">);</span> <span class="c1">// ["ab", "cd"];</span>
-<span class="dl">"</span><span class="s2">ab:cd</span><span class="dl">"</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="dl">"</span><span class="s2">:</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">$</span><span class="dl">"</span><span class="p">);</span> <span class="c1">// "ab$cd"</span>
-<span class="dl">"</span><span class="s2">  abcde  </span><span class="dl">"</span><span class="p">.</span><span class="nx">trim</span><span class="p">();</span> <span class="c1">// "abcde"</span>
-</code></pre></div></div>
-<p><br /></p>
-
-<h2>js의 함수</h2>
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">printName</span><span class="p">(</span><span class="nx">firstname</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="dl">"</span><span class="s2">name is </span><span class="dl">"</span> <span class="o">+</span> <span class="nx">firstname</span><span class="p">;</span>
-<span class="p">}</span>
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">printName</span><span class="p">());</span>
-</code></pre></div></div>
-<p>만약 파라미터인 <code class="language-plaintext highlighter-rouge">firstname</code> 을 입력하지 않는다면?<br />
-<strong>‘name is undefined’</strong> 출력<br />
-아무것도 입력하지 않으면, undefined 가 입력된다.<br />
-<br /></p>
-
-<h2>hoisting</h2>
-<p>함수 안에 있는 변수들을 모두 끌어올려서 선언한다고 하여 <code class="language-plaintext highlighter-rouge">hoisting</code> 이라고 한다.</p>
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">printName</span><span class="p">(</span><span class="nx">firstname</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">inner</span><span class="p">);</span>
-
-    <span class="kd">var</span> <span class="nx">inner</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-        <span class="k">return</span> <span class="dl">"</span><span class="s2">inner value</span><span class="dl">"</span><span class="p">;</span>
-    <span class="p">}</span>
-
-<span class="p">}</span>
-
-<span class="nx">printName</span><span class="p">();</span>    
-</code></pre></div></div>
-<p><strong>undefined</strong> 출력.</p>
-
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">printName</span><span class="p">(</span><span class="nx">firstname</span><span class="p">)</span> <span class="p">{</span>
-
-    <span class="kd">var</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">inner</span><span class="p">();</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">name is </span><span class="dl">"</span> <span class="o">+</span> <span class="nx">result</span><span class="p">);</span>
-
-    <span class="kd">function</span> <span class="nx">inner</span><span class="p">()</span> <span class="p">{</span>
-        <span class="k">return</span> <span class="dl">"</span><span class="s2">inner value</span><span class="dl">"</span><span class="p">;</span>
-    <span class="p">}</span>
-
-<span class="p">}</span>
-
-<span class="nx">printName</span><span class="p">();</span>
-</code></pre></div></div>
-<p><strong>name is inner value</strong> 출력. <code class="language-plaintext highlighter-rouge">javascript</code> 의 <code class="language-plaintext highlighter-rouge">parser</code>가 함수와 변수들을 먼저 선언한다. 이 때, 위에 작성된 코드의 경우</p>
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">inner</span> <span class="o">=</span> <span class="nx">functino</span><span class="p">()</span> <span class="p">{</span>
-    <span class="p">...</span>
-<span class="p">}</span>
-</code></pre></div></div>
-<p>으로 작성되어 있으므로, <code class="language-plaintext highlighter-rouge">parser</code>에 의해 <strong><em>inner</em></strong> 라는 변수만 먼저 선언 되었고, 아래에 작성된 코드의 경우</p>
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">inner</span><span class="p">()</span> <span class="p">{</span>
-    <span class="p">...</span>
-<span class="p">}</span>
-</code></pre></div></div>
-<p>으로 작성되어 있으므로, <strong><em>inner</em></strong> 함수가 먼저 선언이 되었으므로, 결과에서 차이가 난다.<br />
-<br /></p>
-
-<h2>arguments</h2>
-<p>함수가 실행되면 그 안에서 <code class="language-plaintext highlighter-rouge">arguments</code> 라는 특별한 지역변수가 존재한다. js 함수는 선언한 파라미터보다 더 많은 인자를 보낼 수도 있다. 이 때 넘어온 인자를 <code class="language-plaintext highlighter-rouge">arguments</code> 로 배열의 형태로 하나씩 접근할 수가 있다. <code class="language-plaintext highlighter-rouge">arguments</code> 는 배열타입은 아니다. 따라서 배열의 메서드를 사용할 수 없다.</p>
-
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">a</span><span class="p">()</span> <span class="p">{</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">arguments</span><span class="p">);</span>
-<span class="p">}</span>
-<span class="nx">a</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">);</span>
-</code></pre></div></div>
-<p><strong>{ ‘0’: 1, ‘1’: 2, ‘2’: 3 }</strong> 출력.</p>
-
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">a</span><span class="p">()</span> <span class="p">{</span>
-    <span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="nx">i</span><span class="o">&lt;</span><span class="nx">arguments</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">arguments</span><span class="p">[</span><span class="nx">i</span><span class="p">]);</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-<span class="nx">a</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">);</span>
-</code></pre></div></div>
-<p><strong>4 2 3</strong> 출력.<br />
-함수의 선언에서 매개변수를 굳이 지정하지 않아도, <code class="language-plaintext highlighter-rouge">arguments</code> 를 이용하여 사용할 수 있다. 그러나, <code class="language-plaintext highlighter-rouge">arguments</code> 는 의도를 알기 힘드므로, 조심히 사용해야 한다.<br />
-<br /></p>
-
-<h2>arrow function</h2>
-<p><code class="language-plaintext highlighter-rouge">ES2015</code> 에는 <code class="language-plaintext highlighter-rouge">arrow function</code> 이 추가됐다. 간단하게 함수를 선언할 수 있는 문법이다.</p>
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">getName</span><span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="dl">"</span><span class="s2">Yu </span><span class="dl">"</span> <span class="o">+</span> <span class="nx">name</span><span class="p">;</span>
-<span class="p">}</span>
-<span class="c1">// getName 함수와 아래의 arrow 함수는 동일하다.</span>
-<span class="kd">var</span> <span class="nx">getName</span> <span class="o">=</span> <span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="dl">"</span><span class="s2">Yu </span><span class="dl">"</span> <span class="o">+</span> <span class="nx">name</span><span class="p">;</span>
-</code></pre></div></div>
-
-        </div>
-        
-      </li>
-    
-      
-      
-
-      <li>
-        <header class="post-header">
-          <h1 class="post-title">
-            
-              <a class="post-link" href="/Java-%EC%8B%9C%EA%B0%84-%EB%B6%88%EB%9F%AC%EC%98%A4%EA%B8%B0-%EB%B0%8F-%EC%84%A0%ED%96%89-0-%EC%A0%9C%EA%B1%B0/">Java 시간 불러오기 및 선행 0 제거</a>
-            
-          </h1>
-
-          <p class="post-meta">
-            Sep 5, 2020
-            
-            
-          </p>
-        </header>
-
-        <div class="post-content">
-          <h2>Source Code</h2>
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">java.time.LocalDateTime</span><span class="o">;</span>
-<span class="kd">public</span> <span class="nc">String</span> <span class="nf">getDateTime</span><span class="o">()</span> <span class="o">{</span>
-    <span class="nc">LocalDateTime</span> <span class="n">localNow</span> <span class="o">=</span> <span class="nc">LocalDateTime</span><span class="o">.</span><span class="na">now</span><span class="o">();</span>
-    
-    <span class="nc">String</span> <span class="n">ret</span> <span class="o">=</span> <span class="s">""</span><span class="o">;</span>
-    <span class="nc">String</span> <span class="n">yyyy</span> <span class="o">=</span> <span class="n">localNow</span><span class="o">.</span><span class="na">format</span><span class="o">(</span><span class="nc">DateTimeFormatter</span><span class="o">.</span><span class="na">ofPattern</span><span class="o">(</span><span class="s">"yyyy"</span><span class="o">));</span>
-    <span class="nc">String</span> <span class="no">MM</span> <span class="o">=</span> <span class="n">localNow</span><span class="o">.</span><span class="na">format</span><span class="o">(</span><span class="nc">DateTimeFormatter</span><span class="o">.</span><span class="na">ofPattern</span><span class="o">(</span><span class="s">"MM"</span><span class="o">));</span>
-    <span class="nc">String</span> <span class="n">dd</span> <span class="o">=</span> <span class="n">localNow</span><span class="o">.</span><span class="na">format</span><span class="o">(</span><span class="nc">DateTimeFormatter</span><span class="o">.</span><span class="na">ofPattern</span><span class="o">(</span><span class="s">"dd"</span><span class="o">));</span>
-    <span class="nc">String</span> <span class="no">HH</span> <span class="o">=</span> <span class="n">localNow</span><span class="o">.</span><span class="na">format</span><span class="o">(</span><span class="nc">DateTimeFormatter</span><span class="o">.</span><span class="na">ofPattern</span><span class="o">(</span><span class="s">"HH"</span><span class="o">));</span>
-    <span class="nc">String</span> <span class="n">mm</span> <span class="o">=</span> <span class="n">localNow</span><span class="o">.</span><span class="na">format</span><span class="o">(</span><span class="nc">DateTimeFormatter</span><span class="o">.</span><span class="na">ofPattern</span><span class="o">(</span><span class="s">"mm"</span><span class="o">));</span>
-
-    <span class="no">MM</span> <span class="o">=</span> <span class="n">eraseZero</span><span class="o">(</span><span class="no">MM</span><span class="o">);</span>
-    <span class="n">dd</span> <span class="o">=</span> <span class="n">eraseZero</span><span class="o">(</span><span class="n">dd</span><span class="o">);</span>
-    <span class="no">HH</span> <span class="o">=</span> <span class="n">eraseZero</span><span class="o">(</span><span class="no">HH</span><span class="o">);</span>
-    
-    <span class="n">ret</span> <span class="o">=</span> <span class="n">yyyy</span> <span class="o">+</span> <span class="s">"/"</span> <span class="o">+</span> <span class="no">MM</span> <span class="o">+</span> <span class="s">"/"</span> <span class="o">+</span> <span class="n">dd</span> <span class="o">+</span> <span class="s">" "</span> <span class="o">+</span> <span class="no">HH</span> <span class="o">+</span> <span class="s">":"</span> <span class="o">+</span> <span class="n">mm</span><span class="o">;</span>
-
-    <span class="k">return</span> <span class="n">ret</span><span class="o">;</span>
-<span class="o">}</span>
-
-<span class="kd">public</span> <span class="nc">String</span> <span class="nf">eraseZero</span><span class="o">(</span><span class="nc">String</span> <span class="n">str</span><span class="o">)</span> <span class="o">{</span>
-    <span class="n">str</span> <span class="o">=</span> <span class="nc">Integer</span><span class="o">.</span><span class="na">toString</span><span class="o">(</span><span class="nc">Integer</span><span class="o">.</span><span class="na">parseInt</span><span class="o">(</span><span class="n">str</span><span class="o">));</span>
-    <span class="k">return</span> <span class="n">str</span><span class="o">;</span>
-<span class="o">}</span>
-</code></pre></div></div>
-<p>현재 시간의 경우 <code class="language-plaintext highlighter-rouge">LocalDateTime</code>의 <code class="language-plaintext highlighter-rouge">now()</code> 메서드를 사용하여 <code class="language-plaintext highlighter-rouge">localNow</code> 변수로 불러왔다. 하지만 이때 localNow에 저장된 format은 <code class="language-plaintext highlighter-rouge">2020-09-05T18:15:45</code> 와 같은 형식이다.<br /><br />
-<strong><em>2020/9/5 18:15</em></strong> 로 나타내고 싶었으므로, parsing하여서 각각의 변수에 저장하였다.<br />
-<code class="language-plaintext highlighter-rouge">ofPattern()</code>의 안에 format을 넣어서 바로 표현할 수 있지만 <strong><em>2020/09/05</em></strong> 와 같은 형식으로 나오므로 그렇게 하지 않았다.<br /><br />
-선행되는 0을 제거해야 하므로 해당되는 <code class="language-plaintext highlighter-rouge">String</code> 변수 <code class="language-plaintext highlighter-rouge">MM</code>, <code class="language-plaintext highlighter-rouge">dd</code>, <code class="language-plaintext highlighter-rouge">HH</code>를 <code class="language-plaintext highlighter-rouge">Integer</code>로 변환했다가 다시 <code class="language-plaintext highlighter-rouge">String</code>으로 변환하면 선행되는 0이 제거될 것이라는 아이디어가 떠올랐고, 적용하였다.</p>
-
-<p><img src="http://drive.google.com/uc?export=view&amp;id=1nMZgOhkzYpGk2YX97nTIGE76XfrsbIlJ" /><br /></p>
-
-<center style="font-size:30px;">성공!</center>
-
-        </div>
-        
-      </li>
-    
-      
-      
-
-      <li>
-        <header class="post-header">
-          <h1 class="post-title">
-            
-              <a class="post-link" href="/css-layout-%EB%B8%94%EB%9F%AD-%EC%A4%91%EC%95%99%EB%B0%B0%EC%B9%98/">Css layout 블럭 중앙배치</a>
-            
-          </h1>
-
-          <p class="post-meta">
-            Sep 3, 2020
-            
-            
-          </p>
-        </header>
-
-        <div class="post-content">
-          <h1>CSS Layout block 가운데로 배치하기</h1>
-
-<p><img src="http://drive.google.com/uc?export=view&amp;id=1n8oIz2i-1r_ZonFqExbzLixvlzk4vnna" /><br /></p>
-
-<h2>float 이용</h2>
-<p>111, 222 2개의 블럭들을 정중앙에 위치시키고 싶었다. 따라서 <code class="language-plaintext highlighter-rouge">float: left;</code>을 이용해서 왼쪽으로 흐르게 한 뒤, <code class="language-plaintext highlighter-rouge">margin</code>을 이용하여 중앙에 위치시키려고 하였다. 하지만 이 방법은 굉장히 불편하고, 시간도 오래걸리는 방법이기 때문에 다른 방법을 찾아보았다.<br />
-<br /></p>
-
-<h2>margin 이용</h2>
-
-<div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">margin</span><span class="o">:</span> <span class="err">0</span> <span class="nt">auto</span><span class="o">;</span>
-<span class="nt">text-align</span><span class="o">:</span> <span class="nt">center</span><span class="o">;</span>
-</code></pre></div></div>
-<p>이 방법은 글을 중앙으로 정렬하는 방법이므로, 현재 상황에선 적용되지 않는 방법이다.<br />
-<br /></p>
-
-<h2>inline 이용</h2>
-<p><code class="language-plaintext highlighter-rouge">display: inline</code> 을 하는 방법의 경우, 블락이 다음 그림과 같이 크기가 변하게 되므로 알맞지 않다.<br />
-<br />
-<img src="http://drive.google.com/uc?export=view&amp;id=1n6fTEwT23QZkj9LdEuDT_NcuT-zvt-pN" /><br /></p>
-
-<h2>inline-block 이용</h2>
-<p><code class="language-plaintext highlighter-rouge">display: inline-block</code> 을 적용하였더니, 정확하게 정중앙에 위치하였다.<br />
-<br />
-<img src="http://drive.google.com/uc?export=view&amp;id=1n2AlHWudtqIuI9sY20UDkXozHFXZBSW8" /><br /></p>
-
-<h2>결론</h2>
-<p><code class="language-plaintext highlighter-rouge">inline</code>의 경우 전후 줄바꿈 없이 한 줄에 다른 엘리먼트들과 나란히 배치가 된다. 하지만 <code class="language-plaintext highlighter-rouge">width</code>, <code class="language-plaintext highlighter-rouge">height</code>, <code class="language-plaintext highlighter-rouge">padding</code> 등의 속성이 반영되지 않으므로 블락이 크기가 변하는 현상이 발생하였던 것이다. <code class="language-plaintext highlighter-rouge">inline</code> 대신 <code class="language-plaintext highlighter-rouge">inline-block</code>을 사용하게 되면, <code class="language-plaintext highlighter-rouge">inline</code>에선 반영되지 않았던 <code class="language-plaintext highlighter-rouge">width</code>, <code class="language-plaintext highlighter-rouge">height</code>, <code class="language-plaintext highlighter-rouge">padding</code> 등의 속성들이 반영된다.<br />
-<br /></p>
-
-<h2>Code</h2>
-<hr />
-<h3>CSS</h3>
-<div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">section</span> <span class="p">{</span>
-    <span class="nl">text-align</span><span class="p">:</span> <span class="nb">center</span><span class="p">;</span>
-    <span class="nl">overflow</span><span class="p">:</span> <span class="nb">hidden</span><span class="p">;</span>
-<span class="p">}</span>
-<span class="nt">section</span> <span class="nt">ul</span> <span class="p">{</span>
-    <span class="nl">overflow</span><span class="p">:</span> <span class="nb">hidden</span><span class="p">;</span>
-<span class="p">}</span>
-<span class="nt">section</span> <span class="nt">ul</span> <span class="nt">li</span> <span class="p">{</span>
-    <span class="nl">text-align</span><span class="p">:</span> <span class="nb">center</span><span class="p">;</span>
-    <span class="nl">display</span><span class="p">:</span> <span class="n">inline-block</span><span class="p">;</span>
-    <span class="nl">position</span><span class="p">:</span> <span class="nb">relative</span><span class="p">;</span>
-    <span class="nl">background-color</span><span class="p">:</span><span class="no">darkseagreen</span><span class="p">;</span>
-    <span class="nl">width</span> <span class="p">:</span> <span class="m">100px</span><span class="p">;</span>
-    <span class="nl">height</span> <span class="p">:</span> <span class="m">19px</span><span class="p">;</span>
-    <span class="nl">padding</span> <span class="p">:</span> <span class="m">3%</span><span class="p">;</span>
-    <span class="nl">margin</span> <span class="p">:</span> <span class="m">4px</span><span class="p">;</span>
-<span class="p">}</span>
-<span class="nt">section</span> <span class="nt">ul</span> <span class="nt">li</span> <span class="nt">a</span> <span class="p">{</span>
-    <span class="nl">text-decoration</span><span class="p">:</span> <span class="nb">none</span><span class="p">;</span>
-    
-<span class="p">}</span>
-</code></pre></div></div>
-<h3>HTML</h3>
+<h2>이벤트 객체</h2>
 <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;!DOCTYPE html&gt;</span>
 <span class="nt">&lt;html&gt;</span>
+    <span class="nt">&lt;head&gt;</span>
+        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"outside"</span><span class="nt">&gt;</span>outside element<span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;/head&gt;</span>
     <span class="nt">&lt;body&gt;</span>
-        <span class="nt">&lt;section&gt;</span>
-        <span class="nt">&lt;ul&gt;</span>
-            <span class="nt">&lt;li&gt;&lt;a</span> <span class="na">href=</span><span class="s">""</span><span class="nt">&gt;</span>111<span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
-            <span class="nt">&lt;li&gt;&lt;a</span> <span class="na">href=</span><span class="s">""</span><span class="nt">&gt;</span>222<span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
-        <span class="nt">&lt;/ul&gt;</span>
-        <span class="nt">&lt;/section&gt;</span>
+        <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"test1.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
     <span class="nt">&lt;/body&gt;</span>
 <span class="nt">&lt;/html&gt;</span>
 </code></pre></div></div>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">el</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="dl">"</span><span class="s2">.outside</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="nx">el</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">"</span><span class="s2">click</span><span class="dl">"</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">evt</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">target</span> <span class="o">=</span> <span class="nx">evt</span><span class="p">.</span><span class="nx">target</span><span class="p">;</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">target</span><span class="p">.</span><span class="nx">className</span><span class="p">,</span> <span class="nx">target</span><span class="p">.</span><span class="nx">nodeName</span><span class="p">);</span>
+<span class="p">})</span>
+</code></pre></div></div>
+<p><img src="http://drive.google.com/uc?export=view&amp;id=1oNaj7SVU_p-MPHx5WexAYMGE096ZJH0L" /><br />
+click시 다음과 같이 console에 target이 가리키는 <code class="language-plaintext highlighter-rouge">className</code>과 <code class="language-plaintext highlighter-rouge">nodeName</code>이 출력된다.</p>
+
+        </div>
+        
+      </li>
+    
+      
+      
+
+      <li>
+        <header class="post-header">
+          <h1 class="post-title">
+            
+              <a class="post-link" href="/ajax/">Ajax</a>
+            
+          </h1>
+
+          <p class="post-meta">
+            Sep 9, 2020
+            
+            
+          </p>
+        </header>
+
+        <div class="post-content">
+          <h2>Ajax (XMLHttpRequest 통신)</h2>
+<blockquote>
+  <p><strong>Ajax(Asynchronous JavaScript and XML)</strong>
+는 비동기 방식으로 서버로부터 데이터를 가져오는 것이다.</p>
+</blockquote>
+
+<p>위쪽에 탭들을 누르면 아래 컨텐츠들이 매번 바뀐다. 
+그때마다 서버에서 새로운 데이터를 만들어서 보여줘야하니까
+원래는 서버에서 매번 새로운 페이지를 내려줘서 그걸 렌더링 하는 방법을 사용했었다.<br />
+지금은 <strong>필요한 부분</strong> 만 데이터를 가져오게 할 수 있다.
+새로고침 없이 전체 웹페이지에서 일부분만 받아온 데이터로 갱신할 수 있다.</p>
+
+<p>비동기적으로 즉 다른화면에 영향을 주지 않고 데이터를 서버에서 가져오는 방법을 <code class="language-plaintext highlighter-rouge">Ajax</code> 라고 한다.</p>
+
+<h2>JSON</h2>
+
+<p>표준적인 데이터 포맷을 결정하기 위해서 주로 <strong><em>JSON(JavaScript Object Notation)</em></strong> 포맷을 사용한다.<br />
+<br /></p>
+
+<h2>Ajax 실행코드</h2>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">oReq</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">XMLHttpRequest</span><span class="p">();</span>
+<span class="nx">oReq</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">"</span><span class="s2">load</span><span class="dl">"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">responseText</span><span class="p">);</span>
+<span class="p">});</span>
+
+<span class="nx">oReq</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="dl">"</span><span class="s2">GET</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">https://www.w3.org/TR/PNG/iso_8859-1.txt</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">oReq</span><span class="p">.</span><span class="nx">send</span><span class="p">();</span>
+</code></pre></div></div>
+<p>실행 순서</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">XMLHttpRequest</code> 객체 생성</li>
+  <li>open() 메서드로 요청 준비</li>
+  <li>send() 메서드로 서버에 전송</li>
+  <li>서버에서 응답시 load 이벤트 발생</li>
+  <li>function() 실행 (이 때, open, send는 전부 반환되고 callstack에 존재하지 않은 상태)</li>
+</ul>
+
+<h2>결과</h2>
+<p><img src="http://drive.google.com/uc?export=view&amp;id=1oOREqp_K-ST3ZFlhNvbzV3_LgyfMackV" /><br /></p>
+
+        </div>
+        
+      </li>
+    
+      
+      
+
+      <li>
+        <header class="post-header">
+          <h1 class="post-title">
+            
+              <a class="post-link" href="/DOM/">Dom</a>
+            
+          </h1>
+
+          <p class="post-meta">
+            Sep 9, 2020
+            
+            
+          </p>
+        </header>
+
+        <div class="post-content">
+          <h2>DOM</h2>
+<p><strong><em>Document Object Model</em></strong> 이라는 객체형태의 모델로 <code class="language-plaintext highlighter-rouge">HTML</code> 코드가 저장이 된다.
+그렇게 저장이 된 정보들을 <code class="language-plaintext highlighter-rouge">DOM Tree</code> 라고 한다.
+결국 <code class="language-plaintext highlighter-rouge">HTML element</code> 는 <code class="language-plaintext highlighter-rouge">Tree</code> 형태로 저장을 하고 화면에 표현이 된다.
+<code class="language-plaintext highlighter-rouge">js</code>를 이용해서 어떤 부분을 찾고 삭제하고 할 수 있다.
+이런 것들을 편하게 하기 위해서, 브라우저는 <code class="language-plaintext highlighter-rouge">DOM API</code> 를 제공한다.</p>
+
+<ul>
+  <li>getElementById()
+    <ul>
+      <li>ID 정보를 통해서 찾을 수 있는 메서드이다.</li>
+    </ul>
+  </li>
+  <li>querySelector()
+    <ul>
+      <li>DOM을 찾을때 사용하는 메서드이다.</li>
+    </ul>
+  </li>
+</ul>
+
+<p><img src="http://drive.google.com/uc?export=view&amp;id=1oFHQQbswtji1ULFetUbqcg5HdvjHTH0J" /><br /></p>
+
+<p>아마존에서 다음과 같은 카트에 있는 text를 변경할 것이다. 크롬 개발자도구의 console 탭에서 <code class="language-plaintext highlighter-rouge">getElementByID()</code> 를 사용하여 특정 <code class="language-plaintext highlighter-rouge">element</code> 를 찾은 뒤, <code class="language-plaintext highlighter-rouge">innerText</code> 를 변경하였다.<br />
+<br />
+<img src="http://drive.google.com/uc?export=view&amp;id=1oKYM749NOJm7u_YvjGQMRMX4BRw8L2eQ" /><br />
+<br />
+결과는 다음과 같다.
+<br />
+<img src="http://drive.google.com/uc?export=view&amp;id=1oEi4AjDpMB6ET7wdQZUXfRU7EIi7lZMA" /><br /></p>
+
+<p>이번에는 <code class="language-plaintext highlighter-rouge">querySelector()</code> 를 이용하여 <code class="language-plaintext highlighter-rouge">element</code> 를 찾은 뒤, 다시 <code class="language-plaintext highlighter-rouge">innerText</code> 를 변경하였다. 이 때, 찾으려는 <code class="language-plaintext highlighter-rouge">element</code> 가 <code class="language-plaintext highlighter-rouge">ID</code> 이므로, #을 붙여서 사용하였다.
+<br />
+<img src="http://drive.google.com/uc?export=view&amp;id=1oKZY27II2HqPrgU2tUO3hlo2Th2EDsxR" /><br />
+<br />
+결과는 다음과 같다.
+<img src="http://drive.google.com/uc?export=view&amp;id=1oJU1KRQvDOa2DpSrB_szuTBAFiCuWuY_" /><br /></p>
+
+<p>개인적으로, <code class="language-plaintext highlighter-rouge">getElementID()</code>로 할 수 있는 것들을 <code class="language-plaintext highlighter-rouge">querySeletor()</code> 가 포함하고 있으므로, <code class="language-plaintext highlighter-rouge">querySelector()</code> 를 자주 사용할 것 같다.</p>
 
         </div>
         

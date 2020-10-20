@@ -1,0 +1,38 @@
+I"i<p>평소에는 <code class="language-plaintext highlighter-rouge">RowMapper</code> 를 아래와 같이 override 하여서 사용하였다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">new</span> <span class="nc">RowMapper</span><span class="o">&lt;</span><span class="nc">Product</span><span class="o">&gt;()</span> <span class="o">{</span>
+			<span class="nd">@Override</span>
+			<span class="kd">public</span> <span class="nc">Product</span> <span class="nf">mapRow</span><span class="o">(</span><span class="nc">ResultSet</span> <span class="n">rs</span><span class="o">,</span> <span class="kt">int</span> <span class="n">rowNum</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">SQLException</span> <span class="o">{</span>
+				<span class="nc">Product</span> <span class="n">product</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Product</span><span class="o">(</span><span class="n">rs</span><span class="o">.</span><span class="na">getInt</span><span class="o">(</span><span class="s">"displayInfoId"</span><span class="o">),</span> <span class="n">rs</span><span class="o">.</span><span class="na">getString</span><span class="o">(</span><span class="s">"placeName"</span><span class="o">),</span>
+						<span class="n">rs</span><span class="o">.</span><span class="na">getString</span><span class="o">(</span><span class="s">"productContent"</span><span class="o">),</span> <span class="n">rs</span><span class="o">.</span><span class="na">getString</span><span class="o">(</span><span class="s">"productDescription"</span><span class="o">),</span>
+						<span class="n">rs</span><span class="o">.</span><span class="na">getInt</span><span class="o">(</span><span class="s">"productId"</span><span class="o">),</span> <span class="n">rs</span><span class="o">.</span><span class="na">getString</span><span class="o">(</span><span class="s">"productImageUrl"</span><span class="o">),</span> <span class="n">rs</span><span class="o">.</span><span class="na">getInt</span><span class="o">(</span><span class="s">"categoryId"</span><span class="o">));</span>
+
+				<span class="k">return</span> <span class="n">product</span><span class="o">;</span>
+			<span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>그런데, column들이 많아졌을 때, 이걸 일일히 다 타이핑해야되나 싶어졌다..<br />
+그래서 <code class="language-plaintext highlighter-rouge">BeanPropertyRowMapper</code> 를 이용하여 간단하게 해보려고 시도하였다.</p>
+
+<h3>Error</h3>
+<p>DB와의 연동 하는 과정에서, <code class="language-plaintext highlighter-rouge">org.springframework.beans.BeanInstantiationException</code> 오류가 발생하였다.</p>
+
+<h3>원인</h3>
+<p>원인은 쿼리문에 있었다.</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">final</span> <span class="kd">static</span> <span class="nc">String</span> <span class="no">SELECT_PRODUCT_BY_CATEGORY</span> <span class="o">=</span> <span class="s">"SELECT d.id as displayInfoId, 
+p.id as productId, p.description as productDescription, 
+d.place_name as placeName, p.content as productContent\n"</span> <span class="o">+</span> 
+    <span class="o">...</span>
+    <span class="o">...</span>
+
+</code></pre></div></div>
+<p>이런식으로, 내가 보기 편하게 as를 이용하여 카멜표기법으로 바꾸었는데, 
+<code class="language-plaintext highlighter-rouge">BeanPropertyRowMapper</code> 는 스네이크 표기법으로 표현된 컬럼명들을 자동으로 카멜표기법으로 바꾸어, 클래스에 맞게 맵핑 해주는 것이었다.</p>
+
+<h3>해결</h3>
+<p>따라서, 쿼리문에 적혀있는 as들을 다 지웠더니 잘 실행이 됐다.</p>
+
+<p><em>해결!</em></p>
+
+:ET

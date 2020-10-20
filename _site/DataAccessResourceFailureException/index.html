@@ -1,0 +1,30 @@
+<h2>Error Message</h2>
+<p>Exception in thread “main” org.springframework.dao.DataAccessResourceFailureException: Error retrieving database metadata; nested exception is org.springframework.jdbc.support.MetaDataAccessException: Could not get Connection for extracting meta data; nested exception is org.springframework.jdbc.CannotGetJdbcConnectionException: Could not get JDBC Connection; nested exception is java.sql.SQLException: Cannot create PoolableConnectionFactory (No timezone mapping entry for ‘UTC8’)</p>
+
+<p>문제의 url</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">private</span> <span class="nc">String</span> <span class="n">url</span> <span class="o">=</span> <span class="s">"jdbc:mysql://localhost:3306/dbname?useSSL=false&amp;serverTimezone=UTC8"</span><span class="o">;</span>
+</code></pre></div></div>
+
+<p>에러 메시지를 보니, UTC8에 맵핑된 타임존이 없어서 발생하는 오류라고 생각했다.</p>
+
+<p>그래서 간단하게 UTC로 바꾸었다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">private</span> <span class="nc">String</span> <span class="n">url</span> <span class="o">=</span> <span class="s">"jdbc:mysql://localhost:3306/dbname?useSSL=false&amp;serverTimezone=UTC"</span><span class="o">;</span>
+</code></pre></div></div>
+
+<p><em>해결!</em></p>
+
+<p><br /></p>
+
+<p>+추가
+<br /></p>
+
+<p>이렇게 하니, 국제시로 적용돼서, 9시간 늦게 DB에 적용되었다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">private</span> <span class="nc">String</span> <span class="n">url</span> <span class="o">=</span> <span class="s">"jdbc:mysql://localhost:3306/dbname?useSSL=false&amp;serverTimezone=Asia/Seoul"</span><span class="o">;</span>
+</code></pre></div></div>
+
+<p>UTC 부분을 <em>Asia/Seoul</em> 로 변경하였다.</p>
+
+<p><em>해결!</em></p>
+

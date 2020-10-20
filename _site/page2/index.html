@@ -87,89 +87,41 @@
         <header class="post-header">
           <h1 class="post-title">
             
-              <a class="post-link" href="/Spring/">Spring</a>
+              <a class="post-link" href="/cannot-change-version-of-project-facet-dynamic-web-module-to-2.3/">Cannot change version of project facet dynamic web module to 2.3</a>
             
           </h1>
 
           <p class="post-meta">
-            Sep 28, 2020
+            Oct 5, 2020
             
             
           </p>
         </header>
 
         <div class="post-content">
-          <h1>[Spring] IoC/DI 컨테이너</h1>
-
-<h2>컨테이너란?</h2>
-<ul>
-  <li>컨테이너는 인스턴스의 생명주기를 관리한다.</li>
-  <li>생성된 인스턴스들에게 추가적인 기능을 제공한다.</li>
-</ul>
-
-<p>예를들어, <code class="language-plaintext highlighter-rouge">Servlet</code> 을 실행해주는 <code class="language-plaintext highlighter-rouge">WAS</code> 는 <code class="language-plaintext highlighter-rouge">Servlet Container</code>를 갖고있다고 말한다.
-개발자가 <code class="language-plaintext highlighter-rouge">Servlet</code> 클래스를 작성했지만, 실제로 메모리에 올리고 실행하는 것은 <code class="language-plaintext highlighter-rouge">WAS</code>의 <code class="language-plaintext highlighter-rouge">Servlet Container</code> 이다.
-<code class="language-plaintext highlighter-rouge">Servlet Container</code> 는 동일한 요청을 받으면, 다시 메모리에 올리지 않고 기존에 메모리에 올라간 서블릿을 실행하여, 웹 브라우저에 전송한다.</p>
+          <h2>cannot change version of project facet dynamic web module to 2.3 error</h2>
 
 <p><br /></p>
 
-<h2>IOC란?</h2>
-<ul>
-  <li><strong><em>Inversion of Control</em></strong> 의 약어이다.</li>
-  <li>프로그램의 흐름의 제어를, 다른 프로그램이 제어하는 것을 <code class="language-plaintext highlighter-rouge">IoC</code> 라고 한다.</li>
-</ul>
+<p><strong>pom.xml</strong> 에서 <code class="language-plaintext highlighter-rouge">servlet</code> 버전을 바꿔도, <strong>org.eclipse.wst.common.project.facet.core.xml</strong> 에서 jst.web의 버전을 변경하여도 에러가 뜬다면 <strong>web.xml</strong> 에서 문제가 발생한 것이다.</p>
 
-<p>인터페이스를 통일하면, 내부 메서드들은 같기 때문에 사용하는데 훨씬 쉬울 것이다.</p>
+<p><strong>web.xml</strong> 이 다음과 같이 적혀져 있을 것이다.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">Tv</span> <span class="n">tv</span> <span class="o">=</span> <span class="nc">TvFactory</span> <span class="nf">getTv</span><span class="o">(</span><span class="s">"S"</span><span class="o">);</span>
-<span class="c1">// s type의 tv를 갖다준다.</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;!DOCTYPE web-app PUBLIC
+"-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+"http://java.sun.com/dtd/web-app_2_3.dtd" &gt;</span>
 </code></pre></div></div>
 
-<h2>DI란?</h2>
-<ul>
-  <li><strong><em>Dependency Injection</em></strong> 의 약어이다.</li>
-  <li>클래스 사이의 의존관계를 <em>Bean</em> 설정 정보를 바탕으로 컨테이너가 자동으로 연결해주는 것을 뜻한다.</li>
-</ul>
+<p>이것을</p>
 
-<p><br /></p>
-
-<h3>DI가 적용되지 않은 예시</h3>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">Engine</span> <span class="o">{</span>
-    <span class="o">...</span>
-<span class="o">}</span>
-
-<span class="kd">class</span> <span class="nc">Car</span> <span class="o">{</span>
-    <span class="nc">Engine</span> <span class="n">v5</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Engine</span><span class="o">();</span>
-<span class="o">}</span>
-
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
+<span class="nt">&lt;web-app</span> <span class="na">xmlns=</span><span class="s">"http://xmlns.jcp.org/xml/ns/javaee"</span> <span class="na">xmlns:xsi=</span><span class="s">"http://www.w3.org/2001/XMLSchema-instance"</span>
+<span class="na">xsi:schemaLocation=</span><span class="s">"http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"</span> <span class="na">version=</span><span class="s">"3.1"</span> <span class="nt">/&gt;</span>
 </code></pre></div></div>
 
-<h3>DI가 적용된 예시</h3>
+<p>다음과 같이 바꿔준다.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Component</span>
-<span class="kd">class</span> <span class="nc">Engine</span> <span class="o">{</span>
-    <span class="o">...</span>
-<span class="o">}</span>
-
-<span class="nd">@Component</span>
-<span class="kd">class</span> <span class="nc">Car</span> <span class="o">{</span>
-    <span class="nd">@Autowired</span>
-    <span class="nc">Engine</span> <span class="n">v5</span><span class="o">;</span>
-<span class="o">}</span>
-
-</code></pre></div></div>
-<p>컨테이너가 v5변수에 인스턴스를 할당해주게 된다.</p>
-
-<p><br /></p>
-
-<h2>Spring에서 제공하는 IoC/DI 컨테이너</h2>
-
-<ul>
-  <li>BeanFactory : IoC/DI에 대한 기본 기능을 가지고 있다.</li>
-  <li>ApplicationContext : <code class="language-plaintext highlighter-rouge">BeanFactory</code>의 모든 기능을 포함하며, 일반적으로 BeanFactory보다 추천된다. 트랜잭션 처리, AOP등에 대한 처리를 할 수 있다. <code class="language-plaintext highlighter-rouge">BeanPostProcessor</code>, <code class="language-plaintext highlighter-rouge">BeanFactoryPostProcessor</code> 등을 자동으로 등록하고, <code class="language-plaintext highlighter-rouge">국제화 처리</code>, <code class="language-plaintext highlighter-rouge">어플리케이션 이벤트</code> 등을 처리할 수 있다.</li>
-</ul>
-
+<p><em>해결!</em></p>
 
         </div>
         
@@ -182,31 +134,161 @@
         <header class="post-header">
           <h1 class="post-title">
             
-              <a class="post-link" href="/mysql-%EB%B9%84%EB%B0%80%EB%B2%88%ED%98%B8-%EB%B3%80%EA%B2%BD/">Mysql 비밀번호 변경</a>
+              <a class="post-link" href="/Spring-MVC/">Spring mvc</a>
             
           </h1>
 
           <p class="post-meta">
-            Sep 17, 2020
+            Oct 5, 2020
             
             
           </p>
         </header>
 
         <div class="post-content">
-          <p><code class="language-plaintext highlighter-rouge">MySQL</code> 8.x 버전 기준이다.</p>
+          <h1>Spring MVC</h1>
 
-<h1>root 계정</h1>
+<p><img src="http://drive.google.com/uc?export=view&amp;id=1IoRiAATs0f8_nCVtrrBdJyGSs2OhUzDZ" /><br /></p>
 
-<pre><code class="language-mysql">UPDATE mysql.user SET authentication_string=PASSWORD('패스워드') WHERE user='root' AND Host='localhost';
-FLUSH PRIVILEGES;
-</code></pre>
+<p>Database라고 되어있는 부분을 제외한 파란색 부분들이 Spring MVC가 제공해주는 부분이고
+개발자가 만들어야 하는 부분은 <strong>보라색 부분들</strong> 이다.</p>
 
-<h1>db 계정</h1>
+<p>먼저 client가 요청을 보내면 <code class="language-plaintext highlighter-rouge">DispatcherServlet</code> 이라는 서블릿이 받는다.</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;</span> mysqladmin <span class="nt">-u</span>아이디 <span class="nt">-p</span>기존패스워드 password 신규패스워드
-</code></pre></div></div>
+<p><code class="language-plaintext highlighter-rouge">DispatcherServlet</code>은 요청을 처리할 컨트롤러와 메서드가 무엇인지 <code class="language-plaintext highlighter-rouge">HandlerMapping</code>에게 물어본다.</p>
 
+<p><code class="language-plaintext highlighter-rouge">HandlerMapping</code>혼자 요청을 처리할 컨트롤러와 메서드를 알아낼 순 없다.
+따라서 개발자가 어떤 요청에 어떤 컨트롤러가 동작할 것인지 <em>xml</em>,<em>java</em> 파일의 어노테이션을 이용해 설정한다.</p>
+
+<p>Spring으로 만들어진 웹어플리케이션이 생성될 때, <code class="language-plaintext highlighter-rouge">HandlerMapping</code> 객체들이 생성되면서 관리하게 된다.</p>
+
+<p>일련의 과정들을 거쳐, 알맞은 컨트롤러와 메서드를 이용해 <code class="language-plaintext highlighter-rouge">HandlerAdapter</code>에게 실행을 요청한다.</p>
+
+<p>그 결과를 모델에 받아서 <code class="language-plaintext highlighter-rouge">DispatcherServlet</code>에게 전달한다. <code class="language-plaintext highlighter-rouge">DispatcherServlet</code>은 컨트롤러가 리턴한 view name을 알게된다.</p>
+
+<p>컨트롤러가 리턴한 view name을 갖고 적절한 view resolver를 사용하여 view를 출력하게 된다.</p>
+
+<p><br /></p>
+
+<h3>요청 처리를 위해 사용되는 컴포넌트</h3>
+
+<ul>
+  <li>DispatcherServlet
+    <ul>
+      <li>HandlerMapping</li>
+      <li>HandlerAdapter</li>
+      <li>MultipartResolver</li>
+      <li>LocaleResolver</li>
+      <li>ThemeResolver</li>
+      <li>HandlerExceptionResolver</li>
+      <li>RequestToViewNameTranslator</li>
+      <li>ViewResolver</li>
+      <li>FlashMapManager</li>
+    </ul>
+  </li>
+</ul>
+
+<p><br /></p>
+
+<h2>DispatcherServlet</h2>
+
+<p><strong><em>프론트 컨트롤러</em></strong></p>
+
+<p>클라이언트의 <em>모든 요청을 받은 후 이를 처리할 핸들러에게 넘기고</em> 핸들러가 처리한 결과를 받아 사용자에게 응답 결과를 보여준다.<br />
+<code class="language-plaintext highlighter-rouge">DispathcerServlet</code>은 여러 컴포넌트를 이용해 작업을 처리한다.</p>
+
+<p><br /></p>
+
+<h2>DispatcherServlet 내부 동작 흐름</h2>
+
+<p><img src="http://drive.google.com/uc?export=view&amp;id=1RRS6fVLVUBO4vVLNrUuzozLc3BLL5pyF" /><br /></p>
+
+<h3>요청 선처리 작업</h3>
+
+<p><img src="http://drive.google.com/uc?export=view&amp;id=1RU_Z0FLA6VKUvUr8xVPUkw5g7HmZ3zwM" /><br /></p>
+
+<p><strong><em>org.springframework.web.servlet.LocaleResolver</em></strong></p>
+
+<p>Spring MVC 는 지역화를 제공한다.</p>
+
+<p>우리가 똑같은 사이트를 들어갔음에도 불구하고, 어떤 사람들은 영어, 어떤 사람들은 독일어 사이트가 보이게 처리할 수 있다.</p>
+
+<p>브라우저가 보내는 헤더 정보로부터 각 사용자의 브라우저의 언어셋팅 정보등을 받아올 수 있다.</p>
+
+<p><br /></p>
+
+<p><strong><em>RequestContextHolder에 요청 저장</em></strong></p>
+
+<p>이 부분은 스레드 로컬 객체이다.</p>
+
+<p>요청을 받아서 응답할 때 까지, HttpServletRequest, HttpServletResponse 등을 스프링이 관리하는 객체안에서 사용할 수 있도록 해준다.</p>
+
+<p><br /></p>
+
+<p><strong><em>FlashMap 복원</em></strong></p>
+
+<p>redirect로 값을 전달할 때 사용된다.
+URL이 너무 길어지고 복잡해질 때 FlashMap을 사용하면, redirect될 때 딱 한 번 값을 유지시킬 수 있게 해준다.
+FlashMap은 session과 같은 장소에 저장한 뒤, redirect가 된 후 삭제한다. get방식을 사용할 경우, URL이 드러나 보안에 취약하다는 단점이 있어서 사용한다.</p>
+
+<p>사용자가 파일업로드를 했을 때
+파일정보를 읽어들이는 특수한 형태의 request 객체가 필요하다.</p>
+
+<p>이 때, 멀티파트라는 요청이 들어오게 되면, multipart resolver가 멀티파트를 결정하게 된다. 핸들러를 결정하고 요청하는 것 까지 선처리작업.</p>
+
+<h3>선처리작업에 필요한 컴포넌트</h3>
+
+<p><br /></p>
+
+<p><strong><em>org.springframework.web.servlet.LocaleResolver</em></strong></p>
+
+<p>지역 정보를 결정해주는 전략 오브젝트이다.
+디폴트인 AcceptHeaderLocalResolver는 HTTP 헤더의 정보를 보고 지역정보를 설정해준다.</p>
+
+<p><br /></p>
+
+<p><strong><em>org.springframework.web.servlet.FlashMapManager</em></strong></p>
+
+<p>FlashMap객체를 조회(retrieve) &amp; 저장을 위한 인터페이스
+RedirectAttributes의 addFlashAttribute메소드를 이용해서 저장한다.
+리다이렉트 후 조회를 하면 바로 정보는 삭제된다.</p>
+
+<p><br /></p>
+
+<p><strong><em>org.springframework.web.context.request.RequestContextHolder</em></strong></p>
+
+<p>일반 빈에서 HttpServletRequest, HttpServletResponse, HttpSession 등을 사용할 수 있도록 한다.
+해당 객체를 일반 빈에서 사용하게 되면, Web에 종속적이 될 수 있다.</p>
+
+<p><br /></p>
+
+<p><strong><em>org.springframework.web.multipart.MultipartResolver</em></strong></p>
+
+<p>멀티파트 파일 업로드를 처리하는 전략</p>
+
+<p><br /></p>
+
+<h3>요청 전달</h3>
+
+<p><img src="http://drive.google.com/uc?export=view&amp;id=1RW-TzsvVoyejU2lSrutL3HDk8bnCkDfF" /><br /></p>
+
+<p><br /></p>
+
+<h3>요청 처리시 사용된 컴포넌트</h3>
+
+<p><strong><em>org.springframework.web.servlet.ModelAndView</em></strong></p>
+
+<p><code class="language-plaintext highlighter-rouge">ModelAndView</code> 는 Controller의 처리 결과를 보여줄 view와 view에서 사용할 값을 전달하는 클래스이다.<br />
+이전에는 servlet에서 모델을 얻고, 그 모델을 jsp로 넘길 때 request 같은 객체를 이용하였었다.<br />
+반면 스프링에서는 종속되지 않게 하기 위해 <code class="language-plaintext highlighter-rouge">ModelAndView</code> 같은 객체를 제공하고 있다.<br />
+<br />
+ 따라서 request에 값을 넣어서 사용하기 보다는 <code class="language-plaintext highlighter-rouge">ModelAndView</code>같은 컴포넌트를 이용하는 것이 바람직하다.</p>
+
+<p><br /></p>
+
+<p><strong><em>org.springframework.web.servlet.RequestToViewNameTranslator</em></strong></p>
+
+<p>컨트롤러에서 뷰 이름이나 뷰 오브젝트를 <strong>제공해주지 않았을 경우</strong> URL과 같은 요청정보를 참고해서 자동으로 뷰 이름을 생성해주는 전략 오브젝트이다. 디폴트는 DefaultRequestToViewNameTranslator이다.</p>
 
         </div>
         
@@ -219,28 +301,107 @@ FLUSH PRIVILEGES;
         <header class="post-header">
           <h1 class="post-title">
             
-              <a class="post-link" href="/Mac-OS-%EC%97%90%EC%84%9C-MySQL-%EC%A0%91%EC%86%8D-%ED%8F%AC%ED%8A%B8-%ED%99%95%EC%9D%B8/">Mac os 에서 mysql 접속 포트 확인</a>
+              <a class="post-link" href="/Spring-JDBC/">Spring jdbc</a>
             
           </h1>
 
           <p class="post-meta">
-            Sep 16, 2020
+            Sep 29, 2020
             
             
           </p>
         </header>
 
         <div class="post-content">
-          <h1>Mac OS 에서 MySQL 접속 포트 확인</h1>
-<div class="language-zsh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>mysql <span class="nt">-uroot</span>
-</code></pre></div></div>
-<p>터미널에서 입력해서 <code class="language-plaintext highlighter-rouge">mysql</code> 에 접속 후,</p>
-<div class="language-zsh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mysql&gt; SHOW GLOBAL VARIABLES LIKE <span class="s1">'PORT'</span><span class="p">;</span>
+          <h1>Spring JDBC</h1>
+
+<h2>Spring JDBC 패키지</h2>
+
+<p><strong><em>org.springframework.jdbc.core</em></strong><br />
+JdbcTemplate 및 관련 Helper 객체 제공</p>
+
+<p><br /></p>
+
+<p><strong><em>org.springframework.jdbc.datasource</em></strong><br />
+DataSource를 쉽게 접근하기 위한 유틸 클래스, 트랜젝션매니져 및 다양한 DataSource 구현을 제공</p>
+
+<p><br /></p>
+
+<p><strong><em>org.springframework.jdbc.object</em></strong><br />
+RDBMS 조회, 갱신, 저장등을 안전하고 재사용 가능한 객제 제공</p>
+
+<p><br /></p>
+
+<p><strong><em>org.springframework.jdbc.support</em></strong><br />
+jdbc.core 및 jdbc.object를 사용하는 JDBC 프레임워크를 지원</p>
+
+<p><br /></p>
+
+<h2>JDBC Template select Example</h2>
+
+<ul>
+  <li>열의 수 구하기</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="n">rowCount</span> <span class="o">=</span> <span class="k">this</span><span class="o">.</span><span class="na">jdbcTemplate</span><span class="o">.</span><span class="na">queryForInt</span><span class="o">(</span><span class="s">"select count(*) from t_actor"</span><span class="o">);</span>
 </code></pre></div></div>
 
-<p>결과</p>
+<p><br /></p>
 
-<p><img src="http://drive.google.com/uc?export=view&amp;id=1pA7Ad7k_cPPRezxHxnwW6BamGhiP7xdq" /><br /></p>
+<ul>
+  <li>변수 바인딩 하기</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="n">countOfActorsNamedJoe</span> <span class="o">=</span> <span class="k">this</span><span class="o">.</span><span class="na">jdbcTemplate</span><span class="o">.</span><span class="na">queryForInt</span><span class="o">(</span><span class="s">"select count(*) from t_actor where first_name = ?"</span><span class="o">,</span> <span class="s">"Joe"</span><span class="o">);</span> 
+</code></pre></div></div>
+
+<p><br /></p>
+
+<ul>
+  <li>String으로 결과 받기</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">String</span> <span class="n">lastName</span> <span class="o">=</span> <span class="k">this</span><span class="o">.</span><span class="na">jdbcTemplate</span><span class="o">.</span><span class="na">queryForObject</span><span class="o">(</span><span class="s">"select last_name from t_actor where id = ?"</span><span class="o">,</span> <span class="k">new</span> <span class="nc">Object</span><span class="o">[]{</span><span class="mi">1212L</span><span class="o">},</span> <span class="nc">String</span><span class="o">.</span><span class="na">class</span><span class="o">);</span> 
+</code></pre></div></div>
+
+<p><br /></p>
+
+<ul>
+  <li>한 행 조회하기</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">Actor</span> <span class="n">actor</span> <span class="o">=</span> <span class="k">this</span><span class="o">.</span><span class="na">jdbcTemplate</span><span class="o">.</span><span class="na">queryForObject</span><span class="o">(</span>
+  <span class="s">"select first_name, last_name from t_actor where id = ?"</span><span class="o">,</span>
+  <span class="k">new</span> <span class="nc">Object</span><span class="o">[]{</span><span class="mi">1212L</span><span class="o">},</span>
+  <span class="k">new</span> <span class="nc">RowMapper</span><span class="o">&lt;</span><span class="nc">Actor</span><span class="o">&gt;()</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="nc">Actor</span> <span class="nf">mapRow</span><span class="o">(</span><span class="nc">ResultSet</span> <span class="n">rs</span><span class="o">,</span> <span class="kt">int</span> <span class="n">rowNum</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">SQLException</span> <span class="o">{</span>
+      <span class="nc">Actor</span> <span class="n">actor</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Actor</span><span class="o">();</span>
+      <span class="n">actor</span><span class="o">.</span><span class="na">setFirstName</span><span class="o">(</span><span class="n">rs</span><span class="o">.</span><span class="na">getString</span><span class="o">(</span><span class="s">"first_name"</span><span class="o">));</span>
+      <span class="n">actor</span><span class="o">.</span><span class="na">setLastName</span><span class="o">(</span><span class="n">rs</span><span class="o">.</span><span class="na">getString</span><span class="o">(</span><span class="s">"last_name"</span><span class="o">));</span>
+      <span class="k">return</span> <span class="n">actor</span><span class="o">;</span>
+    <span class="o">}</span>
+  <span class="o">});</span>
+</code></pre></div></div>
+
+<p><br /></p>
+
+<ul>
+  <li>여러 건 조회하기</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">List</span><span class="o">&lt;</span><span class="nc">Actor</span><span class="o">&gt;</span> <span class="n">actors</span> <span class="o">=</span> <span class="k">this</span><span class="o">.</span><span class="na">jdbcTemplate</span><span class="o">.</span><span class="na">query</span><span class="o">(</span>
+  <span class="s">"select first_name, last_name from t_actor"</span><span class="o">,</span>
+  <span class="k">new</span> <span class="nc">RowMapper</span><span class="o">&lt;</span><span class="nc">Actor</span><span class="o">&gt;()</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="nc">Actor</span> <span class="nf">mapRow</span><span class="o">(</span><span class="nc">ResultSet</span> <span class="n">rs</span><span class="o">,</span> <span class="kt">int</span> <span class="n">rowNum</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">SQLException</span> <span class="o">{</span>
+      <span class="nc">Actor</span> <span class="n">actor</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Actor</span><span class="o">();</span>
+      <span class="n">actor</span><span class="o">.</span><span class="na">setFirstName</span><span class="o">(</span><span class="n">rs</span><span class="o">.</span><span class="na">getString</span><span class="o">(</span><span class="s">"first_name"</span><span class="o">));</span>
+      <span class="n">actor</span><span class="o">.</span><span class="na">setLastName</span><span class="o">(</span><span class="n">rs</span><span class="o">.</span><span class="na">getString</span><span class="o">(</span><span class="s">"last_name"</span><span class="o">));</span>
+      <span class="k">return</span> <span class="n">actor</span><span class="o">;</span>
+    <span class="o">}</span>
+  <span class="o">});</span>
+</code></pre></div></div>
+
+<p><br /></p>
 
         </div>
         

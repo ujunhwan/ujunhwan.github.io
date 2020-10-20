@@ -87,321 +87,320 @@
         <header class="post-header">
           <h1 class="post-title">
             
-              <a class="post-link" href="/servlet&jsp/">Servlet&amp;jsp</a>
+              <a class="post-link" href="/JDBC/">Jdbc</a>
             
           </h1>
 
           <p class="post-meta">
-            Sep 11, 2020
+            Sep 16, 2020
             
             
           </p>
         </header>
 
         <div class="post-content">
-          <h1>Servlet과 jsp 연동</h1>
+          <h1>JDBC(Java Datebase Connectivity)</h1>
 
 <ul>
-  <li><code class="language-plaintext highlighter-rouge">servlet</code> 은 프로그램 로직이 수행되기에 유리하다.</li>
-  <li>jsp는 결과를 출력하기에 유리하다. html 문을 그냥 입력하면 되기 때문</li>
-  <li>따라서 프로그램 로직 수행은 servlet, 결과 출력은 jsp 에서 하는 것이 유리하다.</li>
+  <li>자바 프로그램내에서 sql문을 실행하기 위한 자바 API 이다.</li>
+  <li>JAVA는 표준 인터페이스인 <code class="language-plaintext highlighter-rouge">JDBC API</code>를 제공한다.</li>
 </ul>
 
-<p>결국 <code class="language-plaintext highlighter-rouge">servlet</code>과 <code class="language-plaintext highlighter-rouge">jsp</code>의 장단점을 해결하기 위해서 <code class="language-plaintext highlighter-rouge">servlet</code> 에서 프로그램 로직이 수행되고, 그 결과를 jsp 에게 포워딩 하는 방법이 사용되게 되었다.<br />
-이를 <code class="language-plaintext highlighter-rouge">servlet</code>과 <code class="language-plaintext highlighter-rouge">jsp</code>의 연동이라고 한다.<br />
-<br /></p>
+<p><br /></p>
+
+<h2>JDBC 클래스의 생성 관계</h2>
+<ol>
+  <li><code class="language-plaintext highlighter-rouge">DriverManager</code>를 이용해 <code class="language-plaintext highlighter-rouge">Connection</code> 인스턴스를 얻는다.</li>
+  <li><code class="language-plaintext highlighter-rouge">Connection</code>을 통해 <code class="language-plaintext highlighter-rouge">Statement</code>를 얻는다.</li>
+  <li><code class="language-plaintext highlighter-rouge">Statement</code>를 이용해 <code class="language-plaintext highlighter-rouge">ResultSet</code>을 얻는다.</li>
+</ol>
+
+<p><br /></p>
+
+<h2>JDBC 드라이버 설치</h2>
+<p><code class="language-plaintext highlighter-rouge">maven</code> 을 이용하여 따로 설치할 필요 없이 의존성을 추가하여 완료한다.</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;dependency&gt;</span>
+    <span class="nt">&lt;groupId&gt;</span>mysql<span class="nt">&lt;/groupId&gt;</span>
+	  <span class="nt">&lt;artifactId&gt;</span>mysql-connector-java<span class="nt">&lt;/artifactId&gt;</span>
+	  <span class="nt">&lt;version&gt;</span>8.0.21<span class="nt">&lt;/version&gt;</span>
+<span class="nt">&lt;/dependency&gt;</span>
+
+</code></pre></div></div>
+
+<h2>JDBC의 사용</h2>
+
+<h3>import</h3>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">java.sql.*</span><span class="o">;</span>
+</code></pre></div></div>
+<h3>드라이버 로드</h3>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">Class</span><span class="o">.</span><span class="na">forName</span><span class="o">(</span><span class="s">"com.mysql.jdbc.Driver"</span><span class="o">);</span>
+</code></pre></div></div>
+<h3>Connection 얻기</h3>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">String</span> <span class="n">dburl</span> <span class="o">=</span> <span class="s">"jdbc:mysql://localhost/dbName"</span><span class="o">;</span>
+<span class="nc">Connection</span> <span class="n">con</span> <span class="o">=</span> <span class="nc">DriverManager</span><span class="o">.</span><span class="na">getConnection</span><span class="o">(</span><span class="n">dburl</span><span class="o">,</span> <span class="no">ID</span><span class="o">,</span> <span class="no">PWD</span><span class="o">);</span>
+</code></pre></div></div>
+
+<h2>Example</h2>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="nc">Connection</span> <span class="nf">getConnection</span><span class="o">()</span> <span class="kd">throws</span> <span class="nc">Exception</span><span class="o">{</span>
+	<span class="nc">String</span> <span class="n">url</span> <span class="o">=</span> <span class="s">"jdbc:oracle:thin:@117.16.46.111:1521:xe"</span><span class="o">;</span>
+	<span class="nc">String</span> <span class="n">user</span> <span class="o">=</span> <span class="s">"smu"</span><span class="o">;</span>
+	<span class="nc">String</span> <span class="n">password</span> <span class="o">=</span> <span class="s">"smu"</span><span class="o">;</span>
+	<span class="nc">Connection</span> <span class="n">conn</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+	<span class="nc">Class</span><span class="o">.</span><span class="na">forName</span><span class="o">(</span><span class="s">"oracle.jdbc.driver.OracleDriver"</span><span class="o">);</span>
+	<span class="n">conn</span> <span class="o">=</span> <span class="nc">DriverManager</span><span class="o">.</span><span class="na">getConnection</span><span class="o">(</span><span class="n">url</span><span class="o">,</span> <span class="n">user</span><span class="o">,</span> <span class="n">password</span><span class="o">);</span>
+	<span class="k">return</span> <span class="n">conn</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h3>Statement 생성</h3>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">Statement</span> <span class="n">stmt</span> <span class="o">=</span> <span class="n">con</span><span class="o">.</span><span class="na">createStatement</span><span class="o">();</span>
+</code></pre></div></div>
+
+<h3>질의 수행</h3>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">ResultSet</span> <span class="n">rs</span> <span class="o">=</span> <span class="n">stmt</span><span class="o">.</span><span class="na">executeQuery</span><span class="o">(</span><span class="s">"select no from user"</span> <span class="o">);</span>
+<span class="c1">// 참고</span>
+<span class="n">stmt</span><span class="o">.</span><span class="na">execute</span><span class="o">(</span><span class="err">“</span><span class="n">query</span><span class="err">”</span><span class="o">);</span>             <span class="c1">//any SQL</span>
+<span class="n">stmt</span><span class="o">.</span><span class="na">executeQuery</span><span class="o">(</span><span class="err">“</span><span class="n">query</span><span class="err">”</span><span class="o">);</span>     <span class="c1">//SELECT</span>
+<span class="n">stmt</span><span class="o">.</span><span class="na">executeUpdate</span><span class="o">(</span><span class="err">“</span><span class="n">query</span><span class="err">”</span><span class="o">);</span>   <span class="c1">//INSERT, UPDATE, DELETE</span>
+</code></pre></div></div>
+
+<h3>ResultSet 으로 결과 받기</h3>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">ResultSet</span> <span class="n">rs</span> <span class="o">=</span>  <span class="n">stmt</span><span class="o">.</span><span class="na">executeQuery</span><span class="o">(</span> <span class="s">"select no from user"</span> <span class="o">);</span>
+<span class="k">while</span> <span class="o">(</span> <span class="n">rs</span><span class="o">.</span><span class="na">next</span><span class="o">()</span> <span class="o">)</span>
+      <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span> <span class="n">rs</span><span class="o">.</span><span class="na">getInt</span><span class="o">(</span> <span class="s">"no"</span><span class="o">)</span> <span class="o">);</span>
+
+</code></pre></div></div>
+
+<h3>Close</h3>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">rs</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+
+<span class="n">stmt</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+
+<span class="n">con</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+</code></pre></div></div>
+
+<p><br /></p>
+
+<details>
+<summary>Example Source Code</summary>
+<div>
+
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">GuestBookVO</span><span class="o">&gt;</span> <span class="nf">getGuestBookList</span><span class="o">(){</span>
+		<span class="nc">List</span><span class="o">&lt;</span><span class="nc">GuestBookVO</span><span class="o">&gt;</span> <span class="n">list</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;&gt;();</span>
+		<span class="nc">GuestBookVO</span> <span class="n">vo</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+		<span class="nc">Connection</span> <span class="n">conn</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+		<span class="nc">PreparedStatement</span> <span class="n">ps</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+		<span class="nc">ResultSet</span> <span class="n">rs</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+		<span class="k">try</span><span class="o">{</span>
+			<span class="n">conn</span> <span class="o">=</span> <span class="nc">DBUtil</span><span class="o">.</span><span class="na">getConnection</span><span class="o">();</span>  <span class="c1">// 접속</span>
+			<span class="nc">String</span> <span class="n">sql</span> <span class="o">=</span> <span class="s">"select * from guestbook"</span><span class="o">;</span>
+			<span class="n">ps</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="na">prepareStatement</span><span class="o">(</span><span class="n">sql</span><span class="o">);</span> <span class="c1">// statement 객체 얻기</span>
+			<span class="n">rs</span> <span class="o">=</span> <span class="n">ps</span><span class="o">.</span><span class="na">executeQuery</span><span class="o">();</span> <span class="c1">// 실행</span>
+			<span class="k">while</span><span class="o">(</span><span class="n">rs</span><span class="o">.</span><span class="na">next</span><span class="o">()){</span>
+				<span class="n">vo</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">GuestBookVO</span><span class="o">();</span>
+				<span class="n">vo</span><span class="o">.</span><span class="na">setNo</span><span class="o">(</span><span class="n">rs</span><span class="o">.</span><span class="na">getInt</span><span class="o">(</span><span class="mi">1</span><span class="o">));</span>
+				<span class="n">vo</span><span class="o">.</span><span class="na">setId</span><span class="o">(</span><span class="n">rs</span><span class="o">.</span><span class="na">getString</span><span class="o">(</span><span class="mi">2</span><span class="o">));</span>
+				<span class="n">vo</span><span class="o">.</span><span class="na">setTitle</span><span class="o">(</span><span class="n">rs</span><span class="o">.</span><span class="na">getString</span><span class="o">(</span><span class="mi">3</span><span class="o">));</span>
+				<span class="n">vo</span><span class="o">.</span><span class="na">setConetnt</span><span class="o">(</span><span class="n">rs</span><span class="o">.</span><span class="na">getString</span><span class="o">(</span><span class="mi">4</span><span class="o">));</span>
+				<span class="n">vo</span><span class="o">.</span><span class="na">setRegDate</span><span class="o">(</span><span class="n">rs</span><span class="o">.</span><span class="na">getString</span><span class="o">(</span><span class="mi">5</span><span class="o">));</span>
+				<span class="n">list</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">vo</span><span class="o">);</span>
+			<span class="o">}</span>
+		<span class="o">}</span><span class="k">catch</span><span class="o">(</span><span class="nc">Exception</span> <span class="n">e</span><span class="o">){</span>
+			<span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+		<span class="o">}</span><span class="k">finally</span> <span class="o">{</span>
+			<span class="nc">DBUtil</span><span class="o">.</span><span class="na">close</span><span class="o">(</span><span class="n">conn</span><span class="o">,</span> <span class="n">ps</span><span class="o">,</span> <span class="n">rs</span><span class="o">);</span> <span class="c1">// 닫기</span>
+		<span class="o">}</span>		
+		<span class="k">return</span> <span class="n">list</span><span class="o">;</span>		
+	<span class="o">}</span>
+</code></pre></div>    </div>
+
+  </div>
+</details>
+
+<details>
+<summary>Example 2 Source Code</summary>
+<div>
+
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kt">int</span> <span class="nf">addGuestBook</span><span class="o">(</span><span class="nc">GuestBookVO</span> <span class="n">vo</span><span class="o">){</span>
+		<span class="kt">int</span> <span class="n">result</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+		<span class="nc">Connection</span> <span class="n">conn</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+		<span class="nc">PreparedStatement</span> <span class="n">ps</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+		<span class="k">try</span><span class="o">{</span>
+			<span class="n">conn</span> <span class="o">=</span> <span class="nc">DBUtil</span><span class="o">.</span><span class="na">getConnection</span><span class="o">();</span>
+			<span class="nc">String</span> <span class="n">sql</span> <span class="o">=</span> <span class="s">"insert into guestbook values("</span>
+					<span class="o">+</span> <span class="s">"guestbook_seq.nextval,?,?,?,sysdate)"</span><span class="o">;</span>
+			<span class="n">ps</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="na">prepareStatement</span><span class="o">(</span><span class="n">sql</span><span class="o">);</span>
+			<span class="n">ps</span><span class="o">.</span><span class="na">setString</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="n">vo</span><span class="o">.</span><span class="na">getId</span><span class="o">());</span>
+			<span class="n">ps</span><span class="o">.</span><span class="na">setString</span><span class="o">(</span><span class="mi">2</span><span class="o">,</span> <span class="n">vo</span><span class="o">.</span><span class="na">getTitle</span><span class="o">());</span>
+			<span class="n">ps</span><span class="o">.</span><span class="na">setString</span><span class="o">(</span><span class="mi">3</span><span class="o">,</span> <span class="n">vo</span><span class="o">.</span><span class="na">getConetnt</span><span class="o">());</span>
+			<span class="n">result</span> <span class="o">=</span> <span class="n">ps</span><span class="o">.</span><span class="na">executeUpdate</span><span class="o">();</span>
+		<span class="o">}</span><span class="k">catch</span><span class="o">(</span><span class="nc">Exception</span> <span class="n">e</span><span class="o">){</span>
+			<span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+		<span class="o">}</span><span class="k">finally</span> <span class="o">{</span>
+			<span class="nc">DBUtil</span><span class="o">.</span><span class="na">close</span><span class="o">(</span><span class="n">conn</span><span class="o">,</span> <span class="n">ps</span><span class="o">);</span>
+		<span class="o">}</span>
+		
+		<span class="k">return</span> <span class="n">result</span><span class="o">;</span>
+	<span class="o">}</span>
+</code></pre></div>    </div>
+  </div>
+</details>
+
+<p><br /></p>
+
+<p>종합해보면,</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">connection</code> 을 통해 DB와의 연결을 하고, <code class="language-plaintext highlighter-rouge">statement</code> 를 통해 
+쿼리를 수행하고, <code class="language-plaintext highlighter-rouge">resultset</code> 을 통해 결과를 받아온다.</li>
+  <li>close 되는 순서는 선언한 순서의 반대로 close 되어야 한다.</li>
+</ul>
+
+<p><br /></p>
 
 <h1>예제</h1>
-<p><em>LogicServlet.java</em> 파일에서 랜덤한 숫자를 발생 시킨다음, <code class="language-plaintext highlighter-rouge">request</code> 객체를 통해 <em>result.jsp</em> 로 보낸 뒤, <em>result.jsp</em> 에서 출력을 담당한다.
- 이 때, <code class="language-plaintext highlighter-rouge">jsp</code> 에서의 출력 방식을 두가지로 사용할 수 있는데, <code class="language-plaintext highlighter-rouge">스크립틀릿</code>과 <code class="language-plaintext highlighter-rouge">표현식</code>을 사용하는 방법과 <code class="language-plaintext highlighter-rouge">EL표기법</code>을 사용하는 방법 이다.</p>
+
 <details>
-<summary>Source Code</summary>
+<summary>Role.java</summary>
 <div>
 
-    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// LogicServlet.java</span>
-<span class="kn">package</span> <span class="nn">examples</span><span class="o">;</span>
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">rok.jdbcexam.dto</span><span class="o">;</span>
 
-<span class="kn">import</span> <span class="nn">java.io.IOException</span><span class="o">;</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Role</span> <span class="o">{</span>
+	<span class="kd">private</span> <span class="nc">Integer</span> <span class="n">roleId</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="nc">String</span> <span class="n">description</span><span class="o">;</span>
 
-<span class="kn">import</span> <span class="nn">javax.servlet.RequestDispatcher</span><span class="o">;</span>
-<span class="kn">import</span> <span class="nn">javax.servlet.ServletException</span><span class="o">;</span>
-<span class="kn">import</span> <span class="nn">javax.servlet.annotation.WebServlet</span><span class="o">;</span>
-<span class="kn">import</span> <span class="nn">javax.servlet.http.HttpServlet</span><span class="o">;</span>
-<span class="kn">import</span> <span class="nn">javax.servlet.http.HttpServletRequest</span><span class="o">;</span>
-<span class="kn">import</span> <span class="nn">javax.servlet.http.HttpServletResponse</span><span class="o">;</span>
-
-<span class="nd">@WebServlet</span><span class="o">(</span><span class="s">"/logic"</span><span class="o">)</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">LogicServlet</span> <span class="kd">extends</span> <span class="nc">HttpServlet</span> <span class="o">{</span>
-	<span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">long</span> <span class="n">serialVersionUID</span> <span class="o">=</span> <span class="mi">1L</span><span class="o">;</span>
-       
-    <span class="kd">public</span> <span class="nf">LogicServlet</span><span class="o">()</span> <span class="o">{</span>
-        <span class="kd">super</span><span class="o">();</span>
-    <span class="o">}</span>
-	<span class="kd">protected</span> <span class="kt">void</span> <span class="nf">service</span><span class="o">(</span><span class="nc">HttpServletRequest</span> <span class="n">request</span><span class="o">,</span> <span class="nc">HttpServletResponse</span> <span class="n">response</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">ServletException</span><span class="o">,</span> <span class="nc">IOException</span> <span class="o">{</span>
-		<span class="kt">int</span> <span class="n">v1</span> <span class="o">=</span> <span class="o">(</span><span class="kt">int</span><span class="o">)(</span><span class="nc">Math</span><span class="o">.</span><span class="na">random</span><span class="o">()</span> <span class="o">*</span> <span class="mi">100</span><span class="o">)</span> <span class="o">+</span> <span class="mi">1</span><span class="o">;</span>
-		<span class="kt">int</span> <span class="n">v2</span> <span class="o">=</span> <span class="o">(</span><span class="kt">int</span><span class="o">)(</span><span class="nc">Math</span><span class="o">.</span><span class="na">random</span><span class="o">()</span> <span class="o">*</span> <span class="mi">100</span><span class="o">)</span> <span class="o">+</span> <span class="mi">1</span><span class="o">;</span>
-		<span class="kt">int</span> <span class="n">result</span> <span class="o">=</span> <span class="n">v1</span> <span class="o">+</span> <span class="n">v2</span><span class="o">;</span>
+	<span class="kd">public</span> <span class="nf">Role</span><span class="o">()</span> <span class="o">{</span>
 		
-		<span class="c1">// jsp forwarding</span>
-		<span class="n">request</span><span class="o">.</span><span class="na">setAttribute</span><span class="o">(</span><span class="s">"v1"</span><span class="o">,</span> <span class="n">v1</span><span class="o">);</span>
-		<span class="n">request</span><span class="o">.</span><span class="na">setAttribute</span><span class="o">(</span><span class="s">"v2"</span><span class="o">,</span> <span class="n">v2</span><span class="o">);</span>
-		<span class="n">request</span><span class="o">.</span><span class="na">setAttribute</span><span class="o">(</span><span class="s">"result"</span><span class="o">,</span> <span class="n">result</span><span class="o">);</span>
+	<span class="o">}</span>
+	
+	<span class="kd">public</span> <span class="nf">Role</span><span class="o">(</span><span class="nc">Integer</span> <span class="n">roleId</span><span class="o">,</span> <span class="nc">String</span> <span class="n">description</span><span class="o">)</span> <span class="o">{</span>
+		<span class="kd">super</span><span class="o">();</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">roleId</span> <span class="o">=</span> <span class="n">roleId</span><span class="o">;</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">description</span> <span class="o">=</span> <span class="n">description</span><span class="o">;</span>
+	<span class="o">}</span>
+	<span class="kd">public</span> <span class="nc">Integer</span> <span class="nf">getRoldId</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">roleId</span><span class="o">;</span>
+	<span class="o">}</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setRoldId</span><span class="o">(</span><span class="nc">Integer</span> <span class="n">roldId</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">roleId</span> <span class="o">=</span> <span class="n">roldId</span><span class="o">;</span>
+	<span class="o">}</span>
+	<span class="kd">public</span> <span class="nc">String</span> <span class="nf">getDescription</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">description</span><span class="o">;</span>
+	<span class="o">}</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setDescription</span><span class="o">(</span><span class="nc">String</span> <span class="n">description</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">description</span> <span class="o">=</span> <span class="n">description</span><span class="o">;</span>
+	<span class="o">}</span>
 
-		<span class="nc">RequestDispatcher</span> <span class="n">rd</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="na">getRequestDispatcher</span><span class="o">(</span><span class="s">"/result.jsp"</span><span class="o">);</span>
-		<span class="n">rd</span><span class="o">.</span><span class="na">forward</span><span class="o">(</span><span class="n">request</span><span class="o">,</span> <span class="n">response</span><span class="o">);</span>
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="nc">String</span> <span class="nf">toString</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="s">"Role [roleId="</span> <span class="o">+</span> <span class="n">roleId</span> <span class="o">+</span> <span class="s">", description="</span> <span class="o">+</span> <span class="n">description</span> <span class="o">+</span> <span class="s">"]"</span><span class="o">;</span>
 	<span class="o">}</span>
 
 <span class="o">}</span>
-</code></pre></div>    </div>
 
-    <div class="language-jsp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">&lt;!-- result.jsp --&gt;</span>
-<span class="nt">&lt;%@ page </span><span class="na">language=</span><span class="s">"java"</span><span class="na"> contentType=</span><span class="s">"text/html; charset=UTF-8"</span><span class="na">
-    pageEncoding=</span><span class="s">"UTF-8"</span><span class="nt">%&gt;</span>
-<span class="cp">&lt;!DOCTYPE html&gt;</span>
-<span class="nt">&lt;html&gt;</span>
-<span class="nt">&lt;head&gt;</span>
-<span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
-<span class="nt">&lt;title&gt;</span>Insert title here<span class="nt">&lt;/title&gt;</span>
-<span class="nt">&lt;/head&gt;</span>
-<span class="nt">&lt;body&gt;</span>
-스크립틀릿 + 표현식 <span class="nt">&lt;br&gt;</span>
-<span class="nt">&lt;%</span>
-	<span class="kt">int</span> <span class="n">v1</span> <span class="o">=</span> <span class="o">(</span><span class="kt">int</span><span class="o">)</span><span class="n">request</span><span class="o">.</span><span class="na">getAttribute</span><span class="o">(</span><span class="s">"v1"</span><span class="o">);</span>
-	<span class="kt">int</span> <span class="n">v2</span> <span class="o">=</span> <span class="o">(</span><span class="kt">int</span><span class="o">)</span><span class="n">request</span><span class="o">.</span><span class="na">getAttribute</span><span class="o">(</span><span class="s">"v2"</span><span class="o">);</span>
-	<span class="kt">int</span> <span class="n">result</span> <span class="o">=</span> <span class="o">(</span><span class="kt">int</span><span class="o">)</span><span class="n">request</span><span class="o">.</span><span class="na">getAttribute</span><span class="o">(</span><span class="s">"result"</span><span class="o">);</span>
-<span class="nt">%&gt;</span>
-<span class="nt">&lt;%=</span><span class="n">v1</span> <span class="nt">%&gt;</span> + <span class="nt">&lt;%=</span><span class="n">v2</span> <span class="nt">%&gt;</span> = <span class="nt">&lt;%=</span><span class="n">result</span> <span class="nt">%&gt;&lt;br&gt;</span>
-<span class="nt">&lt;br&gt;</span>
-
-EL표기 <span class="nt">&lt;br&gt;</span>
-${v1 } + ${v2 } = ${result } <span class="nt">&lt;br&gt;</span>
-
-<span class="nt">&lt;/body&gt;</span>
-<span class="nt">&lt;/html&gt;</span>
 </code></pre></div>    </div>
 
   </div>
 </details>
 
-<details>
-<summary>결과</summary>
-<img src="http://drive.google.com/uc?export=view&amp;id=1oiLw8m79r-pbi-M5VrWa6Xbgz2-pZnx-" /><br />
-</details>
-
-        </div>
-        
-      </li>
-    
-      
-      
-
-      <li>
-        <header class="post-header">
-          <h1 class="post-title">
-            
-              <a class="post-link" href="/scope/">Scope</a>
-            
-          </h1>
-
-          <p class="post-meta">
-            Sep 11, 2020
-            
-            
-          </p>
-        </header>
-
-        <div class="post-content">
-          <h1>Scope</h1>
-<p>이미 약속된 객체들이 존재 하게 된다.
-이 객체들의 범위를
-4가지의 <code class="language-plaintext highlighter-rouge">scope</code> 를 가지고 있다.</p>
-<ul>
-  <li>Application</li>
-  <li>Session</li>
-  <li>Request</li>
-  <li>Page (least visible)</li>
-</ul>
-
-<h2>Page scope</h2>
-<ul>
-  <li><code class="language-plaintext highlighter-rouge">PageContext</code> 라는 추상 클래스를 사용한다.</li>
-  <li><code class="language-plaintext highlighter-rouge">jsp</code> 페이지에서는 <code class="language-plaintext highlighter-rouge">pageContext</code> 라는 내장 객체로 사용가능 하다.</li>
-  <li><code class="language-plaintext highlighter-rouge">forward</code>가 될경우, 해당 page scope에 지정된 변수는 사용할 수 없다.</li>
-  <li>지역 변수처럼 해당 <code class="language-plaintext highlighter-rouge">jsp</code>, <code class="language-plaintext highlighter-rouge">servlet</code>이 실행되는 동안에만 정보를 유지하고 싶을 때 사용한다.<br />
-<br /></li>
-</ul>
-
-<h2>Request scope</h2>
-<ul>
-  <li>http요청을 WAS가 받아서 웹 브라우져에게 응답할 때까지 변수값을 유지하고자 할 경우 사용한다.</li>
-  <li><code class="language-plaintext highlighter-rouge">HttpServletRequest</code> 객체를 사용한다.</li>
-  <li><code class="language-plaintext highlighter-rouge">jsp</code> 에서는 <code class="language-plaintext highlighter-rouge">request</code> 내장 변수를 사용한다.</li>
-  <li><code class="language-plaintext highlighter-rouge">servlet</code> 에서는 <code class="language-plaintext highlighter-rouge">HttpServletRequest</code> 객체를 사용한다.</li>
-  <li><code class="language-plaintext highlighter-rouge">forward</code> 시 값을 유지하고자 사용한다.<br />
-<br /></li>
-</ul>
-
-<h2>Session scope</h2>
-<ul>
-  <li>웹 브라우저 별로 변수를 관리하고자 할 경우 사용한다.</li>
-  <li>웹 브라우저간의 탭 간에는 세션 정보가 공유되기 때문에, 각각의 탭에서는 같은 세션 정보를 사용할 수 있다.</li>
-  <li><code class="language-plaintext highlighter-rouge">jsp</code> 에서는 <code class="language-plaintext highlighter-rouge">session</code> 내장 변수를 사용한다.</li>
-  <li>장바구니처럼 사용자별로 유지가 되어야 할 정보가 있을 때 사용한다.<br />
-<br /></li>
-</ul>
-
-<h2>Application scope</h2>
-<ul>
-  <li>웹 어플리케이션이 시작되고 종료될 때까지 변수를 사용할 수 있다.</li>
-  <li><code class="language-plaintext highlighter-rouge">ServletContext</code> 인터페이스를 구현한 객체를 사용한다.</li>
-  <li><code class="language-plaintext highlighter-rouge">jsp</code> 에서는 application 내장 객체를 이용한다.</li>
-  <li>웹 어플리케이션 하나당 하나의 application 객체가 사용된다.</li>
-  <li>모든 클라이언트가 공통으로 사용해야할 값들이 있을 때 사용한다.</li>
-</ul>
-
-<h1>Application scope 예제</h1>
-<ul>
-  <li>ApplicationScope01.java</li>
-  <li>ApplicationScope02.java</li>
-  <li>applicationScope01.jsp</li>
-</ul>
-
-<p>먼저 <em>ApplicationScope01.java</em> 에서 value = 1 로 선언한 뒤, <code class="language-plaintext highlighter-rouge">application</code> 객체에 set 한다.<br />
-그 다음, <em>ApplicationScope02.java</em>, <em>applicationScope01.jsp</em>
-각각 <code class="language-plaintext highlighter-rouge">application</code> 객체를 불러와서 1, 2 를 더한다음 다시 set한다.</p>
+<p><em>Role</em> 이라는 클래스를 정의한 파일이다.</p>
 
 <details>
-<summary>Source Code</summary>
+<summary>RoleDao.java</summary>
 <div>
 
-    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// ApplicationScope01.java</span>
-<span class="kn">package</span> <span class="nn">examples</span><span class="o">;</span>
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">rok.jdbcexam.dao</span><span class="o">;</span>
 
-<span class="kn">import</span> <span class="nn">java.io.PrintWriter</span><span class="o">;</span>
-<span class="kn">import</span> <span class="nn">java.io.IOException</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.sql.ResultSet</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.sql.SQLException</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.sql.PreparedStatement</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.sql.Connection</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.sql.DriverManager</span><span class="o">;</span>
 
-<span class="kn">import</span> <span class="nn">javax.servlet.ServletContext</span><span class="o">;</span>
-<span class="kn">import</span> <span class="nn">javax.servlet.ServletException</span><span class="o">;</span>
-<span class="kn">import</span> <span class="nn">javax.servlet.annotation.WebServlet</span><span class="o">;</span>
-<span class="kn">import</span> <span class="nn">javax.servlet.http.HttpServlet</span><span class="o">;</span>
-<span class="kn">import</span> <span class="nn">javax.servlet.http.HttpServletRequest</span><span class="o">;</span>
-<span class="kn">import</span> <span class="nn">javax.servlet.http.HttpServletResponse</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">rok.jdbcexam.dto.Role</span><span class="o">;</span>
 
-<span class="nd">@WebServlet</span><span class="o">(</span><span class="s">"/ApplicationScope01"</span><span class="o">)</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">ApplicationScope01</span> <span class="kd">extends</span> <span class="nc">HttpServlet</span> <span class="o">{</span>
-	<span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">long</span> <span class="n">serialVersionUID</span> <span class="o">=</span> <span class="mi">1L</span><span class="o">;</span>
-    <span class="kd">public</span> <span class="nf">ApplicationScope01</span><span class="o">()</span> <span class="o">{</span>
-        <span class="kd">super</span><span class="o">();</span>
-    <span class="o">}</span>
-	<span class="kd">protected</span> <span class="kt">void</span> <span class="nf">doGet</span><span class="o">(</span><span class="nc">HttpServletRequest</span> <span class="n">request</span><span class="o">,</span> <span class="nc">HttpServletResponse</span> <span class="n">response</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">ServletException</span><span class="o">,</span> <span class="nc">IOException</span> <span class="o">{</span>
-		<span class="n">response</span><span class="o">.</span><span class="na">setContentType</span><span class="o">(</span><span class="s">"text/html; charset=UTF-8"</span><span class="o">);</span>
-
-		<span class="nc">PrintWriter</span> <span class="n">out</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="na">getWriter</span><span class="o">();</span>
-
-		<span class="nc">ServletContext</span> <span class="n">application</span> <span class="o">=</span> <span class="n">getServletContext</span><span class="o">();</span>
-		<span class="kt">int</span> <span class="n">value</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
-		<span class="n">application</span><span class="o">.</span><span class="na">setAttribute</span><span class="o">(</span><span class="s">"value"</span><span class="o">,</span> <span class="n">value</span><span class="o">);</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">RoleDao</span> <span class="o">{</span>
+	<span class="kd">private</span> <span class="kd">static</span> <span class="nc">String</span> <span class="n">dburl</span> <span class="o">=</span> <span class="s">"jdbc:mysql://localhost:3306/connectdb?useSSL=false&amp;serverTimezone=UTC"</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="kd">static</span> <span class="nc">String</span> <span class="n">dbUser</span><span class="o">=</span> <span class="s">"connectuser"</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="kd">static</span> <span class="nc">String</span> <span class="n">dbpasswd</span> <span class="o">=</span> <span class="s">"connect123!@#"</span><span class="o">;</span>
+	<span class="c1">// roleID에 해당하는 데이터를 한 건 가져오는 메서드</span>
+	<span class="kd">public</span> <span class="nc">Role</span> <span class="nf">getRole</span><span class="o">(</span><span class="nc">Integer</span> <span class="n">roleId</span><span class="o">)</span> <span class="o">{</span>
+		<span class="nc">Role</span> <span class="n">role</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+		<span class="nc">Connection</span> <span class="n">conn</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+		<span class="nc">PreparedStatement</span> <span class="n">ps</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+		<span class="nc">ResultSet</span> <span class="n">rs</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
 		
-		<span class="n">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"&lt;h1&gt;value : "</span> <span class="o">+</span> <span class="n">value</span> <span class="o">+</span> <span class="s">"&lt;/h1&gt;"</span><span class="o">);</span>
-
-	<span class="o">}</span>
-
-<span class="o">}</span>
-
-</code></pre></div>    </div>
-
-    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// ApplicationScope02.java</span>
-<span class="kn">package</span> <span class="nn">examples</span><span class="o">;</span>
-
-<span class="kn">import</span> <span class="nn">java.io.PrintWriter</span><span class="o">;</span>
-<span class="kn">import</span> <span class="nn">java.io.IOException</span><span class="o">;</span>
-
-<span class="kn">import</span> <span class="nn">javax.servlet.ServletContext</span><span class="o">;</span>
-<span class="kn">import</span> <span class="nn">javax.servlet.ServletException</span><span class="o">;</span>
-<span class="kn">import</span> <span class="nn">javax.servlet.annotation.WebServlet</span><span class="o">;</span>
-<span class="kn">import</span> <span class="nn">javax.servlet.http.HttpServlet</span><span class="o">;</span>
-<span class="kn">import</span> <span class="nn">javax.servlet.http.HttpServletRequest</span><span class="o">;</span>
-<span class="kn">import</span> <span class="nn">javax.servlet.http.HttpServletResponse</span><span class="o">;</span>
-
-<span class="nd">@WebServlet</span><span class="o">(</span><span class="s">"/ApplicationScope02"</span><span class="o">)</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">ApplicationScope02</span> <span class="kd">extends</span> <span class="nc">HttpServlet</span> <span class="o">{</span>
-	<span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">long</span> <span class="n">serialVersionUID</span> <span class="o">=</span> <span class="mi">1L</span><span class="o">;</span>
-    <span class="kd">public</span> <span class="nf">ApplicationScope02</span><span class="o">()</span> <span class="o">{</span>
-        <span class="kd">super</span><span class="o">();</span>
-    <span class="o">}</span>
-
-	<span class="kd">protected</span> <span class="kt">void</span> <span class="nf">doGet</span><span class="o">(</span><span class="nc">HttpServletRequest</span> <span class="n">request</span><span class="o">,</span> <span class="nc">HttpServletResponse</span> <span class="n">response</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">ServletException</span><span class="o">,</span> <span class="nc">IOException</span> <span class="o">{</span>
-		<span class="n">response</span><span class="o">.</span><span class="na">setContentType</span><span class="o">(</span><span class="s">"text/html; charset=UTF-8"</span><span class="o">);</span>
-		
-		<span class="nc">PrintWriter</span> <span class="n">out</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="na">getWriter</span><span class="o">();</span>
-		
-		<span class="nc">ServletContext</span> <span class="n">application</span> <span class="o">=</span> <span class="n">getServletContext</span><span class="o">();</span>
 		<span class="k">try</span> <span class="o">{</span>
-			<span class="kt">int</span> <span class="n">value</span> <span class="o">=</span> <span class="o">(</span><span class="kt">int</span><span class="o">)</span><span class="n">application</span><span class="o">.</span><span class="na">getAttribute</span><span class="o">(</span><span class="s">"value"</span><span class="o">);</span>
-			<span class="n">value</span><span class="o">++;</span>
-			<span class="n">application</span><span class="o">.</span><span class="na">setAttribute</span><span class="o">(</span><span class="s">"value"</span><span class="o">,</span> <span class="n">value</span><span class="o">);</span>
-		
-			<span class="n">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"&lt;h1&gt;value : "</span> <span class="o">+</span> <span class="n">value</span> <span class="o">+</span> <span class="s">"&lt;/h1&gt;"</span><span class="o">);</span>
-		<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">NullPointerException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
-			<span class="n">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"NPE"</span><span class="o">);</span>
+			<span class="nc">Class</span><span class="o">.</span><span class="na">forName</span><span class="o">(</span><span class="s">"com.mysql.cj.jdbc.Driver"</span><span class="o">);</span>
+			<span class="n">conn</span> <span class="o">=</span> <span class="nc">DriverManager</span><span class="o">.</span><span class="na">getConnection</span><span class="o">(</span><span class="n">dburl</span><span class="o">,</span> <span class="n">dbUser</span><span class="o">,</span> <span class="n">dbpasswd</span><span class="o">);</span>
+			<span class="nc">String</span> <span class="n">sql</span> <span class="o">=</span> <span class="s">"SELECT role_id, description FROM role WHERE role_id = ?"</span><span class="o">;</span>
+			<span class="n">ps</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="na">prepareStatement</span><span class="o">(</span><span class="n">sql</span><span class="o">);</span>
+			<span class="n">ps</span><span class="o">.</span><span class="na">setInt</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="n">roleId</span><span class="o">);</span>   <span class="c1">// ? 의 인덱스를 첫번째 인자로 받아들임 </span>
+            <span class="c1">// 즉 첫번째 물음표에 roleId를 입력하여 쿼리를 실행</span>
+			<span class="n">rs</span> <span class="o">=</span> <span class="n">ps</span><span class="o">.</span><span class="na">executeQuery</span><span class="o">();</span>
+			
+			<span class="k">if</span><span class="o">(</span><span class="n">rs</span><span class="o">.</span><span class="na">next</span><span class="o">())</span> <span class="o">{</span>
+				<span class="kt">int</span> <span class="n">id</span> <span class="o">=</span> <span class="n">rs</span><span class="o">.</span><span class="na">getInt</span><span class="o">(</span><span class="s">"role_id"</span><span class="o">);</span>
+				<span class="nc">String</span> <span class="n">description</span> <span class="o">=</span> <span class="n">rs</span><span class="o">.</span><span class="na">getString</span><span class="o">(</span><span class="mi">2</span><span class="o">);</span>
+				<span class="n">role</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Role</span><span class="o">(</span><span class="n">id</span><span class="o">,</span> <span class="n">description</span><span class="o">);</span>
+			<span class="o">}</span>
+		<span class="o">}</span> <span class="k">catch</span><span class="o">(</span><span class="nc">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+			<span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+		<span class="o">}</span> <span class="k">finally</span> <span class="o">{</span>
+			<span class="k">if</span><span class="o">(</span><span class="n">rs</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+				<span class="k">try</span> <span class="o">{</span>
+					<span class="n">rs</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+				<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">SQLException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+					<span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+				<span class="o">}</span>
+			<span class="o">}</span>
 		<span class="o">}</span>
-
+		
+		<span class="k">return</span> <span class="n">role</span><span class="o">;</span>
 	<span class="o">}</span>
 
 <span class="o">}</span>
 
 </code></pre></div>    </div>
 
-    <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">&lt;!-- applicationScope01.jsp --&gt;</span>
-<span class="nt">&lt;</span><span class="err">%@</span> <span class="na">page</span> <span class="na">language=</span><span class="s">"java"</span> <span class="na">contentType=</span><span class="s">"text/html; charset=UTF-8"</span>
-    <span class="na">pageEncoding=</span><span class="s">"UTF-8"</span><span class="err">%</span><span class="nt">&gt;</span>
-<span class="cp">&lt;!DOCTYPE html&gt;</span>
-<span class="nt">&lt;html&gt;</span>
-<span class="nt">&lt;head&gt;</span>
-<span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
-<span class="nt">&lt;title&gt;</span>Insert title here<span class="nt">&lt;/title&gt;</span>
-<span class="nt">&lt;/head&gt;</span>
-<span class="nt">&lt;body&gt;</span>
-<span class="nt">&lt;</span><span class="err">%</span>
-	<span class="na">try</span> <span class="err">{</span>
-		<span class="na">int</span> <span class="na">value = </span><span class="s">(int)application.getAttribute("value");</span>
-		<span class="na">value</span> <span class="err">+=</span> <span class="err">2;</span>
-		<span class="na">application.setAttribute</span><span class="err">("</span><span class="na">value</span><span class="err">",</span> <span class="na">value</span><span class="err">);</span>
-<span class="err">%</span><span class="nt">&gt;</span>
-		<span class="nt">&lt;h1&gt;&lt;</span><span class="err">%=</span><span class="na">value</span> <span class="err">%</span><span class="nt">&gt;&lt;/h1&gt;</span>
-<span class="nt">&lt;</span><span class="err">%</span>
-	<span class="err">}</span> <span class="na">catch</span><span class="err">(</span><span class="na">NullPointerException</span> <span class="na">ex</span><span class="err">)</span> <span class="err">{</span>
-<span class="err">%</span><span class="nt">&gt;</span>
-		<span class="nt">&lt;h1&gt;</span>NPE<span class="nt">&lt;/h1&gt;</span>
-<span class="nt">&lt;</span><span class="err">%</span>
-	<span class="err">}</span>
-<span class="err">%</span><span class="nt">&gt;</span>
+  </div>
+</details>
 
-<span class="nt">&lt;/body&gt;</span>
-<span class="nt">&lt;/html&gt;</span>
+<p><code class="language-plaintext highlighter-rouge">DAO</code> 란 Data Access Object 의 약자로, 데이터베이스의 접근을 하기위한 객체이다. DB에 접근하여 데이터를 불러들이는 <code class="language-plaintext highlighter-rouge">getData</code> 메서드를 정의하였다.</p>
+
+<details>
+<summary>JDBCExam1.java</summary>
+<div>
+
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">rok.jdbcexam</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">rok.jdbcexam.dao.RoleDao</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">rok.jdbcexam.dto.Role</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">JDBCExam1</span> <span class="o">{</span>
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+		<span class="nc">RoleDao</span> <span class="n">dao</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">RoleDao</span><span class="o">();</span>
+		<span class="nc">Role</span> <span class="n">role</span> <span class="o">=</span> <span class="n">dao</span><span class="o">.</span><span class="na">getRole</span><span class="o">(</span><span class="mi">100</span><span class="o">);</span>
+		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">role</span><span class="o">);</span>
+		
+	<span class="o">}</span>
+
+<span class="o">}</span>
 
 </code></pre></div>    </div>
 
   </div>
 </details>
 
-<details>
-<summary>결과</summary>
-<div>
-    <p><img src="http://drive.google.com/uc?export=view&amp;id=1okZgZmZXMHIVo34v58yGVFywtaqdmltq" /><br />
-<img src="http://drive.google.com/uc?export=view&amp;id=1ojm49Q3dabiErtRrNxjIRZzYkLmHCGqE" /><br />
-<img src="http://drive.google.com/uc?export=view&amp;id=1oiUVTQFgErvt10vjFKlOVkitI1Z-FBc7" /><br />
-<br /></p>
-
-    <p><code class="language-plaintext highlighter-rouge">try-catch</code>문을 사용해서 <code class="language-plaintext highlighter-rouge">NullPointerException</code>을 방지하였다.<br />
-<br />
-<em>ApplicationScope01.java</em> 이외의 파일에는 <code class="language-plaintext highlighter-rouge">value</code> 라는 변수의 선언이 존재하지 않고, 다 <code class="language-plaintext highlighter-rouge">getAttribute()</code> 함수를 사용해서 불러온다.<br />
-그렇기 때문에 _ApplicationScope01.java_가 먼저 실행되지 않았을 경우에는 <code class="language-plaintext highlighter-rouge">NullPointerException</code> 이 발생할 수 있다.<br />
-<br />
-첫번째의 경우, <code class="language-plaintext highlighter-rouge">value</code> 의 값이 3이다. 새로고침을 하게 되면, 다시 한번 <code class="language-plaintext highlighter-rouge">application</code> 객체에 저장된 <code class="language-plaintext highlighter-rouge">value</code> 값이 불러질 것인데, 원래의 값에 2를 더하고 저장된 값이 불러질 것이다. 따라서 두번째와 같이 <code class="language-plaintext highlighter-rouge">value</code> 의 값이 5가 출력이 된다. 마찬가지로, 1을 더한 값인 6이 출력이 된다.</p>
-
-  </div>
-</details>
+<p>실행파일</p>
 
         </div>
         
@@ -414,43 +413,285 @@ ${v1 } + ${v2 } = ${result } <span class="nt">&lt;br&gt;</span>
         <header class="post-header">
           <h1 class="post-title">
             
-              <a class="post-link" href="/redirect/">Redirect</a>
+              <a class="post-link" href="/JSTL/">Jstl</a>
             
           </h1>
 
           <p class="post-meta">
-            Sep 10, 2020
+            Sep 13, 2020
             
             
           </p>
         </header>
 
         <div class="post-content">
-          <h1>redirect</h1>
-
+          <h1>JSTL</h1>
 <blockquote>
-  <p>redirect는 http protocol로 정해진 규칙이다.</p>
+  <p>JSTL(JSP Standard Tag Library)는 JSP 페이지에서 조건문, 반복문 등을 html tag 형태로 작성할 수 있게 도와준다.</p>
 </blockquote>
 
-<p>서버는 클라이언트로부터 요청을 받은 후, 클라이언트에게 특정 url로 이동하라고 요청할 수 있다. 이것을 <strong><em>redirect</em></strong> 라고 한다.</p>
+<div class="language-jsp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;%</span>
+    <span class="k">if</span><span class="o">(</span><span class="n">list</span><span class="o">.</span><span class="na">size</span><span class="o">()</span> <span class="err">&gt;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">list</span><span class="o">.</span><span class="na">size</span><span class="o">();</span><span class="err">&gt;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+            <span class="nc">Data</span> <span class="n">data</span> <span class="o">=</span> <span class="o">(</span><span class="nc">Data</span><span class="o">)</span><span class="n">list</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">i</span><span class="o">);</span>
+<span class="nt">%&gt;</span>
+<span class="nt">&lt;%=</span><span class="n">data</span><span class="o">.</span><span class="na">getTitle</span><span class="o">()</span> <span class="nt">%&gt;</span>
 
-<p>서버에서는 클라이언트에게 응답으로 상태코드를 302와 함께 이동할 url정보를 Location 헤더에 담아 전송한다.
-클라이언트는 서버로부터 받은 상태값이 302이면 Location 헤더값으로 재요청을 보내게 된다.</p>
-
-<p>이때 브라우저의 주소창은 전송받은 url로 바뀌게 된다.
-<code class="language-plaintext highlighter-rouge">servlet</code> 이나 <code class="language-plaintext highlighter-rouge">jsp</code> 는 redirect 를 하기 위해 <code class="language-plaintext highlighter-rouge">HttpServletResponse</code> 가 갖고있는 <code class="language-plaintext highlighter-rouge">sendRedirect()</code> 메소드를 사용한다.</p>
-
-<div class="language-jsp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;%@ page </span><span class="na">language=</span><span class="s">"java"</span><span class="na"> contentType=</span><span class="s">"text/html; charset=UTF-8"</span><span class="na">
-    pageEncoding=</span><span class="s">"UTF-8"</span><span class="nt">%&gt;</span>
 <span class="nt">&lt;%</span>
-	<span class="n">response</span><span class="o">.</span><span class="na">sendRedirect</span><span class="o">(</span><span class="s">"https://www.naver.com"</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+<span class="nt">%&gt;</span>
+    데이터가 없습니다.
+<span class="nt">&lt;%</span>
+    <span class="o">}</span>
 <span class="nt">%&gt;</span>
 </code></pre></div></div>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>redirect01.jsp 를 만든 뒤, 위의 코드를 입력하고 tomcat에 올려서 접속하면, 네이버가 실행된다.  
+<div class="language-jsp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;c:if </span><span class="na">test=</span><span class="s">"!empty ${list}"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;c:foreach </span><span class="na">varName=</span><span class="s">"data"</span><span class="na"> list=</span><span class="s">"</span><span class="si">${</span><span class="n">list</span><span class="si">}</span><span class="s">&gt;
+        ${data.title}
+    &lt;/c:foreach&gt;
+&lt;/c:if&gt;
+&lt;c:if test="</span>empty ${list}"<span class="nt">&gt;</span>
+    데이터가 없습니다.
+<span class="nt">&lt;/c&gt;</span>
 </code></pre></div></div>
 
-<p>브라우저의 url 주소도 www.naver.com 으로 바뀜</p>
+<p>위의 두 코드는 <strong>논리적으로 동일한 코드</strong> 이다.<br />
+<br /></p>
+
+<h1>Core 태그</h1>
+<p>|태그|설명|
+|:—:|:—:|
+|set|JSP에서 사용할 변수를 설정한다.
+|remove|설정한 변수를 제거한다.
+|if|조건에 따라 내부 코드를 수행한다.
+|choose|다중 조건을 처리할 때 사용된다.
+|forEach|콜렉션이나 Map의 각 항목을 처리할 때 사용된다.
+|forTokens|구분자로 분리된 각 항목을 처리할 때 사용된다.
+|import|URL을 사용하여 다른 자원의 결과를 삽입할 때 사용된다.
+|redirect|지정한 경로로 리다이렉트 한다.
+|url|URL을 재작성한다.
+|catch|예외 처리에 사용된다.
+|out|JSPWriter에 내용을 알맞게 처리한 후 출력한다.</p>
+
+<p><br /></p>
+
+<h2>set, remove 태그</h2>
+
+<p><code class="language-plaintext highlighter-rouge">set</code> 태그와 <code class="language-plaintext highlighter-rouge">scope</code> 에 값을 저장하고, EL을 이용하여 출력한 뒤, <code class="language-plaintext highlighter-rouge">remove</code> 태그를 이용하여 값을 제거할 수 있다.</p>
+<details>
+<summary>Source Code</summary>
+<div>
+
+    <div class="language-jsp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;%@ page </span><span class="na">language=</span><span class="s">"java"</span><span class="na"> contentType=</span><span class="s">"text/html; charset=UTF-8"</span><span class="na">
+    pageEncoding=</span><span class="s">"UTF-8"</span><span class="nt">%&gt;</span>
+<span class="nt">&lt;%@ taglib </span><span class="na">prefix=</span><span class="s">"c"</span><span class="na"> uri=</span><span class="s">"http://java.sun.com/jsp/jstl/core"</span><span class="nt">%&gt;</span>
+<span class="nt">&lt;c:set </span><span class="na">var=</span><span class="s">"value1"</span><span class="na"> scope=</span><span class="s">"request"</span><span class="na"> value=</span><span class="s">"junhwan"</span> <span class="nt">/&gt;</span>
+<span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+<span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;title&gt;</span>Insert title here<span class="nt">&lt;/title&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+이름 : ${value1 }<span class="nt">&lt;br&gt;</span>
+<span class="nt">&lt;c:remove </span><span class="na">var=</span><span class="s">"value1"</span><span class="na"> scope=</span><span class="s">"request"</span><span class="nt">/&gt;</span>
+이름 : ${value1 }
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre></div>    </div>
+  </div>
+</details>
+
+<details>
+<summary>결과</summary>
+<div>
+
+    <p><img src="http://drive.google.com/uc?export=view&amp;id=1onDTd5JtI6TMKnBQ_n7qtQssQRbWxIwg" /><br /></p>
+
+    <p>처음에는 value1에 들어있는 내 이름이 출력이 되었고, <code class="language-plaintext highlighter-rouge">remove</code> 된 이후에는 출력이 되지 않는 것을 확인할 수 있다.</p>
+  </div>
+</details>
+
+<p><br /></p>
+
+<h2>choose 태그</h2>
+
+<p>if-else 구문하고 동일하다.</p>
+<details>
+<summary>Source Code</summary>
+<div>
+
+    <div class="language-jsp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;%@ page </span><span class="na">language=</span><span class="s">"java"</span><span class="na"> contentType=</span><span class="s">"text/html; charset=UTF-8"</span><span class="na">
+    pageEncoding=</span><span class="s">"UTF-8"</span><span class="nt">%&gt;</span>
+<span class="nt">&lt;%@ taglib </span><span class="na">prefix=</span><span class="s">"c"</span><span class="na"> uri=</span><span class="s">"http://java.sun.com/jsp/jstl/core"</span><span class="nt">%&gt;</span>
+<span class="nt">&lt;c:set </span><span class="na">var=</span><span class="s">"score"</span><span class="na"> scope=</span><span class="s">"request"</span><span class="na"> value=</span><span class="s">"83"</span> <span class="nt">/&gt;</span>
+<span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+<span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;title&gt;</span>Insert title here<span class="nt">&lt;/title&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+점수 : ${score }<span class="nt">&lt;br&gt;</span>
+	<span class="nt">&lt;c:choose&gt;</span>
+		<span class="nt">&lt;c:when </span><span class="na">test=</span><span class="s">"</span><span class="si">${</span><span class="n">score</span> <span class="o">&gt;=</span> <span class="mi">90</span><span class="si">}</span><span class="s">"</span><span class="nt">&gt;</span>
+			A학점 입니다.
+		<span class="nt">&lt;/c:when&gt;</span>
+		<span class="nt">&lt;c:when </span><span class="na">test=</span><span class="s">"</span><span class="si">${</span><span class="n">score</span> <span class="o">&gt;=</span> <span class="mi">80</span><span class="si">}</span><span class="s">"</span><span class="nt">&gt;</span>
+			B학점 입니다.
+		<span class="nt">&lt;/c:when&gt;</span>
+		<span class="nt">&lt;c:when </span><span class="na">test=</span><span class="s">"</span><span class="si">${</span><span class="n">score</span> <span class="o">&gt;=</span> <span class="mi">70</span><span class="si">}</span><span class="s">"</span><span class="nt">&gt;</span>
+			C학점 입니다.
+		<span class="nt">&lt;/c:when&gt;</span>
+		<span class="nt">&lt;c:when </span><span class="na">test=</span><span class="s">"</span><span class="si">${</span><span class="n">score</span> <span class="o">&gt;=</span> <span class="mi">60</span><span class="si">}</span><span class="s">"</span><span class="nt">&gt;</span>
+			D학점 입니다.
+		<span class="nt">&lt;/c:when&gt;</span>
+		<span class="nt">&lt;c:otherwise&gt;</span>
+			F학점 입니다.
+		<span class="nt">&lt;/c:otherwise&gt;</span>
+	<span class="nt">&lt;/c:choose&gt;</span>
+
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre></div>    </div>
+  </div>
+</details>
+
+<details>
+<summary>결과</summary>
+<div>
+
+    <p><img src="http://drive.google.com/uc?export=view&amp;id=1or8W7YjFsLD9wSmn8KjQS0NE6yQGf2Io" /><br /></p>
+
+  </div>
+</details>
+
+<p><br /></p>
+
+<h2>forEach 태그</h2>
+
+<p><code class="language-plaintext highlighter-rouge">forEach</code> 태그를 통해, <code class="language-plaintext highlighter-rouge">list</code>에 담겨있는 값들을 간단하게 사용할 수 있다.</p>
+
+<details>
+<summary>Source Code</summary>
+<div>
+
+    <div class="language-jsp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;%@ page </span><span class="na">language=</span><span class="s">"java"</span><span class="na"> contentType=</span><span class="s">"text/html; charset=UTF-8"</span><span class="na">
+    pageEncoding=</span><span class="s">"UTF-8"</span><span class="nt">%&gt;</span>
+<span class="nt">&lt;%@ taglib </span><span class="na">prefix=</span><span class="s">"c"</span><span class="na"> uri=</span><span class="s">"http://java.sun.com/jsp/jstl/core"</span><span class="nt">%&gt;</span>
+<span class="nt">&lt;%@ page </span><span class="na">import=</span><span class="s">"java.util.List"</span> <span class="nt">%&gt;</span>
+<span class="nt">&lt;%@ page </span><span class="na">import=</span><span class="s">"java.util.ArrayList"</span> <span class="nt">%&gt;</span>
+<span class="nt">&lt;%</span>
+	<span class="nc">List</span><span class="o">&lt;</span><span class="nc">String</span><span class="err">&gt;</span> <span class="n">list</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;</span><span class="err">&gt;</span><span class="o">();</span>
+	<span class="n">list</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">"Hello"</span><span class="o">);</span>
+	<span class="n">list</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">"World"</span><span class="o">);</span>
+	<span class="n">list</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">"!!!!!"</span><span class="o">);</span>
+	
+	<span class="n">request</span><span class="o">.</span><span class="na">setAttribute</span><span class="o">(</span><span class="s">"list"</span><span class="o">,</span> <span class="n">list</span><span class="o">);</span>
+<span class="nt">%&gt;</span>
+
+<span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+<span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;title&gt;</span>Insert title here<span class="nt">&lt;/title&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+<span class="nt">&lt;c:forEach </span><span class="na">var=</span><span class="s">"item"</span><span class="na"> items=</span><span class="s">"</span><span class="si">${</span><span class="n">list</span> <span class="si">}</span><span class="s">"</span><span class="na"> begin=</span><span class="s">"1"</span><span class="nt">&gt;</span>
+	${item }<span class="nt">&lt;br&gt;</span>
+<span class="nt">&lt;/c:forEach&gt;</span>
+
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre></div>    </div>
+  </div>
+</details>
+
+<details>
+<summary>결과</summary>
+
+<img src="http://drive.google.com/uc?export=view&amp;id=1ouTHODIqnH1iiXi31SEvFfjOu9fOjwgU" /><br />
+</details>
+<p><br /></p>
+
+<h2>import 태그</h2>
+<p><code class="language-plaintext highlighter-rouge">import</code> 태그를 통해 지정한 URL에 연결하여 결과를 지정한 변수에 저장할 수 있다.</p>
+
+<details>
+<summary>Source Code</summary>
+<div>
+
+    <div class="language-jsp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;%@ page </span><span class="na">language=</span><span class="s">"java"</span><span class="na"> contentType=</span><span class="s">"text/html; charset=UTF-8"</span><span class="na">
+    pageEncoding=</span><span class="s">"UTF-8"</span><span class="nt">%&gt;</span>
+<span class="nt">&lt;%@ taglib </span><span class="na">prefix=</span><span class="s">"c"</span><span class="na"> uri=</span><span class="s">"http://java.sun.com/jsp/jstl/core"</span> <span class="nt">%&gt;</span>
+<span class="nt">&lt;%@ page </span><span class="na">import=</span><span class="s">"java.util.*"</span> <span class="nt">%&gt;</span>
+<span class="nt">&lt;c:import </span><span class="na">url=</span><span class="s">"https://www.kakaocorp.com/"</span><span class="na"> var=</span><span class="s">"urlValue"</span><span class="na"> scope=</span><span class="s">"request"</span> <span class="nt">/&gt;</span>
+<span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+<span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;title&gt;</span>Insert title here<span class="nt">&lt;/title&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+${urlValue }
+
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre></div>    </div>
+
+  </div>
+</details>
+
+<details>
+<summary>결과</summary>
+
+<img src="http://drive.google.com/uc?export=view&amp;id=1p32IjyNJnud8tACCC9UvOAvyr-I9mWps" /><br />
+
+</details>
+
+
+        </div>
+        
+      </li>
+    
+      
+      
+
+      <li>
+        <header class="post-header">
+          <h1 class="post-title">
+            
+              <a class="post-link" href="/EL/">El</a>
+            
+          </h1>
+
+          <p class="post-meta">
+            Sep 12, 2020
+            
+            
+          </p>
+        </header>
+
+        <div class="post-content">
+          <h1>Expression Language</h1>
+
+<blockquote>
+  <p>표현 언어(Expression Language)는 값을 표현하는 데 사용되는 스크립트 언어로서 JSP의 기본 문법을 보완하는 역할을 한다.</p>
+</blockquote>
+
+<h3>문법</h3>
+<div class="language-jsp highlighter-rouge"><div class="highlight"><pre class="highlight"><code>${expr }
+</code></pre></div></div>
+
+<h3>예제</h3>
+<div class="language-jsp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;b&gt;</span>${sessionScope.member.id}<span class="nt">&lt;/b&gt;</span>님 환영합니다!
+</code></pre></div></div>
+
+<h2>EL 문법을 사용하지 않고, 문자열을 그대로 표시할 때</h2>
+<div class="language-jsp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;%@ page </span><span class="na">isELIgnored = </span><span class="s">"true"</span> <span class="nt">%&gt;</span> 
+</code></pre></div></div>
 
         </div>
         
